@@ -1,0 +1,67 @@
+{
+  "evidence_id": "E-RESP-003",
+  "type": "response_record",
+  "incident": "INC-2026-0417",
+  "phase": "eradication",
+  "time_ist": "2026-09-09T12:00:00+05:30",
+  "actor": "IR team",
+  "actions": [
+    {
+      "order": 1,
+      "action": "Remove scheduled task MicrosoftEdgeUpdateTaskMachineCore on APP-PRD-01",
+      "target": "APP-PRD-01",
+      "result": "SUCCESS",
+      "detail": "Completed 12:10 IST. Task deleted; remaining scheduled-task inventory on APP-PRD-01 reviewed, no other unsigned tasks present"
+    },
+    {
+      "order": 2,
+      "action": "Delete web shell img.aspx on WEB-PRD-01",
+      "target": "WEB-PRD-01",
+      "result": "SUCCESS",
+      "detail": "Completed 12:20 IST. C:\\inetpub\\wwwroot\\staging\\assets\\upload_2024\\img.aspx deleted after hash capture (see E-RESP-002)"
+    },
+    {
+      "order": 3,
+      "action": "Delete staged artifacts (staging.zip + passwords.txt on WEB-PRD-01; C:\\Windows\\Temp\\collect dir + order_export_2026.zip on FILE-PRD-01)",
+      "target": "WEB-PRD-01, FILE-PRD-01",
+      "result": "SUCCESS",
+      "detail": "Completed 12:45 IST. C:\\ProgramData\\Microsoft\\Crypto\\RSA\\staging.zip and C:\\Users\\svc_portal\\Documents\\passwords.txt removed on WEB-PRD-01; C:\\Windows\\Temp\\collect\\ and C:\\Windows\\Temp\\order_export_2026.zip removed on FILE-PRD-01"
+    },
+    {
+      "order": 4,
+      "action": "Delete rogue account svc_mon + audit groups it touched",
+      "target": "DC-01",
+      "result": "SUCCESS",
+      "detail": "Completed 13:05 IST. svc_mon deleted (4726 event, E-AD-004); Domain Admins and local Remote Desktop Users memberships on APP-PRD-01/WEB-PRD-01 audited — no further unauthorized members"
+    },
+    {
+      "order": 5,
+      "action": "Credential resets: rajesh.kulkarni, svc_portal, ALL Domain Admin accounts, krbtgt TWICE, plus org-wide user password reset",
+      "target": "DC-01 (vistara.local)",
+      "result": "SUCCESS",
+      "detail": "Completed 13:50 IST. rajesh.kulkarni and svc_portal reset 13:20; all Domain Admin accounts reset 13:25; krbtgt reset #1 13:30, krbtgt reset #2 13:45 (two resets, replication window observed); org-wide user reset forced at next logon 13:50"
+    },
+    {
+      "order": 6,
+      "action": "Remove the FW-01 any->3389 rule (W-01 fix)",
+      "target": "FW-01",
+      "result": "SUCCESS",
+      "detail": "Completed 14:05 IST. Rule LEGACY-VENDOR-2025-RDP (any -> 203.0.113.10 TCP 3389) deleted; removal logged under INC-2026-0417 (no original change ticket existed — see E-DOC-001)"
+    },
+    {
+      "order": 7,
+      "action": "Disable/remove /staging/test/upload.aspx and restrict /staging/ (W-02b fix)",
+      "target": "WEB-PRD-01",
+      "result": "SUCCESS",
+      "detail": "Completed 14:30 IST. Upload page removed; /staging/ access restricted to internal deployment subnet only"
+    },
+    {
+      "order": 8,
+      "action": "Eradication verification pass",
+      "target": "WEB-PRD-01, APP-PRD-01, FILE-PRD-01, DC-01, FW-01",
+      "result": "SUCCESS",
+      "detail": "Completed 14:50 IST. Steps 1-7 re-verified on each target; results feed the validation reports (E-VALID-001, E-VALID-002)"
+    }
+  ],
+  "synthetic": true
+}

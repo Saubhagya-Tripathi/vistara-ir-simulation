@@ -1,0 +1,9 @@
+# SYNTHETIC TRAINING DATA — DC-01 Security log excerpt (directory service access, SIEM export via SIEM-01). Timezone: IST.
+# Query window: 2026-09-04 13:05–13:20 IST. Event 4662 excerpt, host DC-01 (10.10.20.31).
+Event 4662  2026-09-04 13:08:41 IST  Host: DC-01  Account: DC-02$  Source: 10.10.20.32 (DC-02)  AccessMask: 0x100  Properties: {1131f6aa-…} — scheduled inter-DC replication cycle
+Event 4662  2026-09-04 13:10:22 IST  Host: DC-01  Account: rajesh.kulkarni  Source: 10.10.20.21 (APP-PRD-01)  AccessMask: 0x100  Properties: {1131f6aa-…}{1131f6ad-…} (DS-Replication-Get-Changes-All) — directory replication requested
+Event 4662  2026-09-04 13:11:05 IST  Host: DC-01  Account: rajesh.kulkarni  Source: 10.10.20.21 (APP-PRD-01)  AccessMask: 0x100  Properties: {1131f6aa-…}{1131f6ac-…}{1131f6ad-…} — replication of naming context DC=vistara,DC=local requested
+Event 4662  2026-09-04 13:12:15 IST  Host: DC-01  Account: DC-02$  Source: 10.10.20.32 (DC-02)  AccessMask: 0x100  Properties: {1131f6aa-…} — scheduled inter-DC replication cycle
+Event 4662  2026-09-04 13:12:47 IST  Host: DC-01  Account: rajesh.kulkarni  Source: 10.10.20.21 (APP-PRD-01)  AccessMask: 0x100  Properties: {1131f6aa-…}{1131f6ac-…}{1131f6ad-…} — replication of naming context DC=vistara,DC=local in progress (object sync stream)
+Event 4662  2026-09-04 13:14:09 IST  Host: DC-01  Account: rajesh.kulkarni  Source: 10.10.20.21 (APP-PRD-01)  AccessMask: 0x100  Properties: {1131f6aa-…}{1131f6ad-…} (DS-Replication-Get-Changes-All) — replication of full domain naming context completed
+Event 4662  2026-09-04 13:18:52 IST  Host: DC-01  Account: DC-02$  Source: 10.10.20.32 (DC-02)  AccessMask: 0x100  Properties: {1131f6aa-…} — scheduled inter-DC replication cycle

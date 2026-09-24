@@ -1,0 +1,22 @@
+{
+  "evidence_id": "E-EDR-001",
+  "type": "edr_process",
+  "source": "SentinelNode EDR",
+  "host": "WEB-PRD-01",
+  "synthetic": true,
+  "collection_window_ist": "2026-09-03T11:40:00+05:30/2026-09-03T12:30:00+05:30",
+  "events": [
+    {"time_ist": "2026-09-03T11:47:18+05:30", "pid": 3916, "process": "userinit.exe", "cmdline": "userinit.exe", "parent": "winlogon.exe", "parent_pid": 612, "user": "VISTARA\\svc_portal", "logon_type": 10, "session_src_ip": "45.155.90.23", "sha256": "SYNTHETIC-fb0646c740b2afd6ce0f098ec68a507f33bc2227b52f71fa878549c9ebcaf494", "synthetic": true},
+    {"time_ist": "2026-09-03T11:47:41+05:30", "pid": 3304, "process": "explorer.exe", "cmdline": "C:\\Windows\\Explorer.EXE", "parent": "userinit.exe", "parent_pid": 3916, "user": "VISTARA\\svc_portal", "sha256": "SYNTHETIC-68528abe76f37336676c286292cd52206fcc92dd16124f404bb1a46ab5310677", "synthetic": true},
+    {"time_ist": "2026-09-03T11:48:03+05:30", "pid": 4020, "process": "cmd.exe", "cmdline": "cmd.exe", "parent": "explorer.exe", "parent_pid": 3304, "user": "VISTARA\\svc_portal", "sha256": "SYNTHETIC-37a82111672707d697b3a693b7b84ef0980bf76a75bac5ea8fd3f6dc8364747d", "synthetic": true},
+    {"time_ist": "2026-09-03T11:48:36+05:30", "pid": 4268, "process": "whoami.exe", "cmdline": "whoami", "parent": "cmd.exe", "parent_pid": 4020, "user": "VISTARA\\svc_portal", "sha256": "SYNTHETIC-5bb61084176c79eb6e341fda51b6d04f09ee1dbe8f16142362a624c03192f157", "synthetic": true},
+    {"time_ist": "2026-09-03T11:49:12+05:30", "pid": 4312, "process": "ipconfig.exe", "cmdline": "ipconfig /all", "parent": "cmd.exe", "parent_pid": 4020, "user": "VISTARA\\svc_portal", "sha256": "SYNTHETIC-9b913d5664b4fc6f9fba730720e2f9deeb65b75d1a0b44375f5ce3ea64129a06", "synthetic": true},
+    {"time_ist": "2026-09-03T11:52:30+05:30", "pid": 2892, "process": "TrustedInstaller.exe", "cmdline": "C:\\Windows\\servicing\\TrustedInstaller.exe", "parent": "services.exe", "parent_pid": 548, "user": "NT AUTHORITY\\SYSTEM", "sha256": "SYNTHETIC-fe1d23e18f29fbd559fe247bfc05ce3afa2a4d2c70230d3bb5a1def36c2f9db5", "synthetic": true},
+    {"time_ist": "2026-09-03T11:56:44+05:30", "pid": 4472, "process": "net.exe", "cmdline": "net user", "parent": "cmd.exe", "parent_pid": 4020, "user": "VISTARA\\svc_portal", "sha256": "SYNTHETIC-3b827e30409316ca27dab8a193c74bf8b8f201ce6b44ba714bee189cb0115b96", "synthetic": true},
+    {"time_ist": "2026-09-03T11:58:09+05:30", "pid": 4556, "process": "quser.exe", "cmdline": "quser", "parent": "cmd.exe", "parent_pid": 4020, "user": "VISTARA\\svc_portal", "sha256": "SYNTHETIC-74db17b572a9f62c7539e4c99965a453d61146d66028a89c7c4eeb92ef42a71b", "synthetic": true},
+    {"time_ist": "2026-09-03T12:04:19+05:30", "pid": 4604, "process": "net.exe", "cmdline": "net localgroup administrators", "parent": "cmd.exe", "parent_pid": 4020, "user": "VISTARA\\svc_portal", "sha256": "SYNTHETIC-f9c1c0b08284ac7dbecd6b06314da029542d76b354164eb86818d29533bff873", "synthetic": true},
+    {"time_ist": "2026-09-03T12:06:11+05:30", "pid": 2844, "process": "w3wp.exe", "cmdline": "c:\\windows\\system32\\inetsrv\\w3wp.exe", "parent": "svchost.exe", "parent_pid": 664, "user": "VISTARA\\svc_portal", "sha256": "SYNTHETIC-7ba4aa655f4cd997e9b6b6d073a57c09084032a4e007be6cc6d34dd866f65205", "synthetic": true},
+    {"time_ist": "2026-09-03T12:13:52+05:30", "pid": 3552, "process": "MpCmdRun.exe", "cmdline": "\"C:\\Program Files\\Windows Defender\\MpCmdRun.exe\" -Scan -ScanType 1", "parent": "svchost.exe", "parent_pid": 812, "user": "NT AUTHORITY\\SYSTEM", "sha256": "SYNTHETIC-2bde260494fdfa951d272b2e4759531b671aeb90289cc890d221f3452bae8ee1", "synthetic": true},
+    {"time_ist": "2026-09-03T12:19:55+05:30", "pid": 4732, "process": "logoff.exe", "cmdline": "logoff", "parent": "cmd.exe", "parent_pid": 4020, "user": "VISTARA\\svc_portal", "sha256": "SYNTHETIC-9e4d0951497cc469d90e598ac86e924b600db70fcef161f7fc7c91561a188b1e", "synthetic": true}
+  ]
+}

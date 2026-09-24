@@ -1,0 +1,45 @@
+# SYNTHETIC — FW-01 perimeter syslog excerpt (iptables). Timezone: IST.
+# Collection window: 2026-09-02 14:00–15:05 IST; inbound rule hits, DMZ 203.0.113.0/28.
+# SUMMARY: 9,846 TCP SYN probes from 45.155.90.23 against 203.0.113.0/28 (ports 1–10000) between 14:12:03 and 14:29:47 IST; representative lines follow. Full capture retained in FW-01 local ring buffer.
+Sep  2 14:03:11 FW-01 kernel: INBOUND ALLOW proto=TCP src=122.176.45.9:53220 dst=203.0.113.10:443    rule=DMZ-HTTPS  bytes=5821
+Sep  2 14:05:44 FW-01 kernel: INBOUND ALLOW proto=TCP src=203.0.119.44:41772 dst=203.0.113.11:25     rule=DMZ-SMTP   bytes=1204
+Sep  2 14:09:27 FW-01 kernel: INBOUND ALLOW proto=TCP src=66.249.72.15:38090 dst=203.0.113.10:443    rule=DMZ-HTTPS  bytes=3310
+Sep  2 14:12:03 FW-01 kernel: INBOUND DENY  proto=TCP src=45.155.90.23:51122 dst=203.0.113.10:22
+Sep  2 14:12:03 FW-01 kernel: INBOUND DENY  proto=TCP src=45.155.90.23:51123 dst=203.0.113.10:21
+Sep  2 14:12:04 FW-01 kernel: INBOUND DENY  proto=TCP src=45.155.90.23:51124 dst=203.0.113.10:23
+Sep  2 14:12:04 FW-01 kernel: INBOUND DENY  proto=TCP src=45.155.90.23:51125 dst=203.0.113.10:25
+Sep  2 14:12:05 FW-01 kernel: INBOUND DENY  proto=TCP src=45.155.90.23:51127 dst=203.0.113.10:53
+Sep  2 14:12:06 FW-01 kernel: INBOUND ALLOW proto=TCP src=45.155.90.23:51129 dst=203.0.113.10:80     rule=DMZ-HTTP
+Sep  2 14:12:06 FW-01 kernel: INBOUND DENY  proto=TCP src=45.155.90.23:51130 dst=203.0.113.10:110
+Sep  2 14:12:07 FW-01 kernel: INBOUND DENY  proto=TCP src=45.155.90.23:51131 dst=203.0.113.10:135
+Sep  2 14:12:07 FW-01 kernel: INBOUND DENY  proto=TCP src=45.155.90.23:51132 dst=203.0.113.10:139
+Sep  2 14:12:08 FW-01 kernel: INBOUND DENY  proto=TCP src=45.155.90.23:51133 dst=203.0.113.10:143
+Sep  2 14:12:09 FW-01 kernel: INBOUND ALLOW proto=TCP src=45.155.90.23:51135 dst=203.0.113.10:443    rule=DMZ-HTTPS
+Sep  2 14:12:09 FW-01 kernel: INBOUND DENY  proto=TCP src=45.155.90.23:51136 dst=203.0.113.10:445
+Sep  2 14:12:10 FW-01 kernel: INBOUND DENY  proto=TCP src=45.155.90.23:51138 dst=203.0.113.10:993
+Sep  2 14:12:10 FW-01 kernel: INBOUND DENY  proto=TCP src=45.155.90.23:51139 dst=203.0.113.10:995
+Sep  2 14:12:11 FW-01 kernel: INBOUND DENY  proto=TCP src=45.155.90.23:51141 dst=203.0.113.10:1433
+Sep  2 14:12:12 FW-01 kernel: INBOUND DENY  proto=TCP src=45.155.90.23:51143 dst=203.0.113.10:3306
+Sep  2 14:12:31 FW-01 kernel: INBOUND ALLOW proto=TCP src=45.155.90.23:51490 dst=203.0.113.10:3389   rule=LEGACY-VENDOR-2025-RDP (NO CHANGE TICKET — CH-Policy-03)
+Sep  2 14:12:33 FW-01 kernel: INBOUND DENY  proto=TCP src=45.155.90.23:51491 dst=203.0.113.10:3390
+Sep  2 14:12:35 FW-01 kernel: INBOUND DENY  proto=TCP src=45.155.90.23:51495 dst=203.0.113.10:8080
+Sep  2 14:12:36 FW-01 kernel: INBOUND DENY  proto=TCP src=45.155.90.23:51497 dst=203.0.113.10:8443
+Sep  2 14:13:02 FW-01 kernel: INBOUND ALLOW proto=TCP src=45.155.90.23:51544 dst=203.0.113.11:25     rule=DMZ-SMTP
+Sep  2 14:13:19 FW-01 kernel: INBOUND DENY  proto=TCP src=45.155.90.23:51558 dst=203.0.113.11:3389
+Sep  2 14:13:40 FW-01 kernel: INBOUND ALLOW proto=TCP src=45.155.90.23:51571 dst=203.0.113.12:443    rule=DMZ-SSLVPN
+Sep  2 14:14:05 FW-01 kernel: INBOUND DENY  proto=TCP src=45.155.90.23:51588 dst=203.0.113.12:3389
+# ... 14:14–14:29: probe pattern from 45.155.90.23 continues at ~9 probes/sec across remaining ports (see SUMMARY) ...
+Sep  2 14:17:52 FW-01 kernel: INBOUND ALLOW proto=TCP src=91.240.118.172:52311 dst=203.0.113.10:3389  rule=LEGACY-VENDOR-2025-RDP  bytes=312
+Sep  2 14:21:08 FW-01 kernel: INBOUND ALLOW proto=TCP src=185.156.73.54:61004 dst=203.0.113.10:3389   rule=LEGACY-VENDOR-2025-RDP  bytes=298
+Sep  2 14:24:33 FW-01 kernel: INBOUND ALLOW proto=TCP src=45.148.10.88:50912 dst=203.0.113.10:3389    rule=LEGACY-VENDOR-2025-RDP  bytes=305
+Sep  2 14:26:59 FW-01 kernel: INBOUND ALLOW proto=TCP src=13.232.90.117:44820 dst=203.0.113.10:443    rule=DMZ-HTTPS  bytes=6144
+Sep  2 14:28:47 FW-01 kernel: INBOUND ALLOW proto=TCP src=194.26.29.117:56630 dst=203.0.113.10:3389   rule=LEGACY-VENDOR-2025-RDP  bytes=311
+Sep  2 14:29:47 FW-01 kernel: INBOUND DENY  proto=TCP src=45.155.90.23:52896 dst=203.0.113.10:9931
+# 45.155.90.23 probe run ends 14:29:47 (9,846 probes total). One short follow-up connection below.
+Sep  2 14:31:02 FW-01 kernel: INBOUND ALLOW proto=TCP src=45.155.90.23:53277 dst=203.0.113.10:3389   rule=LEGACY-VENDOR-2025-RDP  session established
+Sep  2 14:31:09 FW-01 kernel: INBOUND ALLOW proto=TCP src=45.155.90.23:53277 dst=203.0.113.10:3389   rule=LEGACY-VENDOR-2025-RDP  session closed  duration=7s  bytes=1842  (banner exchange only)
+Sep  2 14:35:16 FW-01 kernel: INBOUND ALLOW proto=TCP src=2.57.121.33:58741 dst=203.0.113.10:3389    rule=LEGACY-VENDOR-2025-RDP  bytes=299
+Sep  2 14:42:38 FW-01 kernel: INBOUND ALLOW proto=TCP src=122.176.45.9:54018 dst=203.0.113.10:443    rule=DMZ-HTTPS  bytes=7720
+Sep  2 14:55:20 FW-01 kernel: INBOUND ALLOW proto=TCP src=103.75.190.11:51209 dst=203.0.113.10:3389  rule=LEGACY-VENDOR-2025-RDP  bytes=287
+Sep  2 15:01:44 FW-01 kernel: INBOUND ALLOW proto=TCP src=162.159.36.4:44310 dst=203.0.113.10:443    rule=DMZ-HTTPS  bytes=1024
+# NOTE: low-rate single-connection 3389 attempts from unrelated internet sources recur daily; none in this window progressed past the banner exchange.

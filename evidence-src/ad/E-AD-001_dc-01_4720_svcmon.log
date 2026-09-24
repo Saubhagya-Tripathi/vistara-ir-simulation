@@ -1,0 +1,8 @@
+# SYNTHETIC — DC-01 Security log excerpt (SIEM export). Timezone: IST.
+# Collection window: 2026-09-04 11:10–11:25 IST; account-management and credential-validation events.
+Event 4776  2026-09-04 11:11:03 IST  Host: DC-01  Account: kavita.menon  Source: WKSTN-KAV-06 (10.10.10.56)  NTLM credential validation SUCCESS (package: NTLMv2)
+Event 4776  2026-09-04 11:13:47 IST  Host: DC-01  Account: sneha.patil  Source: WKSTN-SNE-04 (10.10.10.54)  NTLM credential validation SUCCESS (package: NTLMv2)
+Event 4720  2026-09-04 11:15:47 IST  Host: DC-01  Subject: rajesh.kulkarni (from APP-PRD-01)  New account: svc_mon  Display: "Monitoring Agent"  "A user account was created"
+  New Account: svc_mon  Domain: VISTARA  SamAccountName: svc_mon  Description: "Systems monitoring service"  Source workstation: APP-PRD-01 (10.10.20.21)
+Event 4776  2026-09-04 11:19:22 IST  Host: DC-01  Account: vikram.rao  Source: WKSTN-VIK-05 (10.10.10.55)  NTLM credential validation SUCCESS (package: NTLMv2)
+Event 4624  2026-09-04 11:22:10 IST  Logon Type 3  Account: DC-02$  Domain: VISTARA  Source: 10.10.20.32  Host: DC-01  Status: 0x0 (SUCCESS — machine account, replication channel)

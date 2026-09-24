@@ -1,0 +1,25 @@
+# SYNTHETIC — FW-01 perimeter syslog excerpt (iptables). Timezone: IST.
+# Collection window: 2026-09-04 11:30 – 2026-09-09 10:35 IST; outbound (egress) connections.
+# SUMMARY: 238 outbound TCP connections 10.10.20.21 → 185.220.101.47:8443 at a steady ~30-minute cadence, 2026-09-04 11:32 IST through 2026-09-09 10:02 IST; each ~3.6–4.5 KB, under 200 ms. Egress to 185.220.101.47 blocked at FW-01 on 2026-09-09 10:30 IST (INC-2026-0417); one further attempt denied 10:32.
+# DRILL-DOWN: E-NET-003_drilldown_beacon_flows.csv (full flow listing: 238 connections + 1 denied attempt)
+Sep  4 11:32:00 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.21:51000 dst=185.220.101.47:8443 bytes=3733 duration=100ms
+Sep  4 12:01:37 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.21:51001 dst=185.220.101.47:8443 bytes=3786 duration=129ms
+Sep  4 12:18:44 FW-01 kernel: OUTBOUND ALLOW proto=UDP src=10.10.20.31:54118 dst=203.0.119.2:53       bytes=104  (DNS forwarder query)
+Sep  4 13:31:27 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.21:51004 dst=185.220.101.47:8443 bytes=3945 duration=126ms
+Sep  4 15:44:09 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.12:51120 dst=203.0.124.18:25     bytes=15302  rule=EGRESS-SMTP (MAIL-PRD-01 outbound mail)
+Sep  4 18:02:51 FW-01 kernel: OUTBOUND ALLOW proto=UDP src=10.10.20.21:51770 dst=162.159.200.123:123 bytes=76   (NTP sync)
+Sep  4 23:01:04 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.21:51023 dst=185.220.101.47:8443 bytes=4225 duration=137ms
+Sep  5 09:14:36 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.11:52204 dst=23.203.52.114:443   bytes=3988  (CRL/OCSP check, portal cert)
+Sep  5 12:02:59 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.21:51049 dst=185.220.101.47:8443 bytes=4149 duration=171ms
+Sep  5 16:27:13 FW-01 kernel: OUTBOUND ALLOW proto=UDP src=10.10.20.32:54901 dst=203.0.119.2:53      bytes=98   (DNS forwarder query)
+Sep  6 12:02:20 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.21:51097 dst=185.220.101.47:8443 bytes=3785 duration=123ms
+Sep  6 17:41:55 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.12:52336 dst=203.0.124.44:25     bytes=11024  rule=EGRESS-SMTP (MAIL-PRD-01 outbound mail)
+Sep  7 00:01:00 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.21:51121 dst=185.220.101.47:8443 bytes=4330 duration=189ms
+Sep  7 10:33:27 FW-01 kernel: OUTBOUND ALLOW proto=UDP src=10.10.20.21:52988 dst=162.159.200.123:123 bytes=76   (NTP sync)
+Sep  7 12:01:41 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.21:51145 dst=185.220.101.47:8443 bytes=4148 duration=165ms
+Sep  8 03:12:48 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.40.13:48802 dst=72.21.91.29:443     bytes=22041  (VULN-01 plugin feed update)
+Sep  8 12:01:02 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.21:51193 dst=185.220.101.47:8443 bytes=3784 duration=117ms
+Sep  9 09:02:14 FW-01 kernel: OUTBOUND ALLOW proto=UDP src=10.10.20.31:56612 dst=203.0.119.2:53      bytes=110  (DNS forwarder query)
+Sep  9 10:01:57 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.21:51237 dst=185.220.101.47:8443 bytes=3935 duration=133ms
+Sep  9 10:32:04 FW-01 kernel: OUTBOUND DENY proto=TCP src=10.10.20.21:51238 dst=185.220.101.47:8443 rule=INC-2026-0417-EGRESS-BLOCK
+# No further connections to 185.220.101.47 observed after 10:32 IST.

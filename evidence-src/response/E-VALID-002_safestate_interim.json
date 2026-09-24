@@ -1,0 +1,51 @@
+{
+  "evidence_id": "E-VALID-002",
+  "type": "validation_record",
+  "incident": "INC-2026-0417",
+  "phase": "validation",
+  "time_ist": "2026-09-09T16:40:00+05:30",
+  "actor": "IR team",
+  "packet": "interim",
+  "checks": [
+    {
+      "check": "EDR full-scan clean on all touched hosts",
+      "result": "PASS",
+      "basis": "WEB-PRD-01, APP-PRD-01, FILE-PRD-01 clean post rebuild/restore; DC-01 clean (E-VALID-001)"
+    },
+    {
+      "check": "Persistence re-check (scheduled tasks, services, run keys, web directories) on all touched hosts including rebuilt ones; AD audit re-run for svc_mon absence",
+      "result": "SKIPPED",
+      "basis": "WEB-PRD-01 and FILE-PRD-01 checked CLEAN. APP-PRD-01: SKIPPED — host was rebuilt, considered clean. AD audit not yet re-run."
+    },
+    {
+      "check": "Credential resets verified",
+      "result": "PASS",
+      "basis": "rajesh.kulkarni, svc_portal, all Domain Admins, krbtgt x2, org-wide user reset confirmed in DC-01 logs"
+    },
+    {
+      "check": "Network egress and perimeter state",
+      "result": "PASS",
+      "basis": "No egress to 185.220.101.47 observed since containment 10:30 IST (72h enhanced monitoring window in progress); FW-01 rule LEGACY-VENDOR-2025-RDP absent; /staging/test/upload.aspx returns 404"
+    },
+    {
+      "check": "External rescan of 203.0.113.10",
+      "result": "PASS",
+      "basis": "TCP 3389 CLOSED on external rescan 16:35 IST"
+    },
+    {
+      "check": "Log silence",
+      "result": "PASS",
+      "basis": "No new 4624 Type 10 logons from unexpected sources; no encoded-PowerShell beacons since containment"
+    },
+    {
+      "check": "Business validation",
+      "result": "PASS",
+      "basis": "Dealer portal order flow tested OK; shares S:/R: accessible; payroll app on HR-APP-01 verified untouched"
+    }
+  ],
+  "declaration": {
+    "state": "NOT_DECLARED",
+    "note": "Checklist incomplete: check 2 shows a SKIPPED item on APP-PRD-01 and the AD audit has not been re-run."
+  },
+  "synthetic": true
+}

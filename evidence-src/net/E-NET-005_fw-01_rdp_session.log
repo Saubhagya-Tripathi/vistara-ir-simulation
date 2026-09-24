@@ -1,0 +1,21 @@
+# SYNTHETIC — FW-01 connection/session log excerpt. Timezone: IST.
+# Collection window: 2026-09-03 10:20–12:25 IST; inbound TCP 3389 to 203.0.113.10.
+# SUMMARY: 147 short-lived TCP 3389 connections from 45.155.90.23 → 203.0.113.10 between 10:22:14 and 11:46:31 IST (mean duration 8s, ≤1 KB each — no session established); 12 representative lines follow, then the one sustained session 11:47–12:20 in full.
+Sep  3 10:22:14 FW-01 kernel: INBOUND ALLOW proto=TCP src=45.155.90.23:49114 dst=203.0.113.10:3389  rule=LEGACY-VENDOR-2025-RDP  closed 8s   bytes=312
+Sep  3 10:28:41 FW-01 kernel: INBOUND ALLOW proto=TCP src=45.155.90.23:49802 dst=203.0.113.10:3389  rule=LEGACY-VENDOR-2025-RDP  closed 9s   bytes=305
+Sep  3 10:35:07 FW-01 kernel: INBOUND ALLOW proto=TCP src=45.155.90.23:50219 dst=203.0.113.10:3389  rule=LEGACY-VENDOR-2025-RDP  closed 7s   bytes=298
+Sep  3 10:41:55 FW-01 kernel: INBOUND ALLOW proto=TCP src=45.155.90.23:50931 dst=203.0.113.10:3389  rule=LEGACY-VENDOR-2025-RDP  closed 8s   bytes=341
+Sep  3 10:48:22 FW-01 kernel: INBOUND ALLOW proto=TCP src=45.155.90.23:51566 dst=203.0.113.10:3389  rule=LEGACY-VENDOR-2025-RDP  closed 10s  bytes=329
+Sep  3 10:54:48 FW-01 kernel: INBOUND ALLOW proto=TCP src=45.155.90.23:52117 dst=203.0.113.10:3389  rule=LEGACY-VENDOR-2025-RDP  closed 8s   bytes=316
+Sep  3 11:01:15 FW-01 kernel: INBOUND ALLOW proto=TCP src=45.155.90.23:52890 dst=203.0.113.10:3389  rule=LEGACY-VENDOR-2025-RDP  closed 9s   bytes=322
+Sep  3 11:07:39 FW-01 kernel: INBOUND ALLOW proto=TCP src=45.155.90.23:53454 dst=203.0.113.10:3389  rule=LEGACY-VENDOR-2025-RDP  closed 7s   bytes=309
+Sep  3 11:14:06 FW-01 kernel: INBOUND ALLOW proto=TCP src=45.155.90.23:54128 dst=203.0.113.10:3389  rule=LEGACY-VENDOR-2025-RDP  closed 8s   bytes=335
+Sep  3 11:20:33 FW-01 kernel: INBOUND ALLOW proto=TCP src=45.155.90.23:54871 dst=203.0.113.10:3389  rule=LEGACY-VENDOR-2025-RDP  closed 9s   bytes=318
+Sep  3 11:33:27 FW-01 kernel: INBOUND ALLOW proto=TCP src=45.155.90.23:56305 dst=203.0.113.10:3389  rule=LEGACY-VENDOR-2025-RDP  closed 8s   bytes=327
+Sep  3 11:46:31 FW-01 kernel: INBOUND ALLOW proto=TCP src=45.155.90.23:59892 dst=203.0.113.10:3389  rule=LEGACY-VENDOR-2025-RDP  closed 8s   bytes=344
+Sep  3 11:47:01 FW-01 kernel: INBOUND ALLOW proto=TCP src=45.155.90.23:60177 dst=203.0.113.10:3389   rule=LEGACY-VENDOR-2025-RDP  bytes=1823104
+Sep  3 11:47:01 FW-01 kernel: INBOUND ALLOW proto=TCP src=45.155.90.23:60177 dst=203.0.113.10:3389   rule=LEGACY-VENDOR-2025-RDP  session established (RDP handshake completed, NLA negotiated)
+Sep  3 12:20:44 FW-01 kernel: INBOUND ALLOW proto=TCP src=45.155.90.23:60177 dst=203.0.113.10:3389   rule=LEGACY-VENDOR-2025-RDP  session closed  duration=33m43s  bytes_total=1823104
+Sep  3 12:23:16 FW-01 kernel: INBOUND ALLOW proto=TCP src=185.156.73.54:62219 dst=203.0.113.10:3389  rule=LEGACY-VENDOR-2025-RDP  closed 4s  bytes=291
+Sep  3 12:24:58 FW-01 kernel: INBOUND ALLOW proto=TCP src=122.176.45.9:55301 dst=203.0.113.10:443    rule=DMZ-HTTPS  bytes=6912
+# NOTE: no further connections from 45.155.90.23 after 12:20:44 IST.

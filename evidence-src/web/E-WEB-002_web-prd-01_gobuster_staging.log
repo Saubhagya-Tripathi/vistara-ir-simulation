@@ -1,0 +1,52 @@
+# Synthetic training data. IIS timestamps are UTC. Convert to IST by adding +05:30.
+# Source: WEB-PRD-01 (10.10.20.11) IIS W3SVC1 W3C log excerpt.
+# Extraction window: 2026-09-02 09:34:30 - 09:53:00 UTC.
+# SUMMARY: full W3SVC1 log records 1,042 GET requests from 45.155.90.23 between 09:35:02 and 09:52:47 UTC (~1 request/second); representative excerpt below, sampled ambient traffic retained.
+#Fields: date time s-ip cs-method cs-uri-stem cs-uri-query c-ip cs(User-Agent) sc-status sc-bytes time-taken
+2026-09-02 09:35:02 10.10.20.11 GET /backup - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 9
+2026-09-02 09:35:03 10.10.20.11 GET /old - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 8
+2026-09-02 09:35:05 10.10.20.11 GET /dev - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 8
+2026-09-02 09:35:06 10.10.20.11 GET /test - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 9
+2026-09-02 09:35:07 10.10.20.11 GET /health - 167.99.14.22 UptimeRobot/2.0 200 15 3
+2026-09-02 09:35:08 10.10.20.11 GET /staging - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 200 2405 19
+2026-09-02 09:35:09 10.10.20.11 GET /beta - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 8
+2026-09-02 09:35:10 10.10.20.11 GET /demo - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 8
+2026-09-02 09:35:12 10.10.20.11 GET /staging/admin - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 12
+2026-09-02 09:35:14 10.10.20.11 GET /staging/test - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 200 2311 18
+2026-09-02 09:35:15 10.10.20.11 GET /staging/test/upload.aspx - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 200 1890 22
+2026-09-02 09:35:17 10.10.20.11 GET /staging/assets - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 200 2244 15
+2026-09-02 09:35:18 10.10.20.11 GET /staging/backup - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 10
+2026-09-02 09:35:20 10.10.20.11 GET /staging/config - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 9
+2026-09-02 09:35:21 10.10.20.11 GET /staging/db - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 8
+2026-09-02 09:35:23 10.10.20.11 GET /staging/old - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 8
+2026-09-02 09:35:24 10.10.20.11 GET /staging/api - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 9
+2026-09-02 09:35:26 10.10.20.11 GET /staging/test/upload_old.aspx - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 11
+2026-09-02 09:35:27 10.10.20.11 GET /staging/test/backup.aspx - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 10
+2026-09-02 09:35:29 10.10.20.11 GET /staging/upload - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 9
+2026-09-02 09:35:30 10.10.20.11 GET /staging/files - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 8
+2026-09-02 09:35:32 10.10.20.11 GET /staging/media - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 9
+2026-09-02 09:35:33 10.10.20.11 GET /staging/images - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 8
+2026-09-02 09:35:35 10.10.20.11 GET /staging/temp - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 8
+2026-09-02 09:35:36 10.10.20.11 GET /staging/tmp - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 8
+2026-09-02 09:35:38 10.10.20.11 GET /staging/test/upload2.aspx - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 10
+2026-09-02 09:35:39 10.10.20.11 GET /staging/assets/upload - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 9
+2026-09-02 09:35:41 10.10.20.11 GET /staging/assets/images - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 8
+2026-09-02 09:35:42 10.10.20.11 GET /staging/assets/css - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 9
+2026-09-02 09:35:45 10.10.20.11 GET /products/industrial-polymers - 66.249.72.14 Mozilla/5.0+(compatible;+Googlebot/2.1;++http://www.google.com/bot.html) 200 24110 58
+2026-09-02 09:36:12 10.10.20.11 POST /api/auth/login - 49.37.118.204 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 200 812 129
+2026-09-02 09:37:03 10.10.20.11 GET /api/pricing sku=HDPE-220 49.37.118.204 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 200 1402 54
+2026-09-02 09:38:29 10.10.20.11 GET /robots.txt - 40.77.167.211 Mozilla/5.0+(compatible;+bingbot/2.0;++http://www.bing.com/bingbot.htm) 200 214 5
+2026-09-02 09:39:07 10.10.20.11 GET /staging/reports - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 9
+2026-09-02 09:40:52 10.10.20.11 GET /wp-login.php - 94.23.170.55 Mozilla/5.0+(X11;+Linux+x86_64)+AppleWebKit/537.36 404 1245 11
+2026-09-02 09:41:18 10.10.20.11 GET /staging/logs - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 8
+2026-09-02 09:42:44 10.10.20.11 GET /staging/data - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 9
+2026-09-02 09:43:16 10.10.20.11 GET /health - 167.99.14.22 UptimeRobot/2.0 200 15 2
+2026-09-02 09:44:09 10.10.20.11 GET /staging/portal - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 8
+2026-09-02 09:45:38 10.10.20.11 GET /dealers/locate - 157.44.201.9 Mozilla/5.0+(iPhone;+CPU+iPhone+OS+17_6+like+Mac+OS+X)+AppleWebKit/605.1.15+(KHTML,+like+Gecko)+Version/17.6+Mobile/15E148+Safari/604.1 200 15330 66
+2026-09-02 09:46:22 10.10.20.11 GET /staging/test/upload.aspx - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 200 1890 21
+2026-09-02 09:47:44 10.10.20.11 GET /staging/include - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 9
+2026-09-02 09:49:05 10.10.20.11 GET /.env - 185.191.34.102 python-requests/2.31.0 404 1245 8
+2026-09-02 09:50:41 10.10.20.11 GET /api/orders/44802/status - 117.215.66.30 Mozilla/5.0+(Macintosh;+Intel+Mac+OS+X+14_6)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/127.0.0.0+Safari/537.36 200 976 45
+2026-09-02 09:51:33 10.10.20.11 GET /staging/secure - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 8
+2026-09-02 09:52:12 10.10.20.11 GET /health - 167.99.14.22 UptimeRobot/2.0 200 15 3
+2026-09-02 09:52:47 10.10.20.11 GET /staging/qa - 45.155.90.23 Mozilla/5.0+(compatible;+Go-http-client/1.1) 404 1245 8

@@ -1,0 +1,17 @@
+{
+  "evidence_id": "E-EDR-005",
+  "type": "edr_process",
+  "source": "SentinelNode EDR",
+  "host": "WEB-PRD-01",
+  "synthetic": true,
+  "collection_window_ist": "2026-09-03T16:15:00+05:30/2026-09-03T16:30:00+05:30",
+  "events": [
+    {"time_ist": "2026-09-03T16:18:40+05:30", "pid": 2140, "process": "svchost.exe", "cmdline": "C:\\Windows\\system32\\svchost.exe -k netsvcs -p -s Schedule", "parent": "services.exe", "parent_pid": 548, "user": "NT AUTHORITY\\SYSTEM", "sha256": "SYNTHETIC-3d3ece752f6178f392b30d44f9e5933d1ab8ce34b99a76a7bf849c68472b015e", "synthetic": true},
+    {"time_ist": "2026-09-03T16:20:11+05:30", "pid": 7212, "process": "cmd.exe", "cmdline": "cmd.exe", "parent": "w3wp.exe", "parent_pid": 2844, "user": "VISTARA\\svc_portal", "sha256": "SYNTHETIC-d6427dea232ee8152a85fb172fda22268e763b83898beb36bf2b07da0eac5934", "synthetic": true},
+    {"time_ist": "2026-09-03T16:20:47+05:30", "pid": 7260, "process": "cmd.exe", "cmdline": "cmd /c type C:\\IT\\scripts\\deploy.ps1", "parent": "cmd.exe", "parent_pid": 7212, "user": "VISTARA\\svc_portal", "sha256": "SYNTHETIC-0de7ab3658cc8312416f5bff1fc4a241f2d03a5be1278faaf16f9c084d299ba0", "synthetic": true},
+    {"time_ist": "2026-09-03T16:21:33+05:30", "pid": 7308, "process": "findstr.exe", "cmdline": "findstr /si \"password\" C:\\Users\\svc_portal\\Documents\\*.txt", "parent": "cmd.exe", "parent_pid": 7212, "user": "VISTARA\\svc_portal", "sha256": "SYNTHETIC-5d6a34352706dd581143bf3094ebd522e8c30860343ca0c13fa73c173289da57", "synthetic": true},
+    {"time_ist": "2026-09-03T16:22:10+05:30", "pid": 7352, "process": "findstr.exe", "cmdline": "findstr /si \"password\" C:\\IT\\scripts\\*.ps1", "parent": "cmd.exe", "parent_pid": 7212, "user": "VISTARA\\svc_portal", "sha256": "SYNTHETIC-fa4c2fbea2d1aa9f76d5d8c092f7f8b8f145ab7ec20c22b05b474a321a6b032f", "synthetic": true},
+    {"time_ist": "2026-09-03T16:23:58+05:30", "pid": 7396, "process": "cmd.exe", "cmdline": "cmd /c type C:\\Users\\svc_portal\\Documents\\passwords.txt", "parent": "cmd.exe", "parent_pid": 7212, "user": "VISTARA\\svc_portal", "sha256": "SYNTHETIC-2ff99ac0f65d53cdf1ebadfe25dfbdde3fab9de41a586060de93251fe54ea99d", "synthetic": true},
+    {"time_ist": "2026-09-03T16:25:12+05:30", "pid": 2844, "process": "w3wp.exe", "cmdline": "c:\\windows\\system32\\inetsrv\\w3wp.exe", "parent": "svchost.exe", "parent_pid": 664, "user": "VISTARA\\svc_portal", "sha256": "SYNTHETIC-7ba4aa655f4cd997e9b6b6d073a57c09084032a4e007be6cc6d34dd866f65205", "synthetic": true}
+  ]
+}

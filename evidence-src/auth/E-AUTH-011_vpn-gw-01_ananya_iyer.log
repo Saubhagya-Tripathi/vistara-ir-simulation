@@ -1,0 +1,7 @@
+# SYNTHETIC — VPN-GW-01 SSL-VPN auth log + ERP-APP-01 logon records. Timezone: IST.
+# Query window: 2026-09-07 11:00–13:00 IST. Session for user ananya.iyer and related application logon.
+2026-09-07 11:20:18 IST  CONNECT  user=ananya.iyer  src=122.176.45.9 (Ahmedabad office)  assigned=10.10.10.141  note="HR travel approval TRV-2026-0312 on file (E-DOC-003); ERP access role-consistent (E-AUTH-011 4624 11:26)"
+2026-09-07 11:26:47 IST  ERP-APP-01  Event 4624  Logon Type 3  Account: ananya.iyer  Domain: VISTARA  Source: 10.10.10.141 (VPN pool)  SUCCESS — ERP finance module session opened
+2026-09-07 11:42:05 IST  CONNECT  user=m.chauhan  src=49.37.210.66  assigned=10.10.10.174  session OK
+2026-09-07 12:15:38 IST  DISCONNECT user=m.chauhan  duration=33m
+2026-09-07 12:48:33 IST  DISCONNECT user=ananya.iyer  duration=88m

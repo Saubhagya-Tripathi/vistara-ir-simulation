@@ -1,0 +1,5 @@
+{"evidence_id":"E-RESP-001","type":"response_record","incident":"INC-2026-0417","phase":"containment","time_ist":"2026-09-09T10:30:00+05:30","actor":"IR team",
+ "actions":[{"order":1,"action":"EDR network isolation","target":"APP-PRD-01, FILE-PRD-01, WEB-PRD-01","result":"SUCCESS","detail":"8443 C2 from APP-PRD-01 ceased 10:30"},
+ {"order":2,"action":"Disable accounts","target":"svc_mon, rajesh.kulkarni, svc_portal","result":"SUCCESS","detail":"4725 events E-AD-004"},
+ {"order":3,"action":"FW-01 egress block","target":"185.220.101.47 (all ports)","result":"SUCCESS"},
+ {"order":4,"action":"Suspend /staging/ site","target":"WEB-PRD-01","result":"SUCCESS"}],"synthetic":true}

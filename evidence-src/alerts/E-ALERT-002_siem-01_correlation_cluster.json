@@ -1,0 +1,39 @@
+{
+  "evidence_id": "E-ALERT-002",
+  "type": "siem_alert",
+  "source": "Wazuh SIEM (SIEM-01)",
+  "alert_id": "CORR-20260909-0418",
+  "time_ist": "2026-09-09T09:52:00+05:30",
+  "severity": "high",
+  "host": "APP-PRD-01",
+  "rule": "Retrospective correlation: recurring outbound TCP 8443 + cross-host remote logons",
+  "summary": "Correlation run linked alert EDR-20260909-0417 (APP-PRD-01) to earlier events on FILE-PRD-01, DC-01 and WEB-PRD-01 between 2026-09-03 13:25 IST and 2026-09-05 13:05 IST. Escalated by SOC analyst Priya Nair.",
+  "cluster": [
+    {
+      "evt": "4624 Logon Type 10, account svc_mon, on FILE-PRD-01 (10.10.20.23) from 10.10.20.21 (APP-PRD-01) at 2026-09-05 10:15 IST",
+      "ref": "E-AUTH-007"
+    },
+    {
+      "evt": "4662 directory replication access on DC-01 by rajesh.kulkarni from 10.10.20.21 (APP-PRD-01), 2026-09-04 13:10-13:14 IST",
+      "ref": "E-AUTH-006"
+    },
+    {
+      "evt": "Outbound TCP 8443 to 185.220.101.47 from 10.10.20.11 (WEB-PRD-01) at 2026-09-03 13:25 IST",
+      "ref": "E-NET-002"
+    },
+    {
+      "evt": "Outbound TCP 8443 to 185.220.101.47 from 10.10.20.23 (FILE-PRD-01) at 2026-09-05 12:30 IST",
+      "ref": "E-NET-004"
+    }
+  ],
+  "correlated_evidence": [
+    "E-ALERT-001",
+    "E-AUTH-006",
+    "E-AUTH-007",
+    "E-NET-002",
+    "E-NET-004"
+  ],
+  "escalated_by": "Priya Nair (SOC L2)",
+  "escalated_ist": "2026-09-09T09:52:00+05:30",
+  "synthetic": true
+}

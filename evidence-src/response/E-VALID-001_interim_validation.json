@@ -1,0 +1,42 @@
+{
+  "evidence_id": "E-VALID-001",
+  "type": "validation_record",
+  "incident": "INC-2026-0417",
+  "phase": "validation",
+  "time_ist": "2026-09-09T16:30:00+05:30",
+  "actor": "IR team",
+  "checks": [
+    {
+      "check": "EDR full scan — WEB-PRD-01 (post-rebuild)",
+      "result": "PASS",
+      "basis": "SentinelNode full scan 16:05-16:18 IST, 0 detections"
+    },
+    {
+      "check": "EDR full scan — APP-PRD-01 (post-rebuild)",
+      "result": "PASS",
+      "basis": "SentinelNode full scan 16:06-16:21 IST, 0 detections"
+    },
+    {
+      "check": "EDR full scan — FILE-PRD-01 (post-restore)",
+      "result": "PASS",
+      "basis": "SentinelNode full scan 16:08-16:24 IST, 0 detections"
+    },
+    {
+      "check": "EDR full scan — DC-01",
+      "result": "PASS",
+      "basis": "SentinelNode full scan 16:02-16:15 IST, 0 detections"
+    },
+    {
+      "check": "Restore integrity — FILE-PRD-01 data vs 2026-09-02 backup catalog",
+      "result": "PASS",
+      "basis": "Veeam verify job OK; ACL spot-checks on S: and R: match pre-incident state"
+    },
+    {
+      "check": "Backup set malware scan (2026-09-02 restore point)",
+      "result": "PASS",
+      "basis": "Scanned before restore; 0 detections"
+    }
+  ],
+  "note": "Interim recovery validation only. Feeds the safe-state checklist (E-VALID-002); a clean EDR scan on its own does not close that checklist.",
+  "synthetic": true
+}

@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.DS_Store
+src/data/generated/
+public/evidence/
+docs/DESIGN_RECONCILIATION_LOG.md.local

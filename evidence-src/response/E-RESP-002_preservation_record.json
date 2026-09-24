@@ -1,0 +1,53 @@
+{
+  "evidence_id": "E-RESP-002",
+  "type": "response_record",
+  "incident": "INC-2026-0417",
+  "phase": "preservation",
+  "time_ist": "2026-09-09T11:00:00+05:30",
+  "actor": "IR team",
+  "actions": [
+    {
+      "order": 1,
+      "action": "Memory capture + disk snapshot",
+      "target": "WEB-PRD-01",
+      "result": "SUCCESS",
+      "detail": "WEB-PRD-01_mem_20260909.raw (16 GB); WEB-PRD-01_disk_20260909.e01; sha256 SYNTHETIC-3f8a1c9e02b74d65a9f03c1e7b6d48a25f09c3e1b7d6a48f25c09e3b1d7a6f48; captured 11:05 IST before any eradication step"
+    },
+    {
+      "order": 2,
+      "action": "Memory capture + disk snapshot",
+      "target": "APP-PRD-01",
+      "result": "SUCCESS",
+      "detail": "APP-PRD-01_mem_20260909.raw (16 GB); APP-PRD-01_disk_20260909.e01; sha256 SYNTHETIC-91c4e7a2f08b3d65c1e9a04f7b6d38250c9e1f7a4b6d38c25e09f1a7b4d6382c; captured 11:12 IST"
+    },
+    {
+      "order": 3,
+      "action": "Memory capture + disk snapshot",
+      "target": "FILE-PRD-01",
+      "result": "SUCCESS",
+      "detail": "FILE-PRD-01_mem_20260909.raw (32 GB); FILE-PRD-01_disk_20260909.e01; sha256 SYNTHETIC-5d20b8f14a97c3e61b09d4f87a2c65e03b91d4f8a7c26e50b39d1f4a87c62e05; captured 11:20 IST"
+    },
+    {
+      "order": 4,
+      "action": "Memory capture + disk snapshot",
+      "target": "DC-01",
+      "result": "SUCCESS",
+      "detail": "DC-01_mem_20260909.raw (16 GB); DC-01_disk_20260909.e01; sha256 SYNTHETIC-7b31e0c59d84f2a6c10e95b38d47a60f29c51e8b3d74a06f59c28e1b3d47a60f; captured 11:28 IST"
+    },
+    {
+      "order": 5,
+      "action": "SIEM log export",
+      "target": "SIEM-01",
+      "result": "SUCCESS",
+      "detail": "Full export 2026-09-02 00:00 → 2026-09-09 11:00 IST (siem_export_inc-2026-0417.tar.gz); sha256 SYNTHETIC-4e09c2a7b51d8f63c07e91a4b6d35f28c01e9a7b4d63c58f20e9a1b7d4c63f58"
+    },
+    {
+      "order": 6,
+      "action": "Chain of custody",
+      "target": "All captured items",
+      "result": "SUCCESS",
+      "detail": "Custody log COC-2026-0417 opened 11:35 IST; items COC-2026-0417-01 through -05 sealed to IR evidence store; custodian: IR lead; hashes verified against capture values"
+    }
+  ],
+  "synthetic": true
+}

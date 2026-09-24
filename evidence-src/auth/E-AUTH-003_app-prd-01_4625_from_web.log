@@ -1,0 +1,7 @@
+# SYNTHETIC TRAINING DATA — APP-PRD-01 Security log excerpt (SIEM export via SIEM-01). Timezone: IST.
+# Query window: 2026-09-03 15:05–15:30 IST. Event 4625/4624 excerpt, host APP-PRD-01 (10.10.20.21).
+Event 4624  2026-09-03 15:08:19 IST  Logon Type 3   Account: svc_portal  Domain: VISTARA  Source: 10.10.20.11 (WEB-PRD-01)  Host: APP-PRD-01  Status: 0x0 SUCCESS (dealer portal backend API connection)
+Event 4625  2026-09-03 15:12:44 IST  Logon Type 3   Account: rajesh.kulkarni  Domain: VISTARA  Source: 10.10.20.11  Host: APP-PRD-01  Status: 0xC000006A (bad password — RajKulk@2023 attempt FAILED)
+Event 4624  2026-09-03 15:16:02 IST  Logon Type 3   Account: svc_portal  Domain: VISTARA  Source: 10.10.20.11 (WEB-PRD-01)  Host: APP-PRD-01  Status: 0x0 SUCCESS (dealer portal backend API connection)
+Event 4624  2026-09-03 15:21:37 IST  Logon Type 3   Account: sneha.patil  Domain: VISTARA  Source: 10.10.10.54 (WKSTN-SNE-04)  Host: APP-PRD-01  Status: 0x0 SUCCESS (HR self-service module)
+Event 4624  2026-09-03 15:26:48 IST  Logon Type 3   Account: svc_portal  Domain: VISTARA  Source: 10.10.20.11 (WEB-PRD-01)  Host: APP-PRD-01  Status: 0x0 SUCCESS (dealer portal backend API connection)

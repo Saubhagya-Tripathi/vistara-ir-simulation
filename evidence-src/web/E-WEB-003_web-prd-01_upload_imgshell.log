@@ -1,0 +1,43 @@
+# Synthetic training data. IIS timestamps are UTC. Convert to IST by adding +05:30.
+# Source: WEB-PRD-01 (10.10.20.11) IIS W3SVC1 W3C log excerpt.
+# Extraction window: 2026-09-03 07:25:00 - 2026-09-08 05:35:00 UTC (all /staging/ requests retained; ambient traffic sampled).
+#Fields: date time s-ip cs-method cs-uri-stem cs-uri-query c-ip cs(User-Agent) sc-status sc-bytes time-taken
+2026-09-03 07:27:52 10.10.20.11 GET /health - 167.99.14.22 UptimeRobot/2.0 200 15 3
+2026-09-03 07:28:14 10.10.20.11 GET /staging/assets/img.aspx - 45.155.90.23 Mozilla/5.0 404 1245 11
+2026-09-03 07:28:52 10.10.20.11 GET /staging/assets/upload_2024/img.aspx - 45.155.90.23 Mozilla/5.0 404 1245 12
+2026-09-03 07:29:31 10.10.20.11 GET /staging/test/img.aspx - 45.155.90.23 Mozilla/5.0 404 1245 10
+2026-09-03 07:30:07 10.10.20.11 GET /api/pricing sku=HDPE-220 49.37.118.204 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 200 1402 57
+2026-09-03 07:30:45 10.10.20.11 GET /staging/uploads/img.aspx - 45.155.90.23 Mozilla/5.0 404 1245 11
+2026-09-03 07:31:58 10.10.20.11 GET /staging/test/upload.aspx - 45.155.90.23 Mozilla/5.0 200 1890 20
+2026-09-03 07:32:41 10.10.20.11 POST /staging/test/upload.aspx - 45.155.90.23 Mozilla/5.0 200 412 156
+2026-09-03 07:33:15 10.10.20.11 GET /staging/assets/upload_2024/img.aspx - 45.155.90.23 Mozilla/5.0 200 318 44
+2026-09-03 07:34:02 10.10.20.11 GET /staging/assets/upload_2024/img.aspx cmd=whoami 45.155.90.23 Mozilla/5.0 200 980 145
+2026-09-03 07:35:19 10.10.20.11 GET /products/industrial-polymers - 66.249.72.14 Mozilla/5.0+(compatible;+Googlebot/2.1;++http://www.google.com/bot.html) 200 24110 60
+2026-09-03 07:36:55 10.10.20.11 GET /staging/assets/upload_2024/img.aspx cmd=ipconfig+/all 45.155.90.23 Mozilla/5.0 200 2210 98
+2026-09-03 07:39:10 10.10.20.11 GET /staging/assets/upload_2024/img.aspx cmd=net+user 45.155.90.23 Mozilla/5.0 200 1644 87
+2026-09-03 07:41:27 10.10.20.11 GET /staging/assets/upload_2024/img.aspx cmd=quser 45.155.90.23 Mozilla/5.0 200 1122 76
+2026-09-03 07:44:03 10.10.20.11 GET /health - 167.99.14.22 UptimeRobot/2.0 200 15 2
+2026-09-03 07:52:48 10.10.20.11 POST /api/auth/login - 117.215.66.30 Mozilla/5.0+(Macintosh;+Intel+Mac+OS+X+14_6)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/127.0.0.0+Safari/537.36 200 812 124
+2026-09-03 09:10:44 10.10.20.11 GET /staging/assets/upload_2024/img.aspx cmd=netstat+-ano 45.155.90.23 Mozilla/5.0 200 5874 210
+2026-09-03 09:12:03 10.10.20.11 GET /staging/assets/upload_2024/img.aspx cmd=tasklist 45.155.90.23 Mozilla/5.0 200 4312 132
+2026-09-03 09:13:38 10.10.20.11 GET /staging/assets/upload_2024/img.aspx cmd=wmic+process+get+name,processid,commandline 45.155.90.23 Mozilla/5.0 200 7951 244
+2026-09-03 09:15:21 10.10.20.11 GET /staging/assets/upload_2024/img.aspx cmd=appcmd+list+site 45.155.90.23 Mozilla/5.0 200 1508 92
+2026-09-03 09:18:55 10.10.20.11 GET /dealers/locate - 157.44.201.9 Mozilla/5.0+(iPhone;+CPU+iPhone+OS+17_6+like+Mac+OS+X)+AppleWebKit/605.1.15+(KHTML,+like+Gecko)+Version/17.6+Mobile/15E148+Safari/604.1 200 15330 68
+2026-09-03 10:50:12 10.10.20.11 GET /staging/assets/upload_2024/img.aspx cmd=type+C:\Users\svc_portal\Documents\passwords.txt 45.155.90.23 Mozilla/5.0 200 1264 118
+2026-09-03 10:52:47 10.10.20.11 GET /staging/assets/upload_2024/img.aspx cmd=findstr+/si+password+C:\IT\scripts\*.ps1 45.155.90.23 Mozilla/5.0 200 1830 136
+2026-09-03 11:04:29 10.10.20.11 GET /health - 167.99.14.22 UptimeRobot/2.0 200 15 3
+2026-09-04 05:40:17 10.10.20.11 GET /robots.txt - 40.77.167.211 Mozilla/5.0+(compatible;+bingbot/2.0;++http://www.bing.com/bingbot.htm) 200 214 5
+2026-09-04 05:44:19 10.10.20.11 GET /staging/assets/upload_2024/img.aspx cmd=whoami 45.155.90.23 Mozilla/5.0 200 980 139
+2026-09-04 07:58:33 10.10.20.11 GET /staging/assets/upload_2024/img.aspx cmd=netstat+-ano 45.155.90.23 Mozilla/5.0 200 6102 198
+2026-09-04 08:15:02 10.10.20.11 GET /api/pricing sku=LLDPE-118 49.37.118.204 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 200 1398 51
+2026-09-05 04:46:11 10.10.20.11 GET /staging/assets/upload_2024/img.aspx cmd=whoami 45.155.90.23 Mozilla/5.0 200 980 141
+2026-09-05 05:02:38 10.10.20.11 GET /health - 167.99.14.22 UptimeRobot/2.0 200 15 3
+2026-09-05 06:58:40 10.10.20.11 GET /staging/assets/upload_2024/img.aspx cmd=tasklist 45.155.90.23 Mozilla/5.0 200 4455 128
+2026-09-05 07:21:15 10.10.20.11 GET /wp-login.php - 94.23.170.55 Mozilla/5.0+(X11;+Linux+x86_64)+AppleWebKit/537.36 404 1245 12
+2026-09-06 05:22:09 10.10.20.11 GET /staging/assets/upload_2024/img.aspx cmd=whoami 45.155.90.23 Mozilla/5.0 200 980 137
+2026-09-06 05:47:44 10.10.20.11 GET /products/packaging-films - 66.249.72.14 Mozilla/5.0+(compatible;+Googlebot/2.1;++http://www.google.com/bot.html) 200 22874 63
+2026-09-07 06:12:54 10.10.20.11 GET /staging/assets/upload_2024/img.aspx cmd=netstat+-ano 45.155.90.23 Mozilla/5.0 200 5988 202
+2026-09-07 06:40:08 10.10.20.11 GET /health - 167.99.14.22 UptimeRobot/2.0 200 15 2
+2026-09-08 04:38:22 10.10.20.11 GET /staging/assets/upload_2024/img.aspx cmd=whoami 45.155.90.23 Mozilla/5.0 200 980 143
+2026-09-08 05:09:51 10.10.20.11 GET /api/orders/44802/status - 117.215.66.30 Mozilla/5.0+(Macintosh;+Intel+Mac+OS+X+14_6)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/127.0.0.0+Safari/537.36 200 976 48
+2026-09-08 05:31:47 10.10.20.11 GET /staging/assets/upload_2024/img.aspx cmd=tasklist 45.155.90.23 Mozilla/5.0 200 4401 125

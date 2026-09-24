@@ -1,0 +1,5551 @@
+{
+  "metadata": {
+    "assessment_id": "VISTARA-IR-ASSESSMENT-v1.0",
+    "title": "Vistara Polymers Cyber-Incident Investigation & Response Assessment",
+    "based_on": "vistara-polymers simulation package v1.1",
+    "incident": "INC-2026-0417",
+    "duration_minutes": 300,
+    "timezone_convention": "All evidence IST except IIS artifacts (UTC + canonical header `Synthetic training data. IIS timestamps are UTC. Convert to IST by adding +05:30.`). Timestamp answers accepted in IST at minute precision (HH:MM) and, for IIS-derived items, the equivalent UTC value.",
+    "pass_threshold_pct": 70,
+    "total_points": 255,
+    "task_count": 30,
+    "version": "1.0.1",
+    "synthetic": true,
+    "reconciliation_note": "Agent 4.1 scoring reconciliation: equal pooling, Q-05-01 40-cell rule, evidence_selection explicit per task, Q-07-04 dwell tolerance 142h±2h"
+  },
+  "phases": [
+    {
+      "id": "P0",
+      "name": "Briefing & Triage",
+      "time_budget_minutes": 15,
+      "time_split": {
+        "investigation": 6,
+        "evidence_review": 5,
+        "task_decision": 4
+      },
+      "gate": "Q-00-01 complete (verdict + severity + anchors)",
+      "tasks": [
+        "Q-00-01"
+      ]
+    },
+    {
+      "id": "P1",
+      "name": "Detection Validation & Initial Scoping",
+      "time_budget_minutes": 30,
+      "time_split": {
+        "investigation": 12,
+        "evidence_review": 10,
+        "task_decision": 8
+      },
+      "gate": "Q-01-01, Q-01-02 complete",
+      "tasks": [
+        "Q-01-01",
+        "Q-01-02"
+      ]
+    },
+    {
+      "id": "P2",
+      "name": "Initial Access & Compromise Analysis",
+      "time_budget_minutes": 45,
+      "time_split": {
+        "investigation": 18,
+        "evidence_review": 17,
+        "task_decision": 10
+      },
+      "gate": "Q-02-01..04 complete",
+      "tasks": [
+        "Q-02-01",
+        "Q-02-02",
+        "Q-02-03",
+        "Q-02-04"
+      ]
+    },
+    {
+      "id": "P3",
+      "name": "Execution, Credentials & Persistence",
+      "time_budget_minutes": 60,
+      "time_split": {
+        "investigation": 24,
+        "evidence_review": 22,
+        "task_decision": 14
+      },
+      "gate": "Q-03-01..06 complete",
+      "tasks": [
+        "Q-03-01",
+        "Q-03-02",
+        "Q-03-03",
+        "Q-03-04",
+        "Q-03-05",
+        "Q-03-06"
+      ]
+    },
+    {
+      "id": "P4",
+      "name": "Discovery, Lateral Movement, Collection & Exfiltration",
+      "time_budget_minutes": 45,
+      "time_split": {
+        "investigation": 18,
+        "evidence_review": 16,
+        "task_decision": 11
+      },
+      "gate": "Q-04-01..04 complete",
+      "tasks": [
+        "Q-04-01",
+        "Q-04-02",
+        "Q-04-03",
+        "Q-04-04"
+      ]
+    },
+    {
+      "id": "P5",
+      "name": "Full Scoping & Attack-Path Reconstruction",
+      "time_budget_minutes": 30,
+      "time_split": {
+        "investigation": 10,
+        "evidence_review": 8,
+        "task_decision": 12
+      },
+      "gate": "Q-05-01..05 complete",
+      "tasks": [
+        "Q-05-01",
+        "Q-05-02",
+        "Q-05-03",
+        "Q-05-04",
+        "Q-05-05"
+      ]
+    },
+    {
+      "id": "P6",
+      "name": "Containment, Eradication & Recovery",
+      "time_budget_minutes": 45,
+      "time_split": {
+        "investigation": 12,
+        "evidence_review": 10,
+        "task_decision": 23
+      },
+      "gate": "Q-06-01..04 complete",
+      "tasks": [
+        "Q-06-01",
+        "Q-06-02",
+        "Q-06-03",
+        "Q-06-04"
+      ]
+    },
+    {
+      "id": "P7",
+      "name": "Safe-State Validation & Final Reporting",
+      "time_budget_minutes": 30,
+      "time_split": {
+        "investigation": 6,
+        "evidence_review": 8,
+        "task_decision": 16
+      },
+      "gate": "Q-07-01..04 complete -> submit",
+      "tasks": [
+        "Q-07-01",
+        "Q-07-02",
+        "Q-07-03",
+        "Q-07-04"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "Q-00-01",
+      "phase": "P0",
+      "title": "Triage & incident declaration",
+      "instructions": "You are the Senior IR Analyst assigned to INC-2026-0417. Review the briefing ticket and the triggering SIEM alert in your workspace, then make your triage call.",
+      "task_type": "composite",
+      "answer_type": "composite",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Verdict for the triggering alert.",
+          "answer_type": "single_choice",
+          "canonical_answer": "A",
+          "accepted_answers": [
+            "A"
+          ],
+          "options": [
+            "A - True security incident - declare and investigate",
+            "B - False positive - benign scanner noise",
+            "C - Legitimate user activity",
+            "D - Insufficient evidence to decide"
+          ],
+          "points": 1.0
+        },
+        {
+          "key": "(b)",
+          "question": "Severity per IR-Policy-01.",
+          "answer_type": "single_choice",
+          "canonical_answer": "Sev-1",
+          "accepted_answers": [
+            "Sev-1"
+          ],
+          "options": [
+            "Sev-1",
+            "Sev-2",
+            "Sev-3",
+            "Sev-4"
+          ],
+          "points": 1.0
+        },
+        {
+          "key": "(c)",
+          "question": "Alerting host.",
+          "answer_type": "asset",
+          "canonical_answer": "APP-PRD-01",
+          "accepted_answers": [
+            "APP-PRD-01",
+            "10.10.20.21"
+          ],
+          "options": [],
+          "points": 1.0
+        },
+        {
+          "key": "(d)",
+          "question": "External IP implicated by the alert.",
+          "answer_type": "ip",
+          "canonical_answer": "185.220.101.47",
+          "accepted_answers": [
+            "185.220.101.47",
+            "185.220.101.47:8443"
+          ],
+          "options": [],
+          "points": 1.0
+        }
+      ],
+      "canonical_answer": {
+        "(a)": "A",
+        "(b)": "Sev-1",
+        "(c)": "APP-PRD-01",
+        "(d)": "185.220.101.47"
+      },
+      "accepted_answers": {
+        "(a)": [
+          "A"
+        ],
+        "(b)": [
+          "Sev-1"
+        ],
+        "(c)": [
+          "APP-PRD-01",
+          "10.10.20.21"
+        ],
+        "(d)": [
+          "185.220.101.47",
+          "185.220.101.47:8443"
+        ]
+      },
+      "required_evidence": [
+        "E-ALERT-001",
+        "E-TICKET-001"
+      ],
+      "attack_events": [
+        "EVT-031"
+      ],
+      "evidence_correlation": "SIEM alert detail x ticket; (E-ALERT-002 cluster + E-EDR-008/E-NET-003 available in P1 disprove the false-positive option).",
+      "points": 5,
+      "difficulty": "Low",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "Read the alert's full process lineage and destination, then check whether the dossier or ticket describes any sanctioned activity that matches it.",
+          "penalty": 1
+        }
+      ],
+      "hint_penalty": 1,
+      "unlock": "none (assessment entry)",
+      "common_wrong_answer": {
+        "answer": "B (false positive / scanner noise)",
+        "why_wrong": "The alert shows an encoded-PowerShell child of a scheduled task making an external 8443 connection from APP-PRD-01; no scanner job or benign process matches that lineage."
+      },
+      "learning_outcomes": [
+        1,
+        11,
+        15
+      ],
+      "evidence_selection": {
+        "is_candidate_action": true,
+        "earns_points": true,
+        "points": 1.0,
+        "required_set": [
+          "E-ALERT-001",
+          "E-TICKET-001"
+        ],
+        "rule": "full points iff selection superset of required_set with zero incorrect IDs; half iff superset with <=2 incorrect; else 0"
+      }
+    },
+    {
+      "id": "Q-01-01",
+      "phase": "P1",
+      "title": "Reading the correlation cluster",
+      "instructions": "Open the SIEM correlation view that followed the alert. Establish which hosts the incident touches and what the recurring outbound connections mean before you dig deeper.",
+      "task_type": "composite",
+      "answer_type": "composite",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Which hosts appear in the correlated cluster?",
+          "answer_type": "multi_select",
+          "canonical_answer": [
+            "WEB-PRD-01",
+            "APP-PRD-01",
+            "FILE-PRD-01",
+            "DC-01"
+          ],
+          "accepted_answers": [
+            [
+              "WEB-PRD-01",
+              "APP-PRD-01",
+              "FILE-PRD-01",
+              "DC-01"
+            ]
+          ],
+          "options": [
+            "WEB-PRD-01",
+            "APP-PRD-01",
+            "FILE-PRD-01",
+            "DC-01",
+            "ERP-APP-01",
+            "MAIL-PRD-01",
+            "DB-PRD-01",
+            "MES-PLC-01"
+          ],
+          "points": 2.4
+        },
+        {
+          "key": "(b)",
+          "question": "The ~30-minute small outbound connections 10.10.20.21 -> 185.220.101.47:8443 most likely indicate:",
+          "answer_type": "single_choice",
+          "canonical_answer": "B",
+          "accepted_answers": [
+            "B"
+          ],
+          "options": [
+            "A - Windows update telemetry",
+            "B - An active C2 beacon from APP-PRD-01",
+            "C - Vulnerability scanner callbacks",
+            "D - NTP synchronization"
+          ],
+          "points": 2.4
+        }
+      ],
+      "canonical_answer": {
+        "(a)": [
+          "WEB-PRD-01",
+          "APP-PRD-01",
+          "FILE-PRD-01",
+          "DC-01"
+        ],
+        "(b)": "B"
+      },
+      "accepted_answers": {
+        "(a)": [
+          [
+            "WEB-PRD-01",
+            "APP-PRD-01",
+            "FILE-PRD-01",
+            "DC-01"
+          ]
+        ],
+        "(b)": [
+          "B"
+        ]
+      },
+      "required_evidence": [
+        "E-ALERT-002",
+        "E-NET-003",
+        "E-EDR-008"
+      ],
+      "attack_events": [
+        "EVT-032",
+        "EVT-018"
+      ],
+      "evidence_correlation": "Cluster view x FW-01 beacon cadence x EDR schtasks artifact.",
+      "points": 6,
+      "difficulty": "Medium",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "Pull the underlying artifacts the cluster references rather than reading the cluster summary alone; compare the cadence and packet size of the 8443 traffic against known benign service patterns in the dossier.",
+          "penalty": 1
+        }
+      ],
+      "hint_penalty": 1,
+      "unlock": "P0 gate",
+      "common_wrong_answer": {
+        "answer": "Including ERP-APP-01/DB-PRD-01 in (a)",
+        "why_wrong": "Neither appears in the cluster; ERP shows only a later single failed probe and DB a later read-only session."
+      },
+      "learning_outcomes": [
+        1,
+        11,
+        15
+      ],
+      "evidence_selection": {
+        "is_candidate_action": true,
+        "earns_points": true,
+        "points": 1.2,
+        "required_set": [
+          "E-ALERT-002",
+          "E-NET-003",
+          "E-EDR-008"
+        ],
+        "rule": "full points iff selection superset of required_set with zero incorrect IDs; half iff superset with <=2 incorrect; else 0"
+      }
+    },
+    {
+      "id": "Q-01-02",
+      "phase": "P1",
+      "title": "Signal vs noise: the vulnerability scanner",
+      "instructions": "While reviewing activity around the incident window you find vulnerability-scan-like behavior on 2026-09-04 09:15-11:02 and again 2026-09-08 02:00-03:47. Decide whether it belongs to the attack.",
+      "task_type": "composite",
+      "answer_type": "composite",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Classification of the scan-like behavior.",
+          "answer_type": "single_choice",
+          "canonical_answer": "B",
+          "accepted_answers": [
+            "B"
+          ],
+          "options": [
+            "A - Attacker reconnaissance",
+            "B - Benign sanctioned vulnerability scanning",
+            "C - Attacker re-entry attempt"
+          ],
+          "points": 2.0
+        },
+        {
+          "key": "(b)",
+          "question": "Select ALL facts that rule it out.",
+          "answer_type": "multi_select",
+          "canonical_answer": [
+            "i",
+            "ii",
+            "iii",
+            "iv",
+            "vi"
+          ],
+          "accepted_answers": [
+            [
+              "i",
+              "ii",
+              "iii",
+              "iv",
+              "vi"
+            ]
+          ],
+          "options": [
+            "i - Source is 10.10.40.13, the registered VULN-01 scanner",
+            "ii - Jobs ran authenticated as svc_monitor with scanner job logs (VS-MAN-2026-0904 on-demand, VS-WK37-2026 scheduled)",
+            "iii - Operator identity devang.shah recorded",
+            "iv - Plugin-based host enumeration with no follow-on exploitation",
+            "v - The Tuesday 02:00 schedule proves the 09-04 run was routine",
+            "vi - No attacker behavior is ever sourced from 10.10.40.13"
+          ],
+          "points": 2.0
+        }
+      ],
+      "canonical_answer": {
+        "(a)": "B",
+        "(b)": [
+          "i",
+          "ii",
+          "iii",
+          "iv",
+          "vi"
+        ]
+      },
+      "accepted_answers": {
+        "(a)": [
+          "B"
+        ],
+        "(b)": [
+          [
+            "i",
+            "ii",
+            "iii",
+            "iv",
+            "vi"
+          ]
+        ]
+      },
+      "required_evidence": [
+        "E-VULN-001",
+        "E-VULN-002"
+      ],
+      "attack_events": [
+        "EVT-007",
+        "EVT-028"
+      ],
+      "evidence_correlation": "Scanner source IP x asset inventory (VULN-01) x authenticated job headers VS-MAN-2026-0904 / VS-WK37-2026 x absence of follow-on exploitation (RH-01 rule-out).",
+      "points": 5,
+      "difficulty": "Medium",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "Trace the source IP in the asset inventory and read both job headers fully - note which job is on-demand and which is scheduled.",
+          "penalty": 1
+        }
+      ],
+      "hint_penalty": 1,
+      "unlock": "P0 gate",
+      "common_wrong_answer": {
+        "answer": "A (attacker recon); or selecting (v) in (b)",
+        "why_wrong": "Scan-like volume alone isn't hostile; the authenticated internal scanner with a named operator and no post-scan exploitation excludes it. (v) is wrong because the 09-04 run was on-demand, not the weekly schedule."
+      },
+      "learning_outcomes": [
+        2,
+        11
+      ],
+      "evidence_selection": {
+        "is_candidate_action": true,
+        "earns_points": true,
+        "points": 1.0,
+        "required_set": [
+          "E-VULN-001",
+          "E-VULN-002"
+        ],
+        "rule": "full points iff selection superset of required_set with zero incorrect IDs; half iff superset with <=2 incorrect; else 0"
+      }
+    },
+    {
+      "id": "Q-02-01",
+      "phase": "P2",
+      "title": "The exposure",
+      "instructions": "Working from the perimeter evidence, identify exactly how the server came to be reachable for remote login from the internet and why that condition existed.",
+      "task_type": "composite",
+      "answer_type": "composite",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Which weakness made the initial access vector reachable?",
+          "answer_type": "single_choice",
+          "canonical_answer": "A",
+          "accepted_answers": [
+            "A",
+            "W-01"
+          ],
+          "options": [
+            "A - W-01: a stale 2025 vendor-era FW-01 rule permitting TCP 3389 from any source to 203.0.113.10, never ticketed or removed",
+            "B - W-08: missing MFA on the VPN gateway",
+            "C - An unpatched IIS remote-code-execution vulnerability",
+            "D - W-06: the Plant VLAN -> FILE-PRD-01 SMB exception"
+          ],
+          "points": 2.4
+        },
+        {
+          "key": "(b)",
+          "question": "Which policy/change-control failure explains its persistence?",
+          "answer_type": "single_choice",
+          "canonical_answer": "A",
+          "accepted_answers": [
+            "A"
+          ],
+          "options": [
+            "A - CH-Policy-03: firewall rule added without a change ticket (grandfathered vendor session), conflicting with VP-Policy-05 vendor-access rules",
+            "B - BK-Policy-04 backup retention",
+            "C - AC-Policy-02 password length",
+            "D - IR-Policy-01 severity definitions"
+          ],
+          "points": 2.4
+        }
+      ],
+      "canonical_answer": {
+        "(a)": "A",
+        "(b)": "A"
+      },
+      "accepted_answers": {
+        "(a)": [
+          "A",
+          "W-01"
+        ],
+        "(b)": [
+          "A"
+        ]
+      },
+      "required_evidence": [
+        "E-NET-001",
+        "E-DOC-001"
+      ],
+      "attack_events": [
+        "EVT-001",
+        "EVT-002"
+      ],
+      "evidence_correlation": "FW-01 allow-rule visibility x 2025 vendor email (origin) x CH-Policy-03 / VP-Policy-05 policy gap.",
+      "points": 6,
+      "difficulty": "Medium",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "Look at which FW-01 rule allowed the inbound 3389 connections, then search the document store for how and when that rule was created.",
+          "penalty": 1
+        }
+      ],
+      "hint_penalty": 1,
+      "unlock": "P1 gate",
+      "common_wrong_answer": {
+        "answer": "B (VPN/no-MFA)",
+        "why_wrong": "The attacker never used the VPN (see Q-02-02(d)); the exposure is the stale RDP rule."
+      },
+      "learning_outcomes": [
+        3,
+        5
+      ],
+      "evidence_selection": {
+        "is_candidate_action": true,
+        "earns_points": true,
+        "points": 1.2,
+        "required_set": [
+          "E-NET-001",
+          "E-DOC-001"
+        ],
+        "rule": "full points iff selection superset of required_set with zero incorrect IDs; half iff superset with <=2 incorrect; else 0"
+      }
+    },
+    {
+      "id": "Q-02-02",
+      "phase": "P2",
+      "title": "Initial access determination",
+      "instructions": "Determine the initial access event end-to-end: who probed, which account was broken, when exactly access was gained, and by which vector. Expect to correlate perimeter, authentication, and endpoint telemetry and to reject ambient noise.",
+      "task_type": "composite",
+      "answer_type": "composite",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "External source IP of the focused campaign.",
+          "answer_type": "ip",
+          "canonical_answer": "45.155.90.23",
+          "accepted_answers": [
+            "45.155.90.23"
+          ],
+          "options": [],
+          "points": 2.0
+        },
+        {
+          "key": "(b)",
+          "question": "Account compromised for initial access.",
+          "answer_type": "username",
+          "canonical_answer": "svc_portal",
+          "accepted_answers": [
+            "svc_portal",
+            "VISTARA\\svc_portal",
+            "vistara\\svc_portal"
+          ],
+          "options": [],
+          "points": 2.0
+        },
+        {
+          "key": "(c)",
+          "question": "Successful logon timestamp (IST).",
+          "answer_type": "timestamp",
+          "canonical_answer": "2026-09-03 11:47 IST",
+          "accepted_answers": [
+            "2026-09-03 11:47 IST",
+            "2026-09-03 11:47:03 IST",
+            "2026-09-03T11:47+05:30"
+          ],
+          "options": [],
+          "points": 2.0
+        },
+        {
+          "key": "(d)",
+          "question": "Initial access vector.",
+          "answer_type": "single_choice",
+          "canonical_answer": "A",
+          "accepted_answers": [
+            "A"
+          ],
+          "options": [
+            "A - RDP brute force of svc_portal over internet-exposed TCP 3389",
+            "B - VPN login with stolen credentials (no MFA)",
+            "C - Web-shell upload as the first entry",
+            "D - Phishing-mail execution"
+          ],
+          "points": 2.0
+        },
+        {
+          "key": "(e)",
+          "question": "Evidence-linked selection: select the artifacts that prove (a)-(d).",
+          "answer_type": "multi_select",
+          "canonical_answer": [
+            "E-AUTH-001",
+            "E-NET-005",
+            "E-NET-001",
+            "E-EDR-001"
+          ],
+          "accepted_answers": [
+            [
+              "E-AUTH-001",
+              "E-NET-005",
+              "E-NET-001",
+              "E-EDR-001"
+            ],
+            [
+              "E-AUTH-001",
+              "E-NET-005",
+              "E-NET-001",
+              "E-EDR-001",
+              "E-AUTH-012"
+            ]
+          ],
+          "options": [],
+          "points": 2.0
+        }
+      ],
+      "canonical_answer": {
+        "(a)": "45.155.90.23",
+        "(b)": "svc_portal",
+        "(c)": "2026-09-03 11:47 IST",
+        "(d)": "A",
+        "(e)": [
+          "E-AUTH-001",
+          "E-NET-005",
+          "E-NET-001",
+          "E-EDR-001"
+        ]
+      },
+      "accepted_answers": {
+        "(a)": [
+          "45.155.90.23"
+        ],
+        "(b)": [
+          "svc_portal",
+          "VISTARA\\svc_portal",
+          "vistara\\svc_portal"
+        ],
+        "(c)": [
+          "2026-09-03 11:47 IST",
+          "2026-09-03 11:47:03 IST",
+          "2026-09-03T11:47+05:30"
+        ],
+        "(d)": [
+          "A"
+        ],
+        "(e)": [
+          [
+            "E-AUTH-001",
+            "E-NET-005",
+            "E-NET-001",
+            "E-EDR-001"
+          ],
+          [
+            "E-AUTH-001",
+            "E-NET-005",
+            "E-NET-001",
+            "E-EDR-001",
+            "E-AUTH-012"
+          ]
+        ]
+      },
+      "required_evidence": [
+        "E-AUTH-001",
+        "E-NET-005",
+        "E-NET-001",
+        "E-EDR-001"
+      ],
+      "attack_events": [
+        "EVT-001",
+        "EVT-004",
+        "EVT-005",
+        "EVT-006"
+      ],
+      "evidence_correlation": "4625 failure run w/ distinct substatus + 4624 Type 10 success 11:47 + DC-01 4776 NTLM validations (E-AUTH-001) x FW-01 session 11:47-12:20 (E-NET-005) x FW-01 scan/allow from same IP (E-NET-001) x interactive EDR session (E-EDR-001); VPN ruled out by E-AUTH-012 full-window summary; RH-07 ambient 3389 scanners rejected (distributed IPs, zero successes).",
+      "points": 10,
+      "difficulty": "High",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "Filter authentication events on WEB-PRD-01 by source IP and look for the failure burst followed by a Type 10 success; check the DC-01 4776 records in the same minute.",
+          "penalty": 2
+        },
+        {
+          "text": "To eliminate the VPN hypothesis, read the full-window VPN session summary and compare source IPs.",
+          "penalty": 2
+        }
+      ],
+      "hint_penalty": 2,
+      "unlock": "P1 gate",
+      "common_wrong_answer": {
+        "answer": "C (web shell first) or B (VPN)",
+        "why_wrong": "The shell upload (09-03 13:02) post-dates the 11:47 RDP success; no attacker IPs or svc_* logins appear in the full VPN window."
+      },
+      "learning_outcomes": [
+        3,
+        7,
+        11
+      ],
+      "evidence_selection": {
+        "is_candidate_action": true,
+        "earns_points": true,
+        "points": 2.0,
+        "required_set": [
+          "E-AUTH-001",
+          "E-NET-005",
+          "E-NET-001",
+          "E-EDR-001"
+        ],
+        "rule": "full points iff selection superset of required_set with zero incorrect IDs; half iff superset with <=2 incorrect; else 0 (candidate-facing expression: sub_answer (e))",
+        "expressed_as": "sub_answer (e)"
+      }
+    },
+    {
+      "id": "Q-02-03",
+      "phase": "P2",
+      "title": "The web shell",
+      "instructions": "The attacker established a web-based way back into WEB-PRD-01. Locate it precisely and separate it from the historical shell fragment left over from the 2025 incident.",
+      "task_type": "composite",
+      "answer_type": "composite",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Full path of THIS incident's web shell.",
+          "answer_type": "path",
+          "canonical_answer": "C:\\inetpub\\wwwroot\\staging\\assets\\upload_2024\\img.aspx",
+          "accepted_answers": [
+            "C:\\inetpub\\wwwroot\\staging\\assets\\upload_2024\\img.aspx",
+            "C:/inetpub/wwwroot/staging/assets/upload_2024/img.aspx"
+          ],
+          "options": [],
+          "points": 1.6
+        },
+        {
+          "key": "(b)",
+          "question": "Delivery vector (URI path).",
+          "answer_type": "path",
+          "canonical_answer": "/staging/test/upload.aspx",
+          "accepted_answers": [
+            "/staging/test/upload.aspx"
+          ],
+          "options": [],
+          "points": 1.6
+        },
+        {
+          "key": "(c)",
+          "question": "Shell upload time.",
+          "answer_type": "timestamp",
+          "canonical_answer": "2026-09-03 13:02 IST",
+          "accepted_answers": [
+            "2026-09-03 13:02 IST",
+            "2026-09-03 07:32 UTC"
+          ],
+          "options": [],
+          "points": 1.6
+        },
+        {
+          "key": "(d)",
+          "question": "Why is C:\\inetpub\\wwwroot\\assets\\old\\upload_bak.aspx NOT this incident's shell?",
+          "answer_type": "single_choice",
+          "canonical_answer": "A",
+          "accepted_answers": [
+            "A"
+          ],
+          "options": [
+            "A - It is a 2025-11-08 file quarantined per the IR-2025-011 note with no 2026 execution requests",
+            "B - It is encrypted",
+            "C - It belongs to the marketing WordPress site",
+            "D - It has a valid digital signature"
+          ],
+          "points": 1.6
+        }
+      ],
+      "canonical_answer": {
+        "(a)": "C:\\inetpub\\wwwroot\\staging\\assets\\upload_2024\\img.aspx",
+        "(b)": "/staging/test/upload.aspx",
+        "(c)": "2026-09-03 13:02 IST",
+        "(d)": "A"
+      },
+      "accepted_answers": {
+        "(a)": [
+          "C:\\inetpub\\wwwroot\\staging\\assets\\upload_2024\\img.aspx",
+          "C:/inetpub/wwwroot/staging/assets/upload_2024/img.aspx"
+        ],
+        "(b)": [
+          "/staging/test/upload.aspx"
+        ],
+        "(c)": [
+          "2026-09-03 13:02 IST",
+          "2026-09-03 07:32 UTC"
+        ],
+        "(d)": [
+          "A"
+        ]
+      },
+      "required_evidence": [
+        "E-WEB-003",
+        "E-FS-001",
+        "E-WEB-002",
+        "E-FS-007",
+        "E-DOC-002"
+      ],
+      "attack_events": [
+        "EVT-003",
+        "EVT-008"
+      ],
+      "evidence_correlation": "IIS POST 200 to upload.aspx then GET img.aspx?cmd=... x matching file-creation event; UTC->IST conversion required by artifact header; RH-05 rejected by 2025 timestamp + quarantine note + no 2026 hits.",
+      "points": 8,
+      "difficulty": "High",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "IIS logs are UTC - convert. Follow the 404 burst on /staging/ to the successful POST, then match the created file on disk; compare timestamps and paths against the 2025 quarantine note.",
+          "penalty": 2
+        }
+      ],
+      "hint_penalty": 2,
+      "unlock": "P1 gate",
+      "common_wrong_answer": {
+        "answer": "Naming upload_bak.aspx, or reporting 07:32 as IST",
+        "why_wrong": "upload_bak.aspx is the quarantined 2025 fragment (RH-05); IIS artifacts are UTC per the artifact header, so the IST upload time is 13:02."
+      },
+      "learning_outcomes": [
+        4,
+        5,
+        8,
+        11
+      ],
+      "evidence_selection": {
+        "is_candidate_action": true,
+        "earns_points": true,
+        "points": 1.6,
+        "required_set": [
+          "E-WEB-003",
+          "E-FS-001",
+          "E-WEB-002",
+          "E-FS-007",
+          "E-DOC-002"
+        ],
+        "rule": "full points iff selection superset of required_set with zero incorrect IDs; half iff superset with <=2 incorrect; else 0"
+      }
+    },
+    {
+      "id": "Q-02-04",
+      "phase": "P2",
+      "title": "Web/application weakness chain",
+      "instructions": "Identify which validated weaknesses chained together to turn moderate web/application exposure into a foothold. Select from the weakness register (W-IDs).",
+      "task_type": "composite",
+      "answer_type": "composite",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Select ALL weaknesses in the initial-access/foothold chain.",
+          "answer_type": "multi_select",
+          "canonical_answer": [
+            "W-01",
+            "W-02b",
+            "W-03"
+          ],
+          "accepted_answers": [
+            [
+              "W-01",
+              "W-02b",
+              "W-03"
+            ]
+          ],
+          "options": [
+            "W-01 - exposed RDP rule",
+            "W-02b - staging site + vendor upload page exposed without auth",
+            "W-03 - weak svc_portal password Portal@2024, documented",
+            "W-05 - password reuse",
+            "W-06 - Plant VLAN SMB exception",
+            "W-08 - no MFA",
+            "W-09 - NetFlow retention"
+          ],
+          "points": 2.4
+        },
+        {
+          "key": "(b)",
+          "question": "The documented internal source that published the brute-forced password.",
+          "answer_type": "asset",
+          "canonical_answer": "E-WIKI-001 (service-account wiki page)",
+          "accepted_answers": [
+            "E-WIKI-001",
+            "service-account wiki",
+            "IT wiki"
+          ],
+          "options": [],
+          "points": 2.4
+        }
+      ],
+      "canonical_answer": {
+        "(a)": [
+          "W-01",
+          "W-02b",
+          "W-03"
+        ],
+        "(b)": "E-WIKI-001 (service-account wiki page)"
+      },
+      "accepted_answers": {
+        "(a)": [
+          [
+            "W-01",
+            "W-02b",
+            "W-03"
+          ]
+        ],
+        "(b)": [
+          "E-WIKI-001",
+          "service-account wiki",
+          "IT wiki"
+        ]
+      },
+      "required_evidence": [
+        "E-NET-001",
+        "E-WEB-002",
+        "E-WEB-003",
+        "E-WIKI-001",
+        "E-DOC-001"
+      ],
+      "attack_events": [
+        "EVT-001",
+        "EVT-003",
+        "EVT-005",
+        "EVT-008"
+      ],
+      "evidence_correlation": "FW-01 RDP rule (W-01) x exposed unauthenticated staging upload page (W-02b, E-WEB-002/003) x wiki-published svc_portal password (W-03, E-WIKI-001).",
+      "points": 6,
+      "difficulty": "Medium",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "Ask which weakness each attack step needed: reaching the host, getting the password, and regaining access without RDP.",
+          "penalty": 1
+        }
+      ],
+      "hint_penalty": 1,
+      "unlock": "P1 gate",
+      "common_wrong_answer": {
+        "answer": "Including W-08",
+        "why_wrong": "No-MFA is real but irrelevant; the VPN was never used by the attacker (E-AUTH-012)."
+      },
+      "learning_outcomes": [
+        5,
+        11
+      ],
+      "evidence_selection": {
+        "is_candidate_action": true,
+        "earns_points": true,
+        "points": 1.2,
+        "required_set": [
+          "E-NET-001",
+          "E-WEB-002",
+          "E-WEB-003",
+          "E-WIKI-001",
+          "E-DOC-001"
+        ],
+        "rule": "full points iff selection superset of required_set with zero incorrect IDs; half iff superset with <=2 incorrect; else 0"
+      }
+    },
+    {
+      "id": "Q-03-01",
+      "phase": "P3",
+      "title": "Credential access chain",
+      "instructions": "Trace how the attacker turned a service-account foothold on WEB-PRD-01 into a privileged domain credential. There were two credential recoveries - establish both and the failed attempt between them.",
+      "task_type": "composite",
+      "answer_type": "composite",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Process whose memory was dumped.",
+          "answer_type": "filename",
+          "canonical_answer": "w3wp.exe",
+          "accepted_answers": [
+            "w3wp.exe",
+            "w3wp"
+          ],
+          "options": [],
+          "points": 1.6
+        },
+        {
+          "key": "(b)",
+          "question": "Account whose OLD password (RajKulk@2023) was recovered.",
+          "answer_type": "username",
+          "canonical_answer": "rajesh.kulkarni",
+          "accepted_answers": [
+            "rajesh.kulkarni",
+            "VISTARA\\rajesh.kulkarni"
+          ],
+          "options": [],
+          "points": 1.6
+        },
+        {
+          "key": "(c)",
+          "question": "Result of the 15:12 authentication attempt to APP-PRD-01 with that old password.",
+          "answer_type": "single_choice",
+          "canonical_answer": "B",
+          "accepted_answers": [
+            "B"
+          ],
+          "options": [
+            "A - Success",
+            "B - Failure - bad password (4625)",
+            "C - Account locked out"
+          ],
+          "points": 1.6
+        },
+        {
+          "key": "(d)",
+          "question": "File that yielded the CURRENT password.",
+          "answer_type": "path",
+          "canonical_answer": "C:\\Users\\svc_portal\\Documents\\passwords.txt",
+          "accepted_answers": [
+            "C:\\Users\\svc_portal\\Documents\\passwords.txt",
+            "C:/Users/svc_portal/Documents/passwords.txt"
+          ],
+          "options": [],
+          "points": 1.6
+        },
+        {
+          "key": "(e)",
+          "question": "The current password recovered there belongs to (username) and its value.",
+          "answer_type": "username",
+          "canonical_answer": "rajesh.kulkarni / RajKulk@2026",
+          "accepted_answers": [
+            "rajesh.kulkarni / RajKulk@2026",
+            "VISTARA\\rajesh.kulkarni / RajKulk@2026"
+          ],
+          "options": [],
+          "points": 1.6
+        }
+      ],
+      "canonical_answer": {
+        "(a)": "w3wp.exe",
+        "(b)": "rajesh.kulkarni",
+        "(c)": "B",
+        "(d)": "C:\\Users\\svc_portal\\Documents\\passwords.txt",
+        "(e)": "rajesh.kulkarni / RajKulk@2026"
+      },
+      "accepted_answers": {
+        "(a)": [
+          "w3wp.exe",
+          "w3wp"
+        ],
+        "(b)": [
+          "rajesh.kulkarni",
+          "VISTARA\\rajesh.kulkarni"
+        ],
+        "(c)": [
+          "B"
+        ],
+        "(d)": [
+          "C:\\Users\\svc_portal\\Documents\\passwords.txt",
+          "C:/Users/svc_portal/Documents/passwords.txt"
+        ],
+        "(e)": [
+          "rajesh.kulkarni / RajKulk@2026",
+          "VISTARA\\rajesh.kulkarni / RajKulk@2026"
+        ]
+      },
+      "required_evidence": [
+        "E-EDR-004",
+        "E-AUTH-002",
+        "E-AUTH-003",
+        "E-FS-003",
+        "E-EDR-005",
+        "E-EDR-003",
+        "E-WIKI-001"
+      ],
+      "attack_events": [
+        "EVT-011",
+        "EVT-012",
+        "EVT-013",
+        "EVT-014"
+      ],
+      "evidence_correlation": "EDR dump + Credential Manager access x failed NTLM/4625 at 15:12 from 10.10.20.11 x findstr/type commands x passwords.txt content.",
+      "points": 10,
+      "difficulty": "High",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "Sequence the EDR events on WEB-PRD-01 after the RDP session: recon commands -> memory dump -> failed 4625 on APP-PRD-01 -> file search. The successful pivot one morning later tells you which recovery mattered.",
+          "penalty": 2
+        }
+      ],
+      "hint_penalty": 2,
+      "unlock": "P2 gate",
+      "common_wrong_answer": {
+        "answer": "(c)=A, or omitting the second recovery",
+        "why_wrong": "E-AUTH-002/003 record a bad-password failure; the old password was dead. The 09-04 success proves the current credential came from passwords.txt."
+      },
+      "learning_outcomes": [
+        4,
+        7,
+        11
+      ],
+      "evidence_selection": {
+        "is_candidate_action": true,
+        "earns_points": true,
+        "points": 2.0,
+        "required_set": [
+          "E-EDR-004",
+          "E-AUTH-002",
+          "E-AUTH-003",
+          "E-FS-003",
+          "E-EDR-005",
+          "E-EDR-003",
+          "E-WIKI-001"
+        ],
+        "rule": "full points iff selection superset of required_set with zero incorrect IDs; half iff superset with <=2 incorrect; else 0"
+      }
+    },
+    {
+      "id": "Q-03-02",
+      "phase": "P3",
+      "title": "First lateral movement & privilege discovery",
+      "instructions": "Establish the attacker's first successful hop off WEB-PRD-01 and what the subsequent domain enumeration revealed.",
+      "task_type": "composite",
+      "answer_type": "composite",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Destination host of the first successful lateral movement.",
+          "answer_type": "asset",
+          "canonical_answer": "APP-PRD-01",
+          "accepted_answers": [
+            "APP-PRD-01",
+            "10.10.20.21"
+          ],
+          "options": [],
+          "points": 1.28
+        },
+        {
+          "key": "(b)",
+          "question": "Account used.",
+          "answer_type": "username",
+          "canonical_answer": "rajesh.kulkarni",
+          "accepted_answers": [
+            "rajesh.kulkarni",
+            "VISTARA\\rajesh.kulkarni"
+          ],
+          "options": [],
+          "points": 1.28
+        },
+        {
+          "key": "(c)",
+          "question": "Method.",
+          "answer_type": "single_choice",
+          "canonical_answer": "A",
+          "accepted_answers": [
+            "A"
+          ],
+          "options": [
+            "A - RDP (logon type 10)",
+            "B - PsExec service",
+            "C - WinRM",
+            "D - SSH"
+          ],
+          "points": 1.28
+        },
+        {
+          "key": "(d)",
+          "question": "Timestamp of the successful hop (IST).",
+          "answer_type": "timestamp",
+          "canonical_answer": "2026-09-04 09:58 IST",
+          "accepted_answers": [
+            "2026-09-04 09:58 IST"
+          ],
+          "options": [],
+          "points": 1.28
+        },
+        {
+          "key": "(e)",
+          "question": "What did the attacker learn from net group / nltest / LDAP enumeration?",
+          "answer_type": "single_choice",
+          "canonical_answer": "A",
+          "accepted_answers": [
+            "A"
+          ],
+          "options": [
+            "A - rajesh.kulkarni is a member of Domain Admins (migration leftover, W-04)",
+            "B - svc_portal is an Enterprise Admin",
+            "C - admin_legacy is the only Domain Admin",
+            "D - The domain has a tiered admin model"
+          ],
+          "points": 1.28
+        }
+      ],
+      "canonical_answer": {
+        "(a)": "APP-PRD-01",
+        "(b)": "rajesh.kulkarni",
+        "(c)": "A",
+        "(d)": "2026-09-04 09:58 IST",
+        "(e)": "A"
+      },
+      "accepted_answers": {
+        "(a)": [
+          "APP-PRD-01",
+          "10.10.20.21"
+        ],
+        "(b)": [
+          "rajesh.kulkarni",
+          "VISTARA\\rajesh.kulkarni"
+        ],
+        "(c)": [
+          "A"
+        ],
+        "(d)": [
+          "2026-09-04 09:58 IST"
+        ],
+        "(e)": [
+          "A"
+        ]
+      },
+      "required_evidence": [
+        "E-AUTH-004",
+        "E-EDR-006",
+        "E-EDR-007",
+        "E-AUTH-005",
+        "E-FS-003"
+      ],
+      "attack_events": [
+        "EVT-015",
+        "EVT-016"
+      ],
+      "evidence_correlation": "4624 Type 10 on APP-PRD-01 x EDR session artifacts x following domain-recon command telemetry (net group / nltest / LDAP); credential origin from E-FS-003.",
+      "points": 8,
+      "difficulty": "Medium-High",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "Match the 4624 Type 10 on the destination host against EDR session artifacts, then read the next hour of command telemetry for the domain-recon set.",
+          "penalty": 2
+        }
+      ],
+      "hint_penalty": 2,
+      "unlock": "P2 gate",
+      "common_wrong_answer": {
+        "answer": "(b)=svc_mon",
+        "why_wrong": "svc_mon did not exist until 11:15 that day; the 09:58 hop used rajesh.kulkarni."
+      },
+      "learning_outcomes": [
+        6,
+        9,
+        11
+      ],
+      "evidence_selection": {
+        "is_candidate_action": true,
+        "earns_points": true,
+        "points": 1.6,
+        "required_set": [
+          "E-AUTH-004",
+          "E-EDR-006",
+          "E-EDR-007",
+          "E-AUTH-005",
+          "E-FS-003"
+        ],
+        "rule": "full points iff selection superset of required_set with zero incorrect IDs; half iff superset with <=2 incorrect; else 0"
+      }
+    },
+    {
+      "id": "Q-03-03",
+      "phase": "P3",
+      "title": "Identity persistence (rogue account)",
+      "instructions": "The attacker created a durable identity for re-entry. Identify it, its privileges, its origin, and when it appeared.",
+      "task_type": "composite",
+      "answer_type": "composite",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Rogue account.",
+          "answer_type": "username",
+          "canonical_answer": "svc_mon",
+          "accepted_answers": [
+            "svc_mon",
+            "VISTARA\\svc_mon",
+            "vistara\\svc_mon"
+          ],
+          "options": [],
+          "points": 1.28
+        },
+        {
+          "key": "(b)",
+          "question": "Its display name.",
+          "answer_type": "string",
+          "canonical_answer": "Monitoring Agent",
+          "accepted_answers": [
+            "Monitoring Agent"
+          ],
+          "options": [],
+          "points": 1.28
+        },
+        {
+          "key": "(c)",
+          "question": "Groups it was added to.",
+          "answer_type": "multi_select",
+          "canonical_answer": [
+            "Domain Admins",
+            "Remote Desktop Users"
+          ],
+          "accepted_answers": [
+            [
+              "Domain Admins",
+              "Remote Desktop Users"
+            ]
+          ],
+          "options": [
+            "Domain Admins",
+            "Enterprise Admins",
+            "Remote Desktop Users (local on APP-PRD-01 & WEB-PRD-01)",
+            "Backup Operators",
+            "Server Operators"
+          ],
+          "points": 1.28
+        },
+        {
+          "key": "(d)",
+          "question": "Created by (account) and from which host.",
+          "answer_type": "username",
+          "canonical_answer": "rajesh.kulkarni from APP-PRD-01",
+          "accepted_answers": [
+            "rajesh.kulkarni from APP-PRD-01",
+            "VISTARA\\rajesh.kulkarni from APP-PRD-01",
+            "rajesh.kulkarni from 10.10.20.21"
+          ],
+          "options": [],
+          "points": 1.28
+        },
+        {
+          "key": "(e)",
+          "question": "Creation timestamp (IST).",
+          "answer_type": "timestamp",
+          "canonical_answer": "2026-09-04 11:15 IST",
+          "accepted_answers": [
+            "2026-09-04 11:15 IST"
+          ],
+          "options": [],
+          "points": 1.28
+        }
+      ],
+      "canonical_answer": {
+        "(a)": "svc_mon",
+        "(b)": "Monitoring Agent",
+        "(c)": [
+          "Domain Admins",
+          "Remote Desktop Users"
+        ],
+        "(d)": "rajesh.kulkarni from APP-PRD-01",
+        "(e)": "2026-09-04 11:15 IST"
+      },
+      "accepted_answers": {
+        "(a)": [
+          "svc_mon",
+          "VISTARA\\svc_mon",
+          "vistara\\svc_mon"
+        ],
+        "(b)": [
+          "Monitoring Agent"
+        ],
+        "(c)": [
+          [
+            "Domain Admins",
+            "Remote Desktop Users"
+          ]
+        ],
+        "(d)": [
+          "rajesh.kulkarni from APP-PRD-01",
+          "VISTARA\\rajesh.kulkarni from APP-PRD-01",
+          "rajesh.kulkarni from 10.10.20.21"
+        ],
+        "(e)": [
+          "2026-09-04 11:15 IST"
+        ]
+      },
+      "required_evidence": [
+        "E-AD-001",
+        "E-AD-002",
+        "E-AD-003",
+        "E-AUTH-007"
+      ],
+      "attack_events": [
+        "EVT-017"
+      ],
+      "evidence_correlation": "DC-01 4720/4728/4732 events (creator + source workstation) x AD snapshot current membership x later svc_mon use (E-AUTH-007).",
+      "points": 8,
+      "difficulty": "Medium",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "On DC-01, look for 4720/4728/4732 events inside the incident window and check the creator and source workstation fields; confirm current membership in the AD snapshot.",
+          "penalty": 2
+        }
+      ],
+      "hint_penalty": 2,
+      "unlock": "P2 gate",
+      "common_wrong_answer": {
+        "answer": "Selecting admin_legacy",
+        "why_wrong": "It is a pre-existing account (created 2019), never used by the attacker (14-month dormancy in E-AD-003)."
+      },
+      "learning_outcomes": [
+        6,
+        8,
+        11
+      ],
+      "evidence_selection": {
+        "is_candidate_action": true,
+        "earns_points": true,
+        "points": 1.6,
+        "required_set": [
+          "E-AD-001",
+          "E-AD-002",
+          "E-AD-003",
+          "E-AUTH-007"
+        ],
+        "rule": "full points iff selection superset of required_set with zero incorrect IDs; half iff superset with <=2 incorrect; else 0"
+      }
+    },
+    {
+      "id": "Q-03-04",
+      "phase": "P3",
+      "title": "Host persistence & C2 (scheduled task)",
+      "instructions": "Characterize the persistence mechanism that survived on APP-PRD-01 and the channel it maintains. The mechanism's name is deliberately uninteresting - read what it DOES.",
+      "task_type": "composite",
+      "answer_type": "composite",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Scheduled task name.",
+          "answer_type": "string",
+          "canonical_answer": "MicrosoftEdgeUpdateTaskMachineCore",
+          "accepted_answers": [
+            "MicrosoftEdgeUpdateTaskMachineCore"
+          ],
+          "options": [],
+          "points": 1.28
+        },
+        {
+          "key": "(b)",
+          "question": "Host.",
+          "answer_type": "asset",
+          "canonical_answer": "APP-PRD-01",
+          "accepted_answers": [
+            "APP-PRD-01",
+            "10.10.20.21"
+          ],
+          "options": [],
+          "points": 1.28
+        },
+        {
+          "key": "(c)",
+          "question": "Runs as (account).",
+          "answer_type": "username",
+          "canonical_answer": "SYSTEM",
+          "accepted_answers": [
+            "SYSTEM",
+            "NT AUTHORITY\\SYSTEM"
+          ],
+          "options": [],
+          "points": 1.28
+        },
+        {
+          "key": "(d)",
+          "question": "Interval.",
+          "answer_type": "single_choice",
+          "canonical_answer": "every 30 minutes",
+          "accepted_answers": [
+            "every 30 minutes"
+          ],
+          "options": [
+            "every 30 minutes",
+            "hourly",
+            "daily",
+            "on logon"
+          ],
+          "points": 1.28
+        },
+        {
+          "key": "(e)",
+          "question": "Decoded callback URL.",
+          "answer_type": "string",
+          "canonical_answer": "https://185.220.101.47:8443/beacon",
+          "accepted_answers": [
+            "https://185.220.101.47:8443/beacon",
+            "https://185.220.101.47:8443/beacon/"
+          ],
+          "options": [],
+          "points": 1.28
+        }
+      ],
+      "canonical_answer": {
+        "(a)": "MicrosoftEdgeUpdateTaskMachineCore",
+        "(b)": "APP-PRD-01",
+        "(c)": "SYSTEM",
+        "(d)": "every 30 minutes",
+        "(e)": "https://185.220.101.47:8443/beacon"
+      },
+      "accepted_answers": {
+        "(a)": [
+          "MicrosoftEdgeUpdateTaskMachineCore"
+        ],
+        "(b)": [
+          "APP-PRD-01",
+          "10.10.20.21"
+        ],
+        "(c)": [
+          "SYSTEM",
+          "NT AUTHORITY\\SYSTEM"
+        ],
+        "(d)": [
+          "every 30 minutes"
+        ],
+        "(e)": [
+          "https://185.220.101.47:8443/beacon",
+          "https://185.220.101.47:8443/beacon/"
+        ]
+      },
+      "required_evidence": [
+        "E-EDR-008",
+        "E-FS-004",
+        "E-NET-003",
+        "E-EDR-008B"
+      ],
+      "attack_events": [
+        "EVT-018",
+        "EVT-031"
+      ],
+      "evidence_correlation": "schtasks /create (EDR) x task XML (FS) x 30-min 8443 egress cadence (FW-01) x 4104 script-block decode (independent second source for the URL).",
+      "points": 8,
+      "difficulty": "Medium-High",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "Don't trust the task name - export the task XML, decode the -enc payload (the PowerShell Operational log gives you a second copy), and match the FW egress cadence.",
+          "penalty": 2
+        }
+      ],
+      "hint_penalty": 2,
+      "unlock": "P2 gate",
+      "common_wrong_answer": {
+        "answer": "Treating the task as legitimate Edge maintenance",
+        "why_wrong": "The action is encoded PowerShell calling an external IP:8443; legitimate Edge tasks don't do that."
+      },
+      "learning_outcomes": [
+        4,
+        8,
+        11
+      ],
+      "evidence_selection": {
+        "is_candidate_action": true,
+        "earns_points": true,
+        "points": 1.6,
+        "required_set": [
+          "E-EDR-008",
+          "E-FS-004",
+          "E-NET-003",
+          "E-EDR-008B"
+        ],
+        "rule": "full points iff selection superset of required_set with zero incorrect IDs; half iff superset with <=2 incorrect; else 0"
+      }
+    },
+    {
+      "id": "Q-03-05",
+      "phase": "P3",
+      "title": "Domain dominance (DCSync)",
+      "instructions": "Determine how the attacker obtained domain-wide credential material, from where, against what, and the full consequence for credential hygiene during eradication.",
+      "task_type": "composite",
+      "answer_type": "composite",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "ATT&CK technique ID.",
+          "answer_type": "attack_technique",
+          "canonical_answer": "T1003.006",
+          "accepted_answers": [
+            "T1003.006"
+          ],
+          "options": [],
+          "points": 1.3333333333333333
+        },
+        {
+          "key": "(b)",
+          "question": "Source host.",
+          "answer_type": "asset",
+          "canonical_answer": "APP-PRD-01",
+          "accepted_answers": [
+            "APP-PRD-01",
+            "10.10.20.21"
+          ],
+          "options": [],
+          "points": 1.3333333333333333
+        },
+        {
+          "key": "(c)",
+          "question": "Target host.",
+          "answer_type": "asset",
+          "canonical_answer": "DC-01",
+          "accepted_answers": [
+            "DC-01",
+            "10.10.20.31"
+          ],
+          "options": [],
+          "points": 1.3333333333333333
+        },
+        {
+          "key": "(d)",
+          "question": "Account performing it.",
+          "answer_type": "username",
+          "canonical_answer": "rajesh.kulkarni",
+          "accepted_answers": [
+            "rajesh.kulkarni",
+            "VISTARA\\rajesh.kulkarni"
+          ],
+          "options": [],
+          "points": 1.3333333333333333
+        },
+        {
+          "key": "(e)",
+          "question": "Event window (IST).",
+          "answer_type": "timestamp",
+          "canonical_answer": "2026-09-04 13:10-13:14 IST",
+          "accepted_answers": [
+            "2026-09-04 13:10-13:14 IST",
+            "2026-09-04 13:10-13:14"
+          ],
+          "options": [],
+          "points": 1.3333333333333333
+        },
+        {
+          "key": "(f)",
+          "question": "Beyond user hashes, which domain credential was captured given the /all replication scope - forcing a DOUBLE reset during eradication.",
+          "answer_type": "username",
+          "canonical_answer": "krbtgt",
+          "accepted_answers": [
+            "krbtgt"
+          ],
+          "options": [],
+          "points": 1.3333333333333333
+        }
+      ],
+      "canonical_answer": {
+        "(a)": "T1003.006",
+        "(b)": "APP-PRD-01",
+        "(c)": "DC-01",
+        "(d)": "rajesh.kulkarni",
+        "(e)": "2026-09-04 13:10-13:14 IST",
+        "(f)": "krbtgt"
+      },
+      "accepted_answers": {
+        "(a)": [
+          "T1003.006"
+        ],
+        "(b)": [
+          "APP-PRD-01",
+          "10.10.20.21"
+        ],
+        "(c)": [
+          "DC-01",
+          "10.10.20.31"
+        ],
+        "(d)": [
+          "rajesh.kulkarni",
+          "VISTARA\\rajesh.kulkarni"
+        ],
+        "(e)": [
+          "2026-09-04 13:10-13:14 IST",
+          "2026-09-04 13:10-13:14"
+        ],
+        "(f)": [
+          "krbtgt"
+        ]
+      },
+      "required_evidence": [
+        "E-AUTH-006",
+        "E-EDR-009"
+      ],
+      "attack_events": [
+        "EVT-019",
+        "EVT-020"
+      ],
+      "evidence_correlation": "4662 directory-replication access on DC-01 from non-DC source (E-AUTH-006) x endpoint command line showing /all scope (E-EDR-009); krbtgt inference-by-design from the /all scope.",
+      "points": 10,
+      "difficulty": "High",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "Look for 4662 directory-replication access on DC-01 from a non-DC source, then read the endpoint telemetry in that session - the command line shows the scope.",
+          "penalty": 2
+        }
+      ],
+      "hint_penalty": 2,
+      "unlock": "P2 gate",
+      "common_wrong_answer": {
+        "answer": "(f)=administrator",
+        "why_wrong": "The /all DCSync scope captures every account's hash including krbtgt; missing krbtgt is the classic eradication failure (golden-ticket capability survives)."
+      },
+      "learning_outcomes": [
+        6,
+        7,
+        11
+      ],
+      "evidence_selection": {
+        "is_candidate_action": true,
+        "earns_points": true,
+        "points": 2.0,
+        "required_set": [
+          "E-AUTH-006",
+          "E-EDR-009"
+        ],
+        "rule": "full points iff selection superset of required_set with zero incorrect IDs; half iff superset with <=2 incorrect; else 0"
+      }
+    },
+    {
+      "id": "Q-03-06",
+      "phase": "P3",
+      "title": "Persistence inventory (synthesis)",
+      "instructions": "Before planning eradication, enumerate EVERY mechanism by which the attacker can regain or retain access. Select all that the evidence supports.",
+      "task_type": "composite",
+      "answer_type": "composite",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Select ALL attacker persistence mechanisms.",
+          "answer_type": "multi_select",
+          "canonical_answer": [
+            "i",
+            "ii",
+            "iii"
+          ],
+          "accepted_answers": [
+            [
+              "i",
+              "ii",
+              "iii"
+            ]
+          ],
+          "options": [
+            "i - Rogue Domain Admin account svc_mon",
+            "ii - Scheduled task MicrosoftEdgeUpdateTaskMachineCore on APP-PRD-01",
+            "iii - Web shell img.aspx on WEB-PRD-01",
+            "iv - Golden ticket actively in use",
+            "v - Backdoored admin_legacy account",
+            "vi - SSH key implanted on VPN-GW-01"
+          ],
+          "points": 2.4
+        },
+        {
+          "key": "(b)",
+          "question": "Which capability does the attacker hold in reserve but has NOT exercised (so it needs eradication-side mitigation, not containment)?",
+          "answer_type": "single_choice",
+          "canonical_answer": "A",
+          "accepted_answers": [
+            "A"
+          ],
+          "options": [
+            "A - Golden-ticket capability via stolen krbtgt hash",
+            "B - Ransomware payload",
+            "C - Firmware implant",
+            "D - BGP hijack"
+          ],
+          "points": 2.4
+        }
+      ],
+      "canonical_answer": {
+        "(a)": [
+          "i",
+          "ii",
+          "iii"
+        ],
+        "(b)": "A"
+      },
+      "accepted_answers": {
+        "(a)": [
+          [
+            "i",
+            "ii",
+            "iii"
+          ]
+        ],
+        "(b)": [
+          "A"
+        ]
+      },
+      "required_evidence": [
+        "E-AD-001",
+        "E-AD-002",
+        "E-AD-003",
+        "E-EDR-008",
+        "E-FS-004",
+        "E-NET-003",
+        "E-WEB-003",
+        "E-FS-001",
+        "E-EDR-009"
+      ],
+      "attack_events": [
+        "EVT-008",
+        "EVT-017",
+        "EVT-018",
+        "EVT-020"
+      ],
+      "evidence_correlation": "One identity artifact family (AD 4720/4728/4732) + one host artifact family (schtasks/task XML/beacon cadence) + one web artifact family (img.aspx); /all DCSync scope (E-EDR-009) proves reserve krbtgt capability.",
+      "points": 6,
+      "difficulty": "Medium",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "Count mechanisms by evidence type: one identity artifact family, one host artifact family, one web artifact family. Don't count capabilities never exercised as active mechanisms.",
+          "penalty": 1
+        }
+      ],
+      "hint_penalty": 1,
+      "unlock": "P2 gate",
+      "common_wrong_answer": {
+        "answer": "Including (iv) as active persistence",
+        "why_wrong": "The krbtgt hash was captured (EVT-020) but never used; it mandates the double krbtgt reset during eradication, not a fourth live mechanism."
+      },
+      "learning_outcomes": [
+        8,
+        11
+      ],
+      "evidence_selection": {
+        "is_candidate_action": true,
+        "earns_points": true,
+        "points": 1.2,
+        "required_set": [
+          "E-AD-001",
+          "E-AD-002",
+          "E-AD-003",
+          "E-EDR-008",
+          "E-FS-004",
+          "E-NET-003",
+          "E-WEB-003",
+          "E-FS-001",
+          "E-EDR-009"
+        ],
+        "rule": "full points iff selection superset of required_set with zero incorrect IDs; half iff superset with <=2 incorrect; else 0"
+      }
+    },
+    {
+      "id": "Q-04-01",
+      "phase": "P4",
+      "title": "Rogue account in action",
+      "instructions": "Prove whether the attacker's created identity was actually used, and where.",
+      "task_type": "composite",
+      "answer_type": "composite",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Host accessed using svc_mon.",
+          "answer_type": "asset",
+          "canonical_answer": "FILE-PRD-01",
+          "accepted_answers": [
+            "FILE-PRD-01",
+            "10.10.20.23"
+          ],
+          "options": [],
+          "points": 1.2
+        },
+        {
+          "key": "(b)",
+          "question": "Source host.",
+          "answer_type": "asset",
+          "canonical_answer": "APP-PRD-01",
+          "accepted_answers": [
+            "APP-PRD-01",
+            "10.10.20.21"
+          ],
+          "options": [],
+          "points": 1.2
+        },
+        {
+          "key": "(c)",
+          "question": "Session start (IST).",
+          "answer_type": "timestamp",
+          "canonical_answer": "2026-09-05 10:15 IST",
+          "accepted_answers": [
+            "2026-09-05 10:15 IST"
+          ],
+          "options": [],
+          "points": 1.2
+        },
+        {
+          "key": "(d)",
+          "question": "Logon type.",
+          "answer_type": "single_choice",
+          "canonical_answer": "A",
+          "accepted_answers": [
+            "A"
+          ],
+          "options": [
+            "A - Type 10 (RemoteInteractive/RDP)",
+            "B - Type 3 (network only)",
+            "C - Type 5 (service)",
+            "D - Type 2 (console)"
+          ],
+          "points": 1.2
+        }
+      ],
+      "canonical_answer": {
+        "(a)": "FILE-PRD-01",
+        "(b)": "APP-PRD-01",
+        "(c)": "2026-09-05 10:15 IST",
+        "(d)": "A"
+      },
+      "accepted_answers": {
+        "(a)": [
+          "FILE-PRD-01",
+          "10.10.20.23"
+        ],
+        "(b)": [
+          "APP-PRD-01",
+          "10.10.20.21"
+        ],
+        "(c)": [
+          "2026-09-05 10:15 IST"
+        ],
+        "(d)": [
+          "A"
+        ]
+      },
+      "required_evidence": [
+        "E-AUTH-007",
+        "E-EDR-015",
+        "E-AD-001",
+        "E-AD-002"
+      ],
+      "attack_events": [
+        "EVT-021"
+      ],
+      "evidence_correlation": "FILE-PRD-01 4624 LogonType 10 for svc_mon (E-AUTH-007) x continuous RDP session 10:15-13:05 in EDR (E-EDR-015) x account provenance (E-AD-001/002).",
+      "points": 6,
+      "difficulty": "Medium",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "Search FILE-PRD-01 authentication events for the rogue account and confirm session continuity in EDR telemetry through the afternoon.",
+          "penalty": 1
+        }
+      ],
+      "hint_penalty": 1,
+      "unlock": "P3 gate",
+      "common_wrong_answer": {
+        "answer": "(d)=B",
+        "why_wrong": "E-AUTH-007 shows LogonType 10 and E-EDR-015 shows a continuous RDP session 10:15->13:05 spanning collection->exfil."
+      },
+      "learning_outcomes": [
+        8,
+        9,
+        11
+      ],
+      "evidence_selection": {
+        "is_candidate_action": true,
+        "earns_points": true,
+        "points": 1.2,
+        "required_set": [
+          "E-AUTH-007",
+          "E-EDR-015",
+          "E-AD-001",
+          "E-AD-002"
+        ],
+        "rule": "full points iff selection superset of required_set with zero incorrect IDs; half iff superset with <=2 incorrect; else 0"
+      }
+    },
+    {
+      "id": "Q-04-02",
+      "phase": "P4",
+      "title": "Collection & staging",
+      "instructions": "Determine exactly what data the attacker gathered on FILE-PRD-01 and where it was staged. Distinguish collected data from data merely queried.",
+      "task_type": "composite",
+      "answer_type": "composite",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Select ALL data categories staged for theft.",
+          "answer_type": "multi_select",
+          "canonical_answer": [
+            "i",
+            "ii",
+            "iii",
+            "iv"
+          ],
+          "accepted_answers": [
+            [
+              "i",
+              "ii",
+              "iii",
+              "iv"
+            ]
+          ],
+          "options": [
+            "i - Client packaging designs (S:\\Clients)",
+            "ii - Engineering spec sheets",
+            "iii - HR payroll export (payroll_aug2026.xlsx, R:\\HR)",
+            "iv - Financial summaries (R:\\Finance)",
+            "v - Full ERPDB database dump",
+            "vi - Executive email mailboxes",
+            "vii - AD database copy (ntds.dit)"
+          ],
+          "points": 2.1333333333333333
+        },
+        {
+          "key": "(b)",
+          "question": "Local staging directory.",
+          "answer_type": "path",
+          "canonical_answer": "C:\\Windows\\Temp\\collect\\",
+          "accepted_answers": [
+            "C:\\Windows\\Temp\\collect\\",
+            "C:\\Windows\\Temp\\collect"
+          ],
+          "options": [],
+          "points": 2.1333333333333333
+        },
+        {
+          "key": "(c)",
+          "question": "Approximate staged volume.",
+          "answer_type": "single_choice",
+          "canonical_answer": "~2.1 GB",
+          "accepted_answers": [
+            "~2.1 GB"
+          ],
+          "options": [
+            "~2.1 GB",
+            "~18 MB",
+            "~680 MB",
+            "~50 GB"
+          ],
+          "points": 2.1333333333333333
+        }
+      ],
+      "canonical_answer": {
+        "(a)": [
+          "i",
+          "ii",
+          "iii",
+          "iv"
+        ],
+        "(b)": "C:\\Windows\\Temp\\collect\\",
+        "(c)": "~2.1 GB"
+      },
+      "accepted_answers": {
+        "(a)": [
+          [
+            "i",
+            "ii",
+            "iii",
+            "iv"
+          ]
+        ],
+        "(b)": [
+          "C:\\Windows\\Temp\\collect\\",
+          "C:\\Windows\\Temp\\collect"
+        ],
+        "(c)": [
+          "~2.1 GB"
+        ]
+      },
+      "required_evidence": [
+        "E-FS-005",
+        "E-EDR-010",
+        "E-SHARE-001",
+        "E-EDR-015"
+      ],
+      "attack_events": [
+        "EVT-022"
+      ],
+      "evidence_correlation": "dir/robocopy command lines x SMB file-open audit (E-SHARE-001) x Temp directory writes; DB read-only queries are answered by a different artifact set (queries != collection).",
+      "points": 8,
+      "difficulty": "Medium",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "Correlate the dir/robocopy command lines with SMB file-open audit and the Temp directory writes; the DB questions are answered by a different artifact set (read-only queries != collection).",
+          "penalty": 2
+        }
+      ],
+      "hint_penalty": 2,
+      "unlock": "P3 gate",
+      "common_wrong_answer": {
+        "answer": "Including (v)/(vii)",
+        "why_wrong": "No bulk DB export or ntds.dit copy exists in evidence; DB activity was 5-row sampling only."
+      },
+      "learning_outcomes": [
+        10,
+        11,
+        15
+      ],
+      "evidence_selection": {
+        "is_candidate_action": true,
+        "earns_points": true,
+        "points": 1.6,
+        "required_set": [
+          "E-FS-005",
+          "E-EDR-010",
+          "E-SHARE-001",
+          "E-EDR-015"
+        ],
+        "rule": "full points iff selection superset of required_set with zero incorrect IDs; half iff superset with <=2 incorrect; else 0"
+      }
+    },
+    {
+      "id": "Q-04-03",
+      "phase": "P4",
+      "title": "Exfiltration",
+      "instructions": "Establish both exfiltration events, their volumes and destination, and explain an evidence-survivability gap the investigation must account for.",
+      "task_type": "composite",
+      "answer_type": "composite",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Exfil archive filename on FILE-PRD-01.",
+          "answer_type": "filename",
+          "canonical_answer": "order_export_2026.zip",
+          "accepted_answers": [
+            "order_export_2026.zip"
+          ],
+          "options": [],
+          "points": 1.6
+        },
+        {
+          "key": "(b)",
+          "question": "Exfil destination (IP:port).",
+          "answer_type": "ip",
+          "canonical_answer": "185.220.101.47:8443",
+          "accepted_answers": [
+            "185.220.101.47:8443"
+          ],
+          "options": [],
+          "points": 1.6
+        },
+        {
+          "key": "(c)",
+          "question": "Match volume to each exfiltration event.",
+          "answer_type": "matching",
+          "canonical_answer": {
+            "2026-09-03 13:25-13:31": "~18 MB (staging.zip, portal source/config, from 10.10.20.11)",
+            "2026-09-05 12:30-13:05": "~680 MB (order_export_2026.zip, from 10.10.20.23)"
+          },
+          "accepted_answers": [
+            "2026-09-03 13:25-13:31 = ~18 MB; 2026-09-05 12:30-13:05 = ~680 MB; total ~698 MB"
+          ],
+          "options": [],
+          "points": 1.6
+        },
+        {
+          "key": "(d)",
+          "question": "Why is the 09-03 exfil flow absent from NetFlow?",
+          "answer_type": "single_choice",
+          "canonical_answer": "A",
+          "accepted_answers": [
+            "A"
+          ],
+          "options": [
+            "A - NetFlow retention is 7 days (W-09); the flow survives only in FW-01 connection logs + EDR",
+            "B - The attacker deleted the NetFlow records",
+            "C - NetFlow was never enabled",
+            "D - The flow used DNS tunneling invisible to NetFlow"
+          ],
+          "points": 1.6
+        }
+      ],
+      "canonical_answer": {
+        "(a)": "order_export_2026.zip",
+        "(b)": "185.220.101.47:8443",
+        "(c)": {
+          "2026-09-03 13:25-13:31": "~18 MB (staging.zip, portal source/config, from 10.10.20.11)",
+          "2026-09-05 12:30-13:05": "~680 MB (order_export_2026.zip, from 10.10.20.23)"
+        },
+        "(d)": "A"
+      },
+      "accepted_answers": {
+        "(a)": [
+          "order_export_2026.zip"
+        ],
+        "(b)": [
+          "185.220.101.47:8443"
+        ],
+        "(c)": [
+          "2026-09-03 13:25-13:31 = ~18 MB; 2026-09-05 12:30-13:05 = ~680 MB; total ~698 MB"
+        ],
+        "(d)": [
+          "A"
+        ]
+      },
+      "required_evidence": [
+        "E-NET-002",
+        "E-FS-002",
+        "E-EDR-002",
+        "E-NET-004",
+        "E-EDR-012",
+        "E-FS-006",
+        "E-NET-006",
+        "E-PROXY-001"
+      ],
+      "attack_events": [
+        "EVT-009",
+        "EVT-010",
+        "EVT-023",
+        "EVT-024"
+      ],
+      "evidence_correlation": "Archive creation times on each host x FW-01 outbound volume windows (exfil #1: E-NET-002/E-FS-002/E-EDR-002; exfil #2: E-NET-004/E-EDR-012/E-FS-006); NetFlow retention note (E-NET-006) + proxy negative record (E-PROXY-001) explain the 09-03 gap.",
+      "points": 8,
+      "difficulty": "Medium-High",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "Match archive creation times on each host against FW-01 outbound volume windows; read the NetFlow summary's retention note before assuming a missing flow means no traffic.",
+          "penalty": 2
+        }
+      ],
+      "hint_penalty": 2,
+      "unlock": "P3 gate",
+      "common_wrong_answer": {
+        "answer": "(d)=B, or missing exfil #1",
+        "why_wrong": "No evidence of NetFlow tampering; the collector retains only 7 days and today is 09-09. staging.zip's 18 MB upload on 09-03 13:25 is a distinct first exfil of source code/config."
+      },
+      "learning_outcomes": [
+        10,
+        11
+      ],
+      "evidence_selection": {
+        "is_candidate_action": true,
+        "earns_points": true,
+        "points": 1.6,
+        "required_set": [
+          "E-NET-002",
+          "E-FS-002",
+          "E-EDR-002",
+          "E-NET-004",
+          "E-EDR-012",
+          "E-FS-006",
+          "E-NET-006",
+          "E-PROXY-001"
+        ],
+        "rule": "full points iff selection superset of required_set with zero incorrect IDs; half iff superset with <=2 incorrect; else 0"
+      }
+    },
+    {
+      "id": "Q-04-04",
+      "phase": "P4",
+      "title": "Scope discrimination: accessed vs compromised vs probed",
+      "instructions": "Two systems brushed against the attack without being owned. Classify each correctly - this judgment drives containment scope.",
+      "task_type": "composite",
+      "answer_type": "composite",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "DB-PRD-01 classification.",
+          "answer_type": "single_choice",
+          "canonical_answer": "B",
+          "accepted_answers": [
+            "B"
+          ],
+          "options": [
+            "A - Compromised (attacker code execution)",
+            "B - Accessed but not compromised (read-only enumeration: sys.databases + TOP-5 row samples, no bulk export)",
+            "C - Probed only",
+            "D - Unrelated"
+          ],
+          "points": 1.5999999999999999
+        },
+        {
+          "key": "(b)",
+          "question": "ERP-APP-01 classification.",
+          "answer_type": "single_choice",
+          "canonical_answer": "C",
+          "accepted_answers": [
+            "C"
+          ],
+          "options": [
+            "A - Compromised",
+            "B - Accessed but not compromised",
+            "C - Probed only (single failed SMB connect 4625 at 09:33, no successful logon)",
+            "D - Unrelated"
+          ],
+          "points": 1.5999999999999999
+        },
+        {
+          "key": "(c)",
+          "question": "Which account authenticated to DB-PRD-01 during the enumeration.",
+          "answer_type": "username",
+          "canonical_answer": "rajesh.kulkarni",
+          "accepted_answers": [
+            "rajesh.kulkarni",
+            "VISTARA\\rajesh.kulkarni"
+          ],
+          "options": [],
+          "points": 1.5999999999999999
+        }
+      ],
+      "canonical_answer": {
+        "(a)": "B",
+        "(b)": "C",
+        "(c)": "rajesh.kulkarni"
+      },
+      "accepted_answers": {
+        "(a)": [
+          "B"
+        ],
+        "(b)": [
+          "C"
+        ],
+        "(c)": [
+          "rajesh.kulkarni",
+          "VISTARA\\rajesh.kulkarni"
+        ]
+      },
+      "required_evidence": [
+        "E-DB-001",
+        "E-AUTH-008",
+        "E-AUTH-009",
+        "E-EDR-013"
+      ],
+      "attack_events": [
+        "EVT-025",
+        "EVT-026"
+      ],
+      "evidence_correlation": "SQL audit statement types/row counts (E-DB-001) x DB Windows-auth session (E-AUTH-008) x ERP single failed 4625 with no success (E-AUTH-009, E-EDR-013).",
+      "points": 6,
+      "difficulty": "Medium-High",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "Read the SQL audit for statement types and row counts, and the ERP security log for the exact event count - one failed SMB connect with no following success.",
+          "penalty": 1
+        }
+      ],
+      "hint_penalty": 1,
+      "unlock": "P3 gate",
+      "common_wrong_answer": {
+        "answer": "DB-PRD-01 = compromised",
+        "why_wrong": "Read-only Windows-auth queries from FILE-PRD-01, no persistence, no execution, no bulk export; containment of DB-PRD-01 would be over-scoping."
+      },
+      "learning_outcomes": [
+        9,
+        15,
+        11
+      ],
+      "evidence_selection": {
+        "is_candidate_action": true,
+        "earns_points": true,
+        "points": 1.2,
+        "required_set": [
+          "E-DB-001",
+          "E-AUTH-008",
+          "E-AUTH-009",
+          "E-EDR-013"
+        ],
+        "rule": "full points iff selection superset of required_set with zero incorrect IDs; half iff superset with <=2 incorrect; else 0"
+      }
+    },
+    {
+      "id": "Q-05-01",
+      "phase": "P5",
+      "title": "Breach scope: host classification table",
+      "instructions": "Classify each listed system into exactly one column. This is the definitive blast-radius statement for the incident record.",
+      "task_type": "classification_table",
+      "answer_type": "classification_table",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Classify each of the 10 hosts into exactly one class: Compromised / Accessed but not compromised / Probed only / Benign-unrelated.",
+          "answer_type": "classification_table",
+          "canonical_answer": {
+            "WEB-PRD-01": "Compromised",
+            "APP-PRD-01": "Compromised",
+            "FILE-PRD-01": "Compromised",
+            "DC-01": "Compromised",
+            "DB-PRD-01": "Accessed but not compromised",
+            "ERP-APP-01": "Probed only",
+            "MAIL-PRD-01": "Benign-unrelated",
+            "VPN-GW-01": "Benign-unrelated",
+            "HR-APP-01": "Benign-unrelated",
+            "MES-PLC-01": "Benign-unrelated"
+          },
+          "accepted_answers": [
+            "Per-cell all-or-nothing: 40 cells (10 hosts x 4 classes) x 0.25 = 10 pts"
+          ],
+          "options": [
+            "Compromised",
+            "Accessed but not compromised",
+            "Probed only",
+            "Benign-unrelated"
+          ],
+          "points": 10.0,
+          "cell_count": 40,
+          "cell_points": 0.25
+        }
+      ],
+      "canonical_answer": {
+        "WEB-PRD-01": "Compromised",
+        "APP-PRD-01": "Compromised",
+        "FILE-PRD-01": "Compromised",
+        "DC-01": "Compromised",
+        "DB-PRD-01": "Accessed but not compromised",
+        "ERP-APP-01": "Probed only",
+        "MAIL-PRD-01": "Benign-unrelated",
+        "VPN-GW-01": "Benign-unrelated",
+        "HR-APP-01": "Benign-unrelated",
+        "MES-PLC-01": "Benign-unrelated"
+      },
+      "accepted_answers": [
+        "Canonical table as in supporting_structures.host_classification"
+      ],
+      "required_evidence": [
+        "E-AUTH-001",
+        "E-NET-005",
+        "E-EDR-001",
+        "E-EDR-008",
+        "E-FS-004",
+        "E-AUTH-006",
+        "E-AUTH-007",
+        "E-EDR-015",
+        "E-FS-005",
+        "E-DB-001",
+        "E-AUTH-008",
+        "E-AUTH-009",
+        "E-EDR-013",
+        "E-AUTH-012"
+      ],
+      "attack_events": [
+        "EVT-005",
+        "EVT-008",
+        "EVT-015",
+        "EVT-018",
+        "EVT-019",
+        "EVT-021",
+        "EVT-025",
+        "EVT-026"
+      ],
+      "evidence_correlation": "Per-host: execution/credential-use proof = Compromised; successful logon without execution = Accessed; failed logon = Probed; no attacker telemetry = Benign. Sources: auth + EDR + FS artifacts per host family.",
+      "points": 10,
+      "difficulty": "High",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "For each host demand proof of execution or credential use: a successful logon alone is access, not compromise; a failed logon is a probe; no attacker telemetry at all is benign.",
+          "penalty": 2
+        }
+      ],
+      "hint_penalty": 2,
+      "unlock": "P4 gate",
+      "common_wrong_answer": {
+        "answer": "Compromised for DB-PRD-01 (over-scope) or missing DC-01's credential disclosure (under-scope)",
+        "why_wrong": "DB-PRD-01 shows read-only enumeration only; DC-01 is a full domain credential disclosure via DCSync. Misclassifying any Compromised host counts toward critical failure CF-3."
+      },
+      "learning_outcomes": [
+        15,
+        11
+      ],
+      "critical_failure_link": "CF-3",
+      "evidence_selection": {
+        "is_candidate_action": false,
+        "earns_points": false,
+        "points": 0,
+        "required_set": [
+          "E-AUTH-001",
+          "E-NET-005",
+          "E-EDR-001",
+          "E-EDR-008",
+          "E-FS-004",
+          "E-AUTH-006",
+          "E-AUTH-007",
+          "E-EDR-015",
+          "E-FS-005",
+          "E-DB-001",
+          "E-AUTH-008",
+          "E-AUTH-009",
+          "E-EDR-013",
+          "E-AUTH-012"
+        ],
+        "rule": "validation/authoring metadata only; the 40-cell table carries all 10 points; used for feedback and CF-3 evaluation"
+      }
+    },
+    {
+      "id": "Q-05-02",
+      "phase": "P5",
+      "title": "Breach scope: identities",
+      "instructions": "Produce the identity blast radius - which accounts are compromised or attacker-controlled, and the domain-wide exposure verdict.",
+      "task_type": "composite",
+      "answer_type": "composite",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Select ALL compromised or attacker-controlled accounts.",
+          "answer_type": "multi_select",
+          "canonical_answer": [
+            "svc_portal",
+            "rajesh.kulkarni",
+            "svc_mon"
+          ],
+          "accepted_answers": [
+            [
+              "svc_portal",
+              "rajesh.kulkarni",
+              "svc_mon"
+            ]
+          ],
+          "options": [
+            "svc_portal",
+            "rajesh.kulkarni",
+            "svc_mon",
+            "admin_legacy",
+            "pranav.joshi",
+            "ananya.iyer",
+            "svc_backup",
+            "helpdesk"
+          ],
+          "points": 1.6
+        },
+        {
+          "key": "(b)",
+          "question": "Given the DCSync scope, must ALL domain credentials be treated as exposed?",
+          "answer_type": "yes_no",
+          "canonical_answer": "Yes",
+          "accepted_answers": [
+            "Yes"
+          ],
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "points": 1.6
+        },
+        {
+          "key": "(c)",
+          "question": "admin_legacy's correct disposition.",
+          "answer_type": "single_choice",
+          "canonical_answer": "B",
+          "accepted_answers": [
+            "B"
+          ],
+          "options": [
+            "A - Compromised in this incident",
+            "B - Weak but unexploited - ~14 months without logon (last_logon ~2025-07); hygiene finding only",
+            "C - Attacker-created"
+          ],
+          "points": 1.6
+        },
+        {
+          "key": "(d)",
+          "question": "The two VPN users with odd-window activity are:",
+          "answer_type": "single_choice",
+          "canonical_answer": "B",
+          "accepted_answers": [
+            "B"
+          ],
+          "options": [
+            "A - Both compromised",
+            "B - Both benign (Ahmedabad office IP 122.176.45.9; pranav.joshi orders match dealer POs; ananya.iyer covered by HR travel approval TRV-2026-0312)",
+            "C - One compromised, one benign"
+          ],
+          "points": 1.6
+        }
+      ],
+      "canonical_answer": {
+        "(a)": [
+          "svc_portal",
+          "rajesh.kulkarni",
+          "svc_mon"
+        ],
+        "(b)": "Yes",
+        "(c)": "B",
+        "(d)": "B"
+      },
+      "accepted_answers": {
+        "(a)": [
+          [
+            "svc_portal",
+            "rajesh.kulkarni",
+            "svc_mon"
+          ]
+        ],
+        "(b)": [
+          "Yes"
+        ],
+        "(c)": [
+          "B"
+        ],
+        "(d)": [
+          "B"
+        ]
+      },
+      "required_evidence": [
+        "E-AD-003",
+        "E-AUTH-006",
+        "E-EDR-009",
+        "E-AUTH-012",
+        "E-AUTH-010",
+        "E-WEB-004",
+        "E-DOC-003",
+        "E-AUTH-011"
+      ],
+      "attack_events": [
+        "EVT-005",
+        "EVT-014",
+        "EVT-017",
+        "EVT-019",
+        "EVT-027",
+        "EVT-029"
+      ],
+      "evidence_correlation": "Attacker-controlled use per account (auth/EDR/AD) x AD snapshot last-logon (admin_legacy ~14-month dormancy, RH-04) x VPN full-window summary + HR travel record (RH-02/RH-03 rule-outs).",
+      "points": 8,
+      "difficulty": "High",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "For each account ask: is there attacker-controlled use in evidence? Then check the AD snapshot's last-logon field and the VPN full-window summary plus the HR travel record.",
+          "penalty": 2
+        }
+      ],
+      "hint_penalty": 2,
+      "unlock": "P4 gate",
+      "common_wrong_answer": {
+        "answer": "Including admin_legacy",
+        "why_wrong": "Dormant ~14 months (last_logon ~2025-07) and absent from every attack artifact; a hygiene finding only."
+      },
+      "learning_outcomes": [
+        7,
+        15,
+        2
+      ],
+      "evidence_selection": {
+        "is_candidate_action": true,
+        "earns_points": true,
+        "points": 1.6,
+        "required_set": [
+          "E-AD-003",
+          "E-AUTH-006",
+          "E-EDR-009",
+          "E-AUTH-012",
+          "E-AUTH-010",
+          "E-WEB-004",
+          "E-DOC-003",
+          "E-AUTH-011"
+        ],
+        "rule": "full points iff selection superset of required_set with zero incorrect IDs; half iff superset with <=2 incorrect; else 0"
+      }
+    },
+    {
+      "id": "Q-05-03",
+      "phase": "P5",
+      "title": "Timeline reconstruction",
+      "instructions": "Drag the 11 shuffled incident milestones into chronological order. (Candidate sees event descriptions with dates hidden; ordering only.)",
+      "task_type": "ordered_sequence",
+      "answer_type": "ordered_sequence",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Order the 11 milestones TL-01..TL-11 chronologically.",
+          "answer_type": "ordered_sequence",
+          "canonical_answer": [
+            "TL-01",
+            "TL-02",
+            "TL-03",
+            "TL-04",
+            "TL-05",
+            "TL-06",
+            "TL-07",
+            "TL-08",
+            "TL-09",
+            "TL-10",
+            "TL-11"
+          ],
+          "accepted_answers": [
+            [
+              "TL-01",
+              "TL-02",
+              "TL-03",
+              "TL-04",
+              "TL-05",
+              "TL-06",
+              "TL-07",
+              "TL-08",
+              "TL-09",
+              "TL-10",
+              "TL-11"
+            ]
+          ],
+          "options": [],
+          "points": 10.0
+        }
+      ],
+      "canonical_answer": [
+        "TL-01",
+        "TL-02",
+        "TL-03",
+        "TL-04",
+        "TL-05",
+        "TL-06",
+        "TL-07",
+        "TL-08",
+        "TL-09",
+        "TL-10",
+        "TL-11"
+      ],
+      "accepted_answers": [
+        [
+          "TL-01",
+          "TL-02",
+          "TL-03",
+          "TL-04",
+          "TL-05",
+          "TL-06",
+          "TL-07",
+          "TL-08",
+          "TL-09",
+          "TL-10",
+          "TL-11"
+        ]
+      ],
+      "required_evidence": [
+        "E-NET-001",
+        "E-WEB-002",
+        "E-AUTH-001",
+        "E-WEB-003",
+        "E-FS-003",
+        "E-AUTH-004",
+        "E-AD-001",
+        "E-EDR-008",
+        "E-AUTH-006",
+        "E-AUTH-007",
+        "E-NET-004",
+        "E-ALERT-001"
+      ],
+      "attack_events": [
+        "EVT-001",
+        "EVT-003",
+        "EVT-005",
+        "EVT-008",
+        "EVT-014",
+        "EVT-015",
+        "EVT-017",
+        "EVT-018",
+        "EVT-019",
+        "EVT-021",
+        "EVT-022",
+        "EVT-024",
+        "EVT-031"
+      ],
+      "evidence_correlation": "Milestone-to-artifact anchoring: recon (E-NET-001/E-WEB-002) -> access (E-AUTH-001) -> shell (E-WEB-003) -> credential (E-FS-003) -> pivot (E-AUTH-004) -> identity (E-AD-001) -> C2 (E-EDR-008) -> DCSync (E-AUTH-006) -> collection (E-AUTH-007) -> exfil (E-NET-004) -> detection (E-ALERT-001). Scored by Kendall-tau concordance x 10 pts, rounded to 0.5.",
+      "points": 10,
+      "difficulty": "Medium",
+      "evidence_linked": false,
+      "hints": [
+        {
+          "text": "Anchor the two exfil-relevant dates (09-03 vs 09-05) and the detection date, then place persistence strictly after the first successful pivot.",
+          "penalty": 2
+        }
+      ],
+      "hint_penalty": 2,
+      "unlock": "P4 gate",
+      "common_wrong_answer": {
+        "answer": "Placing the web shell before initial access",
+        "why_wrong": "The upload (13:02) rode the 11:47 RDP session's access."
+      },
+      "learning_outcomes": [
+        12,
+        1
+      ],
+      "evidence_selection": {
+        "is_candidate_action": false,
+        "earns_points": false,
+        "points": 0,
+        "required_set": null,
+        "rule": "no evidence-selection scoring on this task"
+      }
+    },
+    {
+      "id": "Q-05-04",
+      "phase": "P5",
+      "title": "ATT&CK mapping",
+      "instructions": "Map each observed behavior to exactly one MITRE ATT&CK technique from the controlled list. Every behavior is evidence-backed; scoring is 1 pt per correct mapping.",
+      "task_type": "matching",
+      "answer_type": "matching",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Map behavior to technique: Procdump-style memory dump of w3wp.exe on WEB-PRD-01",
+          "answer_type": "matching",
+          "canonical_answer": "T1003",
+          "accepted_answers": [
+            "T1003"
+          ],
+          "options": [
+            "T1003",
+            "T1003.006",
+            "T1005",
+            "T1018",
+            "T1021.001",
+            "T1039",
+            "T1041",
+            "T1053.005",
+            "T1069",
+            "T1070",
+            "T1071.001",
+            "T1078",
+            "T1087",
+            "T1098",
+            "T1136.001",
+            "T1552",
+            "T1560.001",
+            "T1567"
+          ],
+          "points": 1.0,
+          "attack_events": [
+            "EVT-011"
+          ]
+        },
+        {
+          "key": "(b)",
+          "question": "Map behavior to technique: Credentials recovered from C:\\Users\\svc_portal\\Documents\\passwords.txt",
+          "answer_type": "matching",
+          "canonical_answer": "T1552",
+          "accepted_answers": [
+            "T1552"
+          ],
+          "options": [
+            "T1003",
+            "T1003.006",
+            "T1005",
+            "T1018",
+            "T1021.001",
+            "T1039",
+            "T1041",
+            "T1053.005",
+            "T1069",
+            "T1070",
+            "T1071.001",
+            "T1078",
+            "T1087",
+            "T1098",
+            "T1136.001",
+            "T1552",
+            "T1560.001",
+            "T1567"
+          ],
+          "points": 1.0,
+          "attack_events": [
+            "EVT-014"
+          ]
+        },
+        {
+          "key": "(c)",
+          "question": "Map behavior to technique: Interactive RDP session WEB-PRD-01 -> APP-PRD-01 using a legitimate account",
+          "answer_type": "matching",
+          "canonical_answer": "T1021.001",
+          "accepted_answers": [
+            "T1021.001"
+          ],
+          "options": [
+            "T1003",
+            "T1003.006",
+            "T1005",
+            "T1018",
+            "T1021.001",
+            "T1039",
+            "T1041",
+            "T1053.005",
+            "T1069",
+            "T1070",
+            "T1071.001",
+            "T1078",
+            "T1087",
+            "T1098",
+            "T1136.001",
+            "T1552",
+            "T1560.001",
+            "T1567"
+          ],
+          "points": 1.0,
+          "attack_events": [
+            "EVT-015"
+          ]
+        },
+        {
+          "key": "(d)",
+          "question": "Map behavior to technique: Intrusion conducted through legitimate accounts (svc_portal, rajesh.kulkarni, svc_mon)",
+          "answer_type": "matching",
+          "canonical_answer": "T1078",
+          "accepted_answers": [
+            "T1078"
+          ],
+          "options": [
+            "T1003",
+            "T1003.006",
+            "T1005",
+            "T1018",
+            "T1021.001",
+            "T1039",
+            "T1041",
+            "T1053.005",
+            "T1069",
+            "T1070",
+            "T1071.001",
+            "T1078",
+            "T1087",
+            "T1098",
+            "T1136.001",
+            "T1552",
+            "T1560.001",
+            "T1567"
+          ],
+          "points": 1.0,
+          "attack_events": [
+            "EVT-005",
+            "EVT-015",
+            "EVT-021"
+          ]
+        },
+        {
+          "key": "(e)",
+          "question": "Map behavior to technique: net group \"Domain Admins\" /domain, net group \"Enterprise Admins\" /domain",
+          "answer_type": "matching",
+          "canonical_answer": "T1069",
+          "accepted_answers": [
+            "T1069"
+          ],
+          "options": [
+            "T1003",
+            "T1003.006",
+            "T1005",
+            "T1018",
+            "T1021.001",
+            "T1039",
+            "T1041",
+            "T1053.005",
+            "T1069",
+            "T1070",
+            "T1071.001",
+            "T1078",
+            "T1087",
+            "T1098",
+            "T1136.001",
+            "T1552",
+            "T1560.001",
+            "T1567"
+          ],
+          "points": 1.0,
+          "attack_events": [
+            "EVT-016"
+          ]
+        },
+        {
+          "key": "(f)",
+          "question": "Map behavior to technique: nltest /dclist:vistara.local, net view from APP-PRD-01",
+          "answer_type": "matching",
+          "canonical_answer": "T1018",
+          "accepted_answers": [
+            "T1018"
+          ],
+          "options": [
+            "T1003",
+            "T1003.006",
+            "T1005",
+            "T1018",
+            "T1021.001",
+            "T1039",
+            "T1041",
+            "T1053.005",
+            "T1069",
+            "T1070",
+            "T1071.001",
+            "T1078",
+            "T1087",
+            "T1098",
+            "T1136.001",
+            "T1552",
+            "T1560.001",
+            "T1567"
+          ],
+          "points": 1.0,
+          "attack_events": [
+            "EVT-016"
+          ]
+        },
+        {
+          "key": "(g)",
+          "question": "Map behavior to technique: Creation of domain account svc_mon",
+          "answer_type": "matching",
+          "canonical_answer": "T1136.001",
+          "accepted_answers": [
+            "T1136.001"
+          ],
+          "options": [
+            "T1003",
+            "T1003.006",
+            "T1005",
+            "T1018",
+            "T1021.001",
+            "T1039",
+            "T1041",
+            "T1053.005",
+            "T1069",
+            "T1070",
+            "T1071.001",
+            "T1078",
+            "T1087",
+            "T1098",
+            "T1136.001",
+            "T1552",
+            "T1560.001",
+            "T1567"
+          ],
+          "points": 1.0,
+          "attack_events": [
+            "EVT-017"
+          ]
+        },
+        {
+          "key": "(h)",
+          "question": "Map behavior to technique: Adding svc_mon to Domain Admins / Remote Desktop Users",
+          "answer_type": "matching",
+          "canonical_answer": "T1098",
+          "accepted_answers": [
+            "T1098"
+          ],
+          "options": [
+            "T1003",
+            "T1003.006",
+            "T1005",
+            "T1018",
+            "T1021.001",
+            "T1039",
+            "T1041",
+            "T1053.005",
+            "T1069",
+            "T1070",
+            "T1071.001",
+            "T1078",
+            "T1087",
+            "T1098",
+            "T1136.001",
+            "T1552",
+            "T1560.001",
+            "T1567"
+          ],
+          "points": 1.0,
+          "attack_events": [
+            "EVT-017"
+          ]
+        },
+        {
+          "key": "(i)",
+          "question": "Map behavior to technique: schtasks /create of MicrosoftEdgeUpdateTaskMachineCore",
+          "answer_type": "matching",
+          "canonical_answer": "T1053.005",
+          "accepted_answers": [
+            "T1053.005"
+          ],
+          "options": [
+            "T1003",
+            "T1003.006",
+            "T1005",
+            "T1018",
+            "T1021.001",
+            "T1039",
+            "T1041",
+            "T1053.005",
+            "T1069",
+            "T1070",
+            "T1071.001",
+            "T1078",
+            "T1087",
+            "T1098",
+            "T1136.001",
+            "T1552",
+            "T1560.001",
+            "T1567"
+          ],
+          "points": 1.0,
+          "attack_events": [
+            "EVT-018"
+          ]
+        },
+        {
+          "key": "(j)",
+          "question": "Map behavior to technique: Encoded-PowerShell beacon every 30 minutes over HTTPS to 185.220.101.47:8443",
+          "answer_type": "matching",
+          "canonical_answer": "T1071.001",
+          "accepted_answers": [
+            "T1071.001"
+          ],
+          "options": [
+            "T1003",
+            "T1003.006",
+            "T1005",
+            "T1018",
+            "T1021.001",
+            "T1039",
+            "T1041",
+            "T1053.005",
+            "T1069",
+            "T1070",
+            "T1071.001",
+            "T1078",
+            "T1087",
+            "T1098",
+            "T1136.001",
+            "T1552",
+            "T1560.001",
+            "T1567"
+          ],
+          "points": 1.0,
+          "attack_events": [
+            "EVT-018"
+          ]
+        },
+        {
+          "key": "(k)",
+          "question": "Map behavior to technique: lsadump::dcsync /domain:vistara.local /all replication request from APP-PRD-01 to DC-01",
+          "answer_type": "matching",
+          "canonical_answer": "T1003.006",
+          "accepted_answers": [
+            "T1003.006"
+          ],
+          "options": [
+            "T1003",
+            "T1003.006",
+            "T1005",
+            "T1018",
+            "T1021.001",
+            "T1039",
+            "T1041",
+            "T1053.005",
+            "T1069",
+            "T1070",
+            "T1071.001",
+            "T1078",
+            "T1087",
+            "T1098",
+            "T1136.001",
+            "T1552",
+            "T1560.001",
+            "T1567"
+          ],
+          "points": 1.0,
+          "attack_events": [
+            "EVT-019"
+          ]
+        },
+        {
+          "key": "(l)",
+          "question": "Map behavior to technique: Bulk reads from S:\\ and R:\\ shares into C:\\Windows\\Temp\\collect\\",
+          "answer_type": "matching",
+          "canonical_answer": "T1039",
+          "accepted_answers": [
+            "T1039"
+          ],
+          "options": [
+            "T1003",
+            "T1003.006",
+            "T1005",
+            "T1018",
+            "T1021.001",
+            "T1039",
+            "T1041",
+            "T1053.005",
+            "T1069",
+            "T1070",
+            "T1071.001",
+            "T1078",
+            "T1087",
+            "T1098",
+            "T1136.001",
+            "T1552",
+            "T1560.001",
+            "T1567"
+          ],
+          "points": 1.0,
+          "attack_events": [
+            "EVT-022"
+          ]
+        },
+        {
+          "key": "(m)",
+          "question": "Map behavior to technique: Compress-Archive of the staging tree and the collect directory into zip archives",
+          "answer_type": "matching",
+          "canonical_answer": "T1560.001",
+          "accepted_answers": [
+            "T1560.001"
+          ],
+          "options": [
+            "T1003",
+            "T1003.006",
+            "T1005",
+            "T1018",
+            "T1021.001",
+            "T1039",
+            "T1041",
+            "T1053.005",
+            "T1069",
+            "T1070",
+            "T1071.001",
+            "T1078",
+            "T1087",
+            "T1098",
+            "T1136.001",
+            "T1552",
+            "T1560.001",
+            "T1567"
+          ],
+          "points": 1.0,
+          "attack_events": [
+            "EVT-009",
+            "EVT-023"
+          ]
+        },
+        {
+          "key": "(n)",
+          "question": "Map behavior to technique: HTTPS POST of archives to the attacker's 185.220.101.47:8443 /upload endpoint",
+          "answer_type": "matching",
+          "canonical_answer": "T1041",
+          "accepted_answers": [
+            "T1041"
+          ],
+          "options": [
+            "T1003",
+            "T1003.006",
+            "T1005",
+            "T1018",
+            "T1021.001",
+            "T1039",
+            "T1041",
+            "T1053.005",
+            "T1069",
+            "T1070",
+            "T1071.001",
+            "T1078",
+            "T1087",
+            "T1098",
+            "T1136.001",
+            "T1552",
+            "T1560.001",
+            "T1567"
+          ],
+          "points": 1.0,
+          "attack_events": [
+            "EVT-010",
+            "EVT-024"
+          ]
+        },
+        {
+          "key": "(o)",
+          "question": "Map behavior to technique: Clear-History, ConsoleHost_history.txt deletion, recycle-bin emptying on APP-PRD-01",
+          "answer_type": "matching",
+          "canonical_answer": "T1070",
+          "accepted_answers": [
+            "T1070"
+          ],
+          "options": [
+            "T1003",
+            "T1003.006",
+            "T1005",
+            "T1018",
+            "T1021.001",
+            "T1039",
+            "T1041",
+            "T1053.005",
+            "T1069",
+            "T1070",
+            "T1071.001",
+            "T1078",
+            "T1087",
+            "T1098",
+            "T1136.001",
+            "T1552",
+            "T1560.001",
+            "T1567"
+          ],
+          "points": 1.0,
+          "attack_events": [
+            "EVT-030"
+          ]
+        }
+      ],
+      "canonical_answer": "15 mappings per supporting_structures.attack_mappings",
+      "accepted_answers": [
+        "See supporting_structures.attack_mappings"
+      ],
+      "required_evidence": [],
+      "attack_events": [
+        "EVT-005",
+        "EVT-009",
+        "EVT-010",
+        "EVT-011",
+        "EVT-014",
+        "EVT-015",
+        "EVT-016",
+        "EVT-017",
+        "EVT-018",
+        "EVT-019",
+        "EVT-021",
+        "EVT-022",
+        "EVT-023",
+        "EVT-024",
+        "EVT-030"
+      ],
+      "evidence_correlation": "Each behavior row is quoted from its evidence artifact; ambiguous pairs (T1041 vs T1567) resolved by the channel evidence actually shows - the same 8443 endpoint as the beacon.",
+      "points": 15,
+      "difficulty": "Medium",
+      "evidence_linked": false,
+      "hints": [
+        {
+          "text": "Match each behavior row to the evidence artifact quoted beside it; where two techniques look close (e.g., exfil-over-C2 vs exfil-over-web-service), prefer the channel the evidence actually shows - the same 8443 endpoint as the beacon.",
+          "penalty": 3
+        }
+      ],
+      "hint_penalty": 3,
+      "unlock": "P4 gate",
+      "common_wrong_answer": {
+        "answer": "T1567 for exfil",
+        "why_wrong": "The exfil rode the existing C2 endpoint (185.220.101.47:8443), i.e., exfiltration over the C2 channel (T1041)."
+      },
+      "learning_outcomes": [
+        13
+      ],
+      "reference_evidence": [
+        "E-EDR-004",
+        "E-FS-003",
+        "E-AUTH-004",
+        "E-AUTH-001",
+        "E-AUTH-005",
+        "E-EDR-007",
+        "E-AD-001",
+        "E-AD-002",
+        "E-EDR-008",
+        "E-FS-004",
+        "E-NET-003",
+        "E-AUTH-006",
+        "E-EDR-009",
+        "E-SHARE-001",
+        "E-EDR-010",
+        "E-EDR-012",
+        "E-EDR-014",
+        "E-NET-004"
+      ],
+      "evidence_selection": {
+        "is_candidate_action": false,
+        "earns_points": false,
+        "points": 0,
+        "required_set": null,
+        "rule": "authoring/validation metadata; evidence selection is not scored (15 mappings x 1.0)"
+      }
+    },
+    {
+      "id": "Q-05-05",
+      "phase": "P5",
+      "title": "IOC consolidation",
+      "instructions": "Assemble the defensible indicator set for blocking and threat-hunting. Include only indicators tied to THIS attacker; reject benign and historical look-alikes.",
+      "task_type": "composite",
+      "answer_type": "composite",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Select ALL valid IOCs.",
+          "answer_type": "multi_select",
+          "canonical_answer": [
+            "i",
+            "ii",
+            "iii",
+            "iv",
+            "v",
+            "vi",
+            "vii",
+            "viii"
+          ],
+          "accepted_answers": [
+            [
+              "i",
+              "ii",
+              "iii",
+              "iv",
+              "v",
+              "vi",
+              "vii",
+              "viii"
+            ]
+          ],
+          "options": [
+            "i - 45.155.90.23",
+            "ii - 185.220.101.47 (:8443)",
+            "iii - https://185.220.101.47:8443/beacon",
+            "iv - C:\\inetpub\\wwwroot\\staging\\assets\\upload_2024\\img.aspx",
+            "v - order_export_2026.zip",
+            "vi - C:\\ProgramData\\Microsoft\\Crypto\\RSA\\staging.zip",
+            "vii - svc_mon",
+            "viii - MicrosoftEdgeUpdateTaskMachineCore",
+            "ix - 10.10.40.13",
+            "x - 122.176.45.9",
+            "xi - C:\\inetpub\\wwwroot\\assets\\old\\upload_bak.aspx",
+            "xii - pranav.joshi",
+            "xiii - admin_legacy",
+            "xiv - VS-MAN-2026-0904"
+          ],
+          "points": 3.2
+        },
+        {
+          "key": "(b)",
+          "question": "Highest-priority indicator to block at FW-01 immediately.",
+          "answer_type": "single_choice",
+          "canonical_answer": "185.220.101.47",
+          "accepted_answers": [
+            "185.220.101.47",
+            "185.220.101.47:8443"
+          ],
+          "options": [],
+          "points": 3.2
+        }
+      ],
+      "canonical_answer": {
+        "(a)": [
+          "i",
+          "ii",
+          "iii",
+          "iv",
+          "v",
+          "vi",
+          "vii",
+          "viii"
+        ],
+        "(b)": "185.220.101.47"
+      },
+      "accepted_answers": {
+        "(a)": [
+          [
+            "i",
+            "ii",
+            "iii",
+            "iv",
+            "v",
+            "vi",
+            "vii",
+            "viii"
+          ]
+        ],
+        "(b)": [
+          "185.220.101.47",
+          "185.220.101.47:8443"
+        ]
+      },
+      "required_evidence": [
+        "E-NET-001",
+        "E-AUTH-001",
+        "E-NET-003",
+        "E-NET-002",
+        "E-NET-004",
+        "E-EDR-008",
+        "E-WEB-003",
+        "E-FS-001",
+        "E-FS-002",
+        "E-FS-006",
+        "E-AD-001",
+        "E-VULN-001",
+        "E-VULN-002",
+        "E-AUTH-010",
+        "E-AUTH-011",
+        "E-AUTH-012",
+        "E-FS-007",
+        "E-DOC-002"
+      ],
+      "attack_events": [
+        "EVT-001",
+        "EVT-005",
+        "EVT-008",
+        "EVT-010",
+        "EVT-018",
+        "EVT-024"
+      ],
+      "evidence_correlation": "Attacker-attributability test per indicator: scanner (E-VULN-001/002), office-egress IP (E-AUTH-010/012), benign VPN users (E-AUTH-011/E-DOC-003), and the 2025 shell (E-FS-007/E-DOC-002) all fail it.",
+      "points": 8,
+      "difficulty": "Medium-High",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "An IOC must be attacker-attributable: test each candidate against its evidence - scanner, office-egress IP, and the 2025 shell all fail that test.",
+          "penalty": 2
+        }
+      ],
+      "hint_penalty": 2,
+      "unlock": "P4 gate",
+      "common_wrong_answer": {
+        "answer": "Including 122.176.45.9 or 10.10.40.13",
+        "why_wrong": "Registered Ahmedabad office egress and the internal scanner; blocking them causes business harm."
+      },
+      "learning_outcomes": [
+        14,
+        2
+      ],
+      "evidence_selection": {
+        "is_candidate_action": true,
+        "earns_points": true,
+        "points": 1.6,
+        "required_set": [
+          "E-NET-001",
+          "E-AUTH-001",
+          "E-NET-003",
+          "E-NET-002",
+          "E-NET-004",
+          "E-EDR-008",
+          "E-WEB-003",
+          "E-FS-001",
+          "E-FS-002",
+          "E-FS-006",
+          "E-AD-001",
+          "E-VULN-001",
+          "E-VULN-002",
+          "E-AUTH-010",
+          "E-AUTH-011",
+          "E-AUTH-012",
+          "E-FS-007",
+          "E-DOC-002"
+        ],
+        "rule": "full points iff selection superset of required_set with zero incorrect IDs; half iff superset with <=2 incorrect; else 0"
+      }
+    },
+    {
+      "id": "Q-06-01",
+      "phase": "P6",
+      "title": "Containment decision",
+      "instructions": "It is 2026-09-09 ~10:00 IST; the attacker's beacon is live. Select the containment set to execute now. Over- and under-containment both cost points; the set must be evidence-driven.",
+      "task_type": "composite",
+      "answer_type": "composite",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Hosts to network-isolate.",
+          "answer_type": "multi_select",
+          "canonical_answer": [
+            "WEB-PRD-01",
+            "APP-PRD-01",
+            "FILE-PRD-01"
+          ],
+          "accepted_answers": [
+            [
+              "WEB-PRD-01",
+              "APP-PRD-01",
+              "FILE-PRD-01"
+            ]
+          ],
+          "options": [
+            "WEB-PRD-01",
+            "APP-PRD-01",
+            "FILE-PRD-01",
+            "DC-01",
+            "DB-PRD-01",
+            "ERP-APP-01",
+            "MAIL-PRD-01",
+            "entire Server VLAN"
+          ],
+          "points": 1.92
+        },
+        {
+          "key": "(b)",
+          "question": "Accounts to disable.",
+          "answer_type": "multi_select",
+          "canonical_answer": [
+            "svc_mon",
+            "rajesh.kulkarni",
+            "svc_portal"
+          ],
+          "accepted_answers": [
+            [
+              "svc_mon",
+              "rajesh.kulkarni",
+              "svc_portal"
+            ]
+          ],
+          "options": [
+            "svc_mon",
+            "rajesh.kulkarni",
+            "svc_portal",
+            "admin_legacy",
+            "svc_backup",
+            "ananya.iyer"
+          ],
+          "points": 1.92
+        },
+        {
+          "key": "(c)",
+          "question": "Network action.",
+          "answer_type": "single_choice",
+          "canonical_answer": "A",
+          "accepted_answers": [
+            "A"
+          ],
+          "options": [
+            "A - Block 185.220.101.47 (all ports) at FW-01",
+            "B - Block 45.155.90.23 only",
+            "C - Block both attacker IPs AND take the DMZ offline",
+            "D - No network action"
+          ],
+          "points": 1.92
+        },
+        {
+          "key": "(d)",
+          "question": "Web action.",
+          "answer_type": "single_choice",
+          "canonical_answer": "A",
+          "accepted_answers": [
+            "A"
+          ],
+          "options": [
+            "A - Suspend the /staging/ site on WEB-PRD-01",
+            "B - Take the entire dealer portal offline",
+            "C - No web action",
+            "D - Rebuild WEB-PRD-01 immediately"
+          ],
+          "points": 1.92
+        },
+        {
+          "key": "(e)",
+          "question": "Primary rationale for isolating APP-PRD-01.",
+          "answer_type": "single_choice",
+          "canonical_answer": "A",
+          "accepted_answers": [
+            "A"
+          ],
+          "options": [
+            "A - Host exhibits an active C2 beacon and holds attacker persistence",
+            "B - It is the oldest server",
+            "C - Policy requires isolating all servers",
+            "D - It is nearest to DC-01"
+          ],
+          "points": 1.92
+        }
+      ],
+      "canonical_answer": {
+        "(a)": [
+          "WEB-PRD-01",
+          "APP-PRD-01",
+          "FILE-PRD-01"
+        ],
+        "(b)": [
+          "svc_mon",
+          "rajesh.kulkarni",
+          "svc_portal"
+        ],
+        "(c)": "A",
+        "(d)": "A",
+        "(e)": "A"
+      },
+      "accepted_answers": {
+        "(a)": [
+          [
+            "WEB-PRD-01",
+            "APP-PRD-01",
+            "FILE-PRD-01"
+          ]
+        ],
+        "(b)": [
+          [
+            "svc_mon",
+            "rajesh.kulkarni",
+            "svc_portal"
+          ]
+        ],
+        "(c)": [
+          "A"
+        ],
+        "(d)": [
+          "A"
+        ],
+        "(e)": [
+          "A"
+        ]
+      },
+      "required_evidence": [
+        "E-NET-003",
+        "E-ALERT-001",
+        "E-EDR-008",
+        "E-AUTH-007",
+        "E-AD-001",
+        "E-AD-002",
+        "E-AD-003"
+      ],
+      "attack_events": [
+        "EVT-033"
+      ],
+      "evidence_correlation": "Contain only proven-compromised/attacker-controlled assets (canon state per EVT-033 / E-RESP-001 / E-AD-004); dossier business context: DC-01 isolation would halt domain auth; ERP/payroll criticality.",
+      "points": 12,
+      "difficulty": "High",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "Contain what is proven compromised or attacker-controlled - no more (domain auth and payroll depend on the rest), no less (a beacon is still running).",
+          "penalty": 2
+        }
+      ],
+      "hint_penalty": 2,
+      "unlock": "P5 gate",
+      "common_wrong_answer": {
+        "answer": "Isolating DC-01 (overbroad), monitor-only (under-reactive), or disabling admin_legacy",
+        "why_wrong": "DC-01 isolation causes a domain-wide authentication outage; a live C2 demands the block; admin_legacy is not compromised."
+      },
+      "learning_outcomes": [
+        16
+      ],
+      "critical_failure_link": "CF-2",
+      "evidence_selection": {
+        "is_candidate_action": true,
+        "earns_points": true,
+        "points": 2.4,
+        "required_set": [
+          "E-NET-003",
+          "E-ALERT-001",
+          "E-EDR-008",
+          "E-AUTH-007",
+          "E-AD-001",
+          "E-AD-002",
+          "E-AD-003"
+        ],
+        "rule": "full points iff selection superset of required_set with zero incorrect IDs; half iff superset with <=2 incorrect; else 0"
+      }
+    },
+    {
+      "id": "Q-06-02",
+      "phase": "P6",
+      "title": "Response lifecycle sequencing",
+      "instructions": "Order the major response actions. One of these orderings destroys evidence and leaves persistence alive - identify the defensible sequence.",
+      "task_type": "ordered_sequence",
+      "answer_type": "ordered_sequence",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Order the 5 major response actions.",
+          "answer_type": "ordered_sequence",
+          "canonical_answer": [
+            "Containment (isolate hosts/accounts, block C2)",
+            "Evidence preservation (snapshots, memory, SIEM export, chain of custody)",
+            "Eradication (remove persistence, close weaknesses, reset credentials)",
+            "Recovery (rebuild/restore)",
+            "Safe-state validation"
+          ],
+          "accepted_answers": [
+            [
+              "Containment",
+              "Evidence preservation",
+              "Eradication",
+              "Recovery",
+              "Safe-state validation"
+            ]
+          ],
+          "options": [],
+          "points": 5.0
+        }
+      ],
+      "canonical_answer": [
+        "Containment",
+        "Evidence preservation",
+        "Eradication",
+        "Recovery",
+        "Safe-state validation"
+      ],
+      "accepted_answers": [
+        [
+          "Containment",
+          "Evidence preservation",
+          "Eradication",
+          "Recovery",
+          "Safe-state validation"
+        ]
+      ],
+      "required_evidence": [
+        "E-RESP-001",
+        "E-RESP-002",
+        "E-RESP-003",
+        "E-RESP-004"
+      ],
+      "attack_events": [
+        "EVT-033",
+        "EVT-034",
+        "EVT-035",
+        "EVT-036",
+        "EVT-037"
+      ],
+      "evidence_correlation": "IR-Policy-01 (dossier) + response-record conventions (E-RESP-001 -> E-RESP-004 ordering): preservation after urgent containment, before eradication.",
+      "points": 5,
+      "difficulty": "Medium",
+      "evidence_linked": false,
+      "hints": [
+        {
+          "text": "Urgent containment comes first; destructive cleanup must never precede preservation; you cannot validate a state you have not yet restored.",
+          "penalty": 1
+        }
+      ],
+      "hint_penalty": 1,
+      "unlock": "Q-06-01 complete",
+      "common_wrong_answer": {
+        "answer": "Preservation before containment",
+        "why_wrong": "Urgent containment stops the bleeding first; preservation immediately follows, before eradication."
+      },
+      "learning_outcomes": [
+        16,
+        17
+      ],
+      "evidence_selection": {
+        "is_candidate_action": false,
+        "earns_points": false,
+        "points": 0,
+        "required_set": null,
+        "rule": "no evidence-selection scoring on this task"
+      }
+    },
+    {
+      "id": "Q-06-03",
+      "phase": "P6",
+      "title": "Eradication plan",
+      "instructions": "Select every action required to evict the attacker and close what let them in, then order the plan. \"Restore from backup\" alone is NOT eradication.",
+      "task_type": "composite",
+      "answer_type": "composite",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Select ALL required eradication actions.",
+          "answer_type": "multi_select",
+          "canonical_answer": [
+            "i",
+            "ii",
+            "iii",
+            "iv",
+            "v",
+            "vi",
+            "vii"
+          ],
+          "accepted_answers": [
+            [
+              "i",
+              "ii",
+              "iii",
+              "iv",
+              "v",
+              "vi",
+              "vii"
+            ]
+          ],
+          "options": [
+            "i - Delete scheduled task MicrosoftEdgeUpdateTaskMachineCore on APP-PRD-01",
+            "ii - Delete web shell img.aspx on WEB-PRD-01",
+            "iii - Delete staged artifacts (staging.zip, passwords.txt on WEB-PRD-01; C:\\Windows\\Temp\\collect remnants and order_export_2026.zip on FILE-PRD-01)",
+            "iv - Delete rogue account svc_mon and audit groups it touched",
+            "v - Reset credentials: rajesh.kulkarni, svc_portal, ALL Domain Admin accounts, krbtgt TWICE, plus org-wide user password reset",
+            "vi - Remove the FW-01 any->3389 rule (close W-01)",
+            "vii - Disable/remove /staging/test/upload.aspx and restrict /staging/ (close W-02b)",
+            "viii - Restore FILE-PRD-01 from backup and consider the incident closed",
+            "ix - Reboot all servers to clear memory",
+            "x - Change svc_mon's password and keep the account"
+          ],
+          "points": 4.8
+        },
+        {
+          "key": "(b)",
+          "question": "Order the 7 eradication step-groups canonically.",
+          "answer_type": "ordered_sequence",
+          "canonical_answer": [
+            "Remove scheduled task on APP-PRD-01",
+            "Delete web shell img.aspx on WEB-PRD-01",
+            "Delete staged artifacts (staging.zip + passwords.txt; collect dir + order_export_2026.zip)",
+            "Delete svc_mon + audit groups",
+            "Credential resets incl. krbtgt x2 + org-wide reset",
+            "Remove FW-01 RDP rule (W-01 fix)",
+            "Close/restrict staging upload page (W-02b fix)"
+          ],
+          "accepted_answers": [
+            "Canonical order per EVT-035 / E-RESP-003"
+          ],
+          "options": [],
+          "points": 4.8
+        }
+      ],
+      "canonical_answer": {
+        "(a)": [
+          "i",
+          "ii",
+          "iii",
+          "iv",
+          "v",
+          "vi",
+          "vii"
+        ],
+        "(b)": [
+          "Remove scheduled task on APP-PRD-01",
+          "Delete web shell img.aspx on WEB-PRD-01",
+          "Delete staged artifacts (staging.zip + passwords.txt; collect dir + order_export_2026.zip)",
+          "Delete svc_mon + audit groups",
+          "Credential resets incl. krbtgt x2 + org-wide reset",
+          "Remove FW-01 RDP rule (W-01 fix)",
+          "Close/restrict staging upload page (W-02b fix)"
+        ]
+      },
+      "accepted_answers": {
+        "(a)": [
+          [
+            "i",
+            "ii",
+            "iii",
+            "iv",
+            "v",
+            "vi",
+            "vii"
+          ]
+        ],
+        "(b)": [
+          "Canonical order per EVT-035 / E-RESP-003"
+        ]
+      },
+      "required_evidence": [
+        "E-FS-004",
+        "E-EDR-008",
+        "E-FS-001",
+        "E-WEB-003",
+        "E-FS-002",
+        "E-FS-003",
+        "E-FS-006",
+        "E-AD-001",
+        "E-AD-002",
+        "E-AD-003",
+        "E-AUTH-006",
+        "E-EDR-009",
+        "E-NET-001",
+        "E-DOC-001",
+        "E-WEB-002"
+      ],
+      "attack_events": [
+        "EVT-035",
+        "EVT-008",
+        "EVT-017",
+        "EVT-018",
+        "EVT-019",
+        "EVT-020"
+      ],
+      "evidence_correlation": "Every persistence mechanism (Q-03-06) + both entry weaknesses (W-01, W-02b) + every proven-exposed credential incl. krbtgt from the /all DCSync scope; canon per EVT-035 / E-RESP-003.",
+      "points": 12,
+      "difficulty": "High",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "Walk your own findings: every persistence mechanism (Q-03-06), both entry weaknesses (Q-02-01, Q-02-03), and every credential whose exposure you proved - including what the /all DCSync scope implies.",
+          "penalty": 2
+        }
+      ],
+      "hint_penalty": 2,
+      "unlock": "Q-06-02 complete",
+      "common_wrong_answer": {
+        "answer": "Selecting (viii) as sufficient, or omitting the second krbtgt reset",
+        "why_wrong": "Backup restoration does not remove the web shell/task/rogue account, does not close W-01/W-02b, and does not invalidate stolen credentials (the designed trap). A single krbtgt reset leaves golden tickets minted between resets valid."
+      },
+      "learning_outcomes": [
+        17,
+        8,
+        6
+      ],
+      "evidence_selection": {
+        "is_candidate_action": true,
+        "earns_points": true,
+        "points": 2.4,
+        "required_set": [
+          "E-FS-004",
+          "E-EDR-008",
+          "E-FS-001",
+          "E-WEB-003",
+          "E-FS-002",
+          "E-FS-003",
+          "E-FS-006",
+          "E-AD-001",
+          "E-AD-002",
+          "E-AD-003",
+          "E-AUTH-006",
+          "E-EDR-009",
+          "E-NET-001",
+          "E-DOC-001",
+          "E-WEB-002"
+        ],
+        "rule": "full points iff selection superset of required_set with zero incorrect IDs; half iff superset with <=2 incorrect; else 0"
+      }
+    },
+    {
+      "id": "Q-06-04",
+      "phase": "P6",
+      "title": "Recovery sequencing & approach",
+      "instructions": "Plan the restoration: which systems come back, in what order, by which method, and what follows them.",
+      "task_type": "composite",
+      "answer_type": "composite",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Restoration order.",
+          "answer_type": "ordered_sequence",
+          "canonical_answer": [
+            "Validate DC-01 (no rebuild; verify no persistence, forced krbtgt reset x2 complete)",
+            "Rebuild WEB-PRD-01 from clean template + redeploy portal",
+            "Rebuild APP-PRD-01 + domain rejoin (config from version control)",
+            "Restore FILE-PRD-01 data from the 2026-09-02 pre-incident backup after malware scan + ACL verification"
+          ],
+          "accepted_answers": [
+            "Canonical order per EVT-036 / E-RESP-004"
+          ],
+          "options": [],
+          "points": 2.0
+        },
+        {
+          "key": "(b)",
+          "question": "Match host -> recovery approach.",
+          "answer_type": "matching",
+          "canonical_answer": {
+            "DC-01": "validate-only (no OS rebuild; credential remediation)",
+            "WEB-PRD-01": "clean-template rebuild + portal redeploy + content restore from 09-02 backup after AV scan",
+            "APP-PRD-01": "rebuild + rejoin + config from version control",
+            "FILE-PRD-01": "in-place OS with data restore from 09-02 backup after malware scan"
+          },
+          "accepted_answers": [
+            "Canonical as stated per EVT-036 / E-RESP-004"
+          ],
+          "options": [],
+          "points": 2.0
+        },
+        {
+          "key": "(c)",
+          "question": "Backup date selection.",
+          "answer_type": "single_choice",
+          "canonical_answer": "A",
+          "accepted_answers": [
+            "A"
+          ],
+          "options": [
+            "A - 2026-09-02 (pre-incident)",
+            "B - 2026-09-04 (most recent before detection)",
+            "C - 2026-09-08 (latest available)"
+          ],
+          "points": 2.0
+        },
+        {
+          "key": "(d)",
+          "question": "Post-restore requirement: include 72-hour enhanced monitoring?",
+          "answer_type": "yes_no",
+          "canonical_answer": "Yes",
+          "accepted_answers": [
+            "Yes"
+          ],
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "points": 2.0
+        }
+      ],
+      "canonical_answer": {
+        "(a)": [
+          "Validate DC-01",
+          "Rebuild WEB-PRD-01",
+          "Rebuild APP-PRD-01",
+          "Restore FILE-PRD-01"
+        ],
+        "(b)": {
+          "DC-01": "validate-only",
+          "WEB-PRD-01": "clean-template rebuild",
+          "APP-PRD-01": "rebuild + rejoin",
+          "FILE-PRD-01": "in-place OS + data restore"
+        },
+        "(c)": "A",
+        "(d)": "Yes"
+      },
+      "accepted_answers": {
+        "(a)": [
+          "Canonical order per EVT-036 / E-RESP-004"
+        ],
+        "(b)": [
+          "Canonical as stated per EVT-036 / E-RESP-004"
+        ],
+        "(c)": [
+          "A"
+        ],
+        "(d)": [
+          "Yes"
+        ]
+      },
+      "required_evidence": [
+        "E-RESP-004",
+        "E-VALID-001"
+      ],
+      "attack_events": [
+        "EVT-036"
+      ],
+      "evidence_correlation": "Canon per EVT-036 / E-RESP-004; BK-Policy-04 RPO 24h accepts ~1 day file-version loss; backups after 09-03 11:47 are untrusted (compromise timeline).",
+      "points": 10,
+      "difficulty": "High",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "Identity infrastructure must be trustworthy before anything rejoins it; known-compromised operating systems are rebuilt, not patched; pick the newest backup that PREDATES initial access.",
+          "penalty": 2
+        }
+      ],
+      "hint_penalty": 2,
+      "unlock": "Q-06-03 complete",
+      "common_wrong_answer": {
+        "answer": "Restoring FILE-PRD-01 from the 09-08 backup, or restoring services before DC validation",
+        "why_wrong": "Post-compromise backups risk reintroducing staged artifacts; rebuilt hosts would rejoin an untrusted domain."
+      },
+      "learning_outcomes": [
+        18
+      ],
+      "evidence_selection": {
+        "is_candidate_action": true,
+        "earns_points": true,
+        "points": 2.0,
+        "required_set": [
+          "E-RESP-004",
+          "E-VALID-001"
+        ],
+        "rule": "full points iff selection superset of required_set with zero incorrect IDs; half iff superset with <=2 incorrect; else 0"
+      }
+    },
+    {
+      "id": "Q-07-01",
+      "phase": "P7",
+      "title": "Validation requirements",
+      "instructions": "Before anyone declares recovery complete, define the full validation gate. Select every check that must PASS.",
+      "task_type": "multi_select",
+      "answer_type": "multi_select",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Select ALL checks that must PASS before declaring recovery complete.",
+          "answer_type": "multi_select",
+          "canonical_answer": [
+            "i",
+            "ii",
+            "iii",
+            "iv",
+            "v",
+            "vi",
+            "vii",
+            "viii",
+            "ix"
+          ],
+          "accepted_answers": [
+            [
+              "i",
+              "ii",
+              "iii",
+              "iv",
+              "v",
+              "vi",
+              "vii",
+              "viii",
+              "ix"
+            ]
+          ],
+          "options": [
+            "i - EDR full-scan clean on all touched hosts",
+            "ii - Persistence re-check (scheduled tasks, services, run keys, web directories) on ALL touched hosts INCLUDING rebuilt ones",
+            "iii - Credential resets verified - rajesh.kulkarni, svc_portal, all Domain Admins, krbtgt x2, org-wide user reset",
+            "iv - AD audit confirms svc_mon absent",
+            "v - No egress to 185.220.101.47 in 72h enhanced monitoring",
+            "vi - FW-01 3389 rule removed AND external rescan shows 3389 closed on 203.0.113.10",
+            "vii - /staging/test/upload.aspx returns 404",
+            "viii - No anomalous 4624 Type 10 logons or encoded-PowerShell beacons in logs",
+            "ix - Business validation - dealer portal order flow, S:/R: shares, payroll app verified",
+            "x - Antivirus definitions updated",
+            "xi - CEO sign-off by email"
+          ],
+          "points": 6.4
+        }
+      ],
+      "canonical_answer": [
+        "i",
+        "ii",
+        "iii",
+        "iv",
+        "v",
+        "vi",
+        "vii",
+        "viii",
+        "ix"
+      ],
+      "accepted_answers": [
+        [
+          "i",
+          "ii",
+          "iii",
+          "iv",
+          "v",
+          "vi",
+          "vii",
+          "viii",
+          "ix"
+        ]
+      ],
+      "required_evidence": [
+        "E-VALID-002",
+        "E-AD-003",
+        "E-VALID-001"
+      ],
+      "attack_events": [
+        "EVT-037"
+      ],
+      "evidence_correlation": "E-VALID-002 7-check gate canon (EDR clean; persistence re-check; credential resets incl. krbtgt x2 + org-wide; network - no 8443 egress + rule absent + 3389 closed + upload page 404; log review; business validation) + E-AD-003 re-check + E-VALID-001.",
+      "points": 8,
+      "difficulty": "Medium",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "A rebuilt host can still carry a re-deployed misconfiguration or a missed artifact - the checklist must verify persistence absence everywhere, identity state, network exposure, log silence, and business function.",
+          "penalty": 2
+        }
+      ],
+      "hint_penalty": 2,
+      "unlock": "P6 gate",
+      "common_wrong_answer": {
+        "answer": "Treating EDR-clean (i) alone as sufficient",
+        "why_wrong": "That is exactly the trap exercised in Q-07-02."
+      },
+      "learning_outcomes": [
+        19
+      ],
+      "evidence_selection": {
+        "is_candidate_action": true,
+        "earns_points": true,
+        "points": 1.6,
+        "required_set": [
+          "E-VALID-002",
+          "E-AD-003",
+          "E-VALID-001"
+        ],
+        "rule": "full points iff selection superset of required_set with zero incorrect IDs; half iff superset with <=2 incorrect; else 0"
+      }
+    },
+    {
+      "id": "Q-07-02",
+      "phase": "P7",
+      "title": "The safe-state gate (TRAP)",
+      "instructions": "Stage 1: The interim validation packet shows: EDR full-scan CLEAN on all rebuilt/restored hosts; credential resets verified; network checks pass; persistence re-check on rebuilt APP-PRD-01 marked SKIPPED (\"host was rebuilt, considered clean\"); AD audit not yet re-run. The business is pressing to reopen the portal. Declare the current state.",
+      "task_type": "composite",
+      "answer_type": "composite",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Stage-1 declaration.",
+          "answer_type": "single_choice",
+          "canonical_answer": "NOT SAFE",
+          "accepted_answers": [
+            "NOT SAFE"
+          ],
+          "options": [
+            "SAFE",
+            "NOT SAFE"
+          ],
+          "points": 2.6666666666666665
+        },
+        {
+          "key": "(b)",
+          "question": "The blocking deficiency.",
+          "answer_type": "single_choice",
+          "canonical_answer": "A",
+          "accepted_answers": [
+            "A"
+          ],
+          "options": [
+            "A - Persistence re-check skipped on rebuilt APP-PRD-01 and svc_mon absence not yet re-verified in AD",
+            "B - EDR vendor signatures are one day old",
+            "C - The portal SSL certificate expires soon",
+            "D - NetFlow only retains 7 days"
+          ],
+          "points": 2.6666666666666665
+        },
+        {
+          "key": "(c)",
+          "question": "Stage-2 (packet shows the 16:55 re-run: scheduled tasks/services/run keys/web dirs CLEAN on APP-PRD-01; AD audit confirms svc_mon ABSENT; all other checks PASS) - declaration.",
+          "answer_type": "single_choice",
+          "canonical_answer": "SAFE",
+          "accepted_answers": [
+            "SAFE"
+          ],
+          "options": [
+            "SAFE",
+            "NOT SAFE"
+          ],
+          "points": 2.6666666666666665
+        }
+      ],
+      "canonical_answer": {
+        "(a)": "NOT SAFE",
+        "(b)": "A",
+        "(c)": "SAFE"
+      },
+      "accepted_answers": {
+        "(a)": [
+          "NOT SAFE"
+        ],
+        "(b)": [
+          "A"
+        ],
+        "(c)": [
+          "SAFE"
+        ]
+      },
+      "required_evidence": [
+        "E-VALID-001",
+        "E-VALID-002",
+        "E-AD-003",
+        "E-RESP-003"
+      ],
+      "attack_events": [
+        "EVT-037"
+      ],
+      "evidence_correlation": "Interim packet (E-VALID-002 with SKIPPED line) checked line-by-line against the Q-07-01 gate; a SKIPPED line is not a PASS; 16:55 re-run completes the gate.",
+      "points": 10,
+      "difficulty": "High",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "Check the gate against your own Q-07-01 checklist line by line; a SKIPPED line is not a PASS.",
+          "penalty": 2
+        }
+      ],
+      "hint_penalty": 2,
+      "unlock": "Q-07-01 complete",
+      "common_wrong_answer": {
+        "answer": "Stage-1 SAFE on EDR-clean grounds",
+        "why_wrong": "The designed critical failure: EDR-clean is necessary, not sufficient; persistence and identity checks must be explicitly complete."
+      },
+      "learning_outcomes": [
+        19
+      ],
+      "critical_failure_link": "CF-1",
+      "evidence_selection": {
+        "is_candidate_action": true,
+        "earns_points": true,
+        "points": 2.0,
+        "required_set": [
+          "E-VALID-001",
+          "E-VALID-002",
+          "E-AD-003",
+          "E-RESP-003"
+        ],
+        "rule": "full points iff selection superset of required_set with zero incorrect IDs; half iff superset with <=2 incorrect; else 0"
+      }
+    },
+    {
+      "id": "Q-07-03",
+      "phase": "P7",
+      "title": "Residual risk & recommendations",
+      "instructions": "Close out honestly: acknowledge what recovery did NOT fix, and select the remediation set that maps to the weaknesses this incident actually exercised or exposed.",
+      "task_type": "composite",
+      "answer_type": "composite",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Select ALL residual risks.",
+          "answer_type": "multi_select",
+          "canonical_answer": [
+            "i",
+            "ii",
+            "iii",
+            "iv",
+            "v"
+          ],
+          "accepted_answers": [
+            [
+              "i",
+              "ii",
+              "iii",
+              "iv",
+              "v"
+            ]
+          ],
+          "options": [
+            "i - Stolen data (~698 MB incl. payroll PII and client designs) is unrecoverable - exposure must be managed",
+            "ii - W-05: password-reuse/plaintext-credential hygiene",
+            "iii - W-06: Plant VLAN -> FILE-PRD-01 SMB exception still open",
+            "iv - W-08: no MFA on remote access",
+            "v - W-09: NetFlow 7-day retention limits investigations",
+            "vi - The attacker still has an active beacon",
+            "vii - ERPDB was fully exfiltrated"
+          ],
+          "points": 3.2
+        },
+        {
+          "key": "(b)",
+          "question": "Select ALL correct recommendations.",
+          "answer_type": "multi_select",
+          "canonical_answer": [
+            "i",
+            "ii",
+            "iii",
+            "iv",
+            "v",
+            "vi",
+            "vii"
+          ],
+          "accepted_answers": [
+            [
+              "i",
+              "ii",
+              "iii",
+              "iv",
+              "v",
+              "vi",
+              "vii"
+            ]
+          ],
+          "options": [
+            "i - Enforce CH-Policy-03 change control for firewall rules + audit for stale rules",
+            "ii - Service-account credential vaulting + rotation (close W-03/W-03c; register per AC-Policy-02)",
+            "iii - MFA on VPN/remote access (W-08)",
+            "iv - Privileged-access tiering; remove standing Domain Admin membership (W-04); deploy LAPS (W-05b)",
+            "v - Extend NetFlow/log retention (W-09)",
+            "vi - Review/remove the W-06 segmentation exception",
+            "vii - Permanently remove internet exposure of staging resources (W-02b) and audit for upload pages",
+            "viii - Replace the EDR vendor",
+            "ix - Discipline the vulnerability-scanner operator"
+          ],
+          "points": 3.2
+        }
+      ],
+      "canonical_answer": {
+        "(a)": [
+          "i",
+          "ii",
+          "iii",
+          "iv",
+          "v"
+        ],
+        "(b)": [
+          "i",
+          "ii",
+          "iii",
+          "iv",
+          "v",
+          "vi",
+          "vii"
+        ]
+      },
+      "accepted_answers": {
+        "(a)": [
+          [
+            "i",
+            "ii",
+            "iii",
+            "iv",
+            "v"
+          ]
+        ],
+        "(b)": [
+          [
+            "i",
+            "ii",
+            "iii",
+            "iv",
+            "v",
+            "vi",
+            "vii"
+          ]
+        ]
+      },
+      "required_evidence": [
+        "E-NET-002",
+        "E-NET-004",
+        "E-FS-003",
+        "E-NET-006"
+      ],
+      "attack_events": [
+        "EVT-038"
+      ],
+      "evidence_correlation": "Exfil findings (E-NET-002/004) + plaintext-credential finding (E-FS-003) + dossier weaknesses W-05/W-06/W-08/W-09 (+W-04, W-05b) + NetFlow retention note (E-NET-006); each recommendation maps to a weakness actually exercised or exposed.",
+      "points": 8,
+      "difficulty": "Medium",
+      "evidence_linked": true,
+      "hints": [
+        {
+          "text": "Map each recommendation to a weakness ID you actually met in evidence; exclude anything already verified closed by eradication.",
+          "penalty": 2
+        }
+      ],
+      "hint_penalty": 2,
+      "unlock": "Q-07-02 complete",
+      "common_wrong_answer": {
+        "answer": "(a) including vi/vii",
+        "why_wrong": "The beacon was contained and eradicated (E-RESP-003, E-VALID-002), and ERPDB was never bulk-exfiltrated (E-DB-001)."
+      },
+      "learning_outcomes": [
+        19,
+        20
+      ],
+      "evidence_selection": {
+        "is_candidate_action": true,
+        "earns_points": true,
+        "points": 1.6,
+        "required_set": [
+          "E-NET-002",
+          "E-NET-004",
+          "E-FS-003",
+          "E-NET-006"
+        ],
+        "rule": "full points iff selection superset of required_set with zero incorrect IDs; half iff superset with <=2 incorrect; else 0"
+      }
+    },
+    {
+      "id": "Q-07-04",
+      "phase": "P7",
+      "title": "Final incident report (structured)",
+      "instructions": "Complete the structured incident report. Deterministic fields are cross-checked against your phase answers (inconsistency costs points); the executive summary is the one rubric-scored narrative.",
+      "task_type": "structured_report",
+      "answer_type": "structured_report",
+      "sub_answers": [
+        {
+          "key": "(a)",
+          "question": "Incident classification.",
+          "answer_type": "single_choice",
+          "canonical_answer": "Sev-1",
+          "accepted_answers": [
+            "Sev-1"
+          ],
+          "options": [
+            "Sev-1",
+            "Sev-2",
+            "Sev-3",
+            "Sev-4"
+          ],
+          "points": 1.0
+        },
+        {
+          "key": "(b)",
+          "question": "Detection source / ticket.",
+          "answer_type": "string",
+          "canonical_answer": "EDR-20260909-0417 / INC-2026-0417",
+          "accepted_answers": [
+            "EDR-20260909-0417",
+            "INC-2026-0417",
+            "EDR-20260909-0417 / INC-2026-0417"
+          ],
+          "options": [],
+          "points": 1.0
+        },
+        {
+          "key": "(c)",
+          "question": "Initial access vector.",
+          "answer_type": "single_choice",
+          "canonical_answer": "RDP brute force of svc_portal over internet-exposed TCP 3389",
+          "accepted_answers": [
+            "RDP brute force of svc_portal over internet-exposed TCP 3389"
+          ],
+          "options": [
+            "RDP brute force of svc_portal over internet-exposed TCP 3389",
+            "VPN login with stolen credentials",
+            "Web-shell upload as first entry",
+            "Phishing-mail execution"
+          ],
+          "points": 1.0
+        },
+        {
+          "key": "(d)",
+          "question": "First compromised asset.",
+          "answer_type": "asset",
+          "canonical_answer": "WEB-PRD-01",
+          "accepted_answers": [
+            "WEB-PRD-01",
+            "10.10.20.11"
+          ],
+          "options": [],
+          "points": 1.0
+        },
+        {
+          "key": "(e)",
+          "question": "Compromised/attacker-controlled accounts.",
+          "answer_type": "multi_select",
+          "canonical_answer": [
+            "svc_portal",
+            "rajesh.kulkarni",
+            "svc_mon"
+          ],
+          "accepted_answers": [
+            [
+              "svc_portal",
+              "rajesh.kulkarni",
+              "svc_mon"
+            ]
+          ],
+          "options": [
+            "svc_portal",
+            "rajesh.kulkarni",
+            "svc_mon",
+            "admin_legacy",
+            "pranav.joshi",
+            "ananya.iyer"
+          ],
+          "points": 1.0
+        },
+        {
+          "key": "(f)",
+          "question": "Compromised hosts.",
+          "answer_type": "multi_select",
+          "canonical_answer": [
+            "WEB-PRD-01",
+            "APP-PRD-01",
+            "FILE-PRD-01",
+            "DC-01"
+          ],
+          "accepted_answers": [
+            [
+              "WEB-PRD-01",
+              "APP-PRD-01",
+              "FILE-PRD-01",
+              "DC-01"
+            ]
+          ],
+          "options": [
+            "WEB-PRD-01",
+            "APP-PRD-01",
+            "FILE-PRD-01",
+            "DC-01",
+            "DB-PRD-01",
+            "ERP-APP-01"
+          ],
+          "points": 1.0
+        },
+        {
+          "key": "(g)",
+          "question": "Dwell time (initial access 09-03 11:47 -> detection 09-09 09:47).",
+          "answer_type": "string",
+          "canonical_answer": "6 days",
+          "accepted_answers": [
+            "6 days",
+            "~6 days",
+            "5.9 days",
+            "142 hours",
+            "142h",
+            "140 hours",
+            "140h",
+            "144 hours",
+            "144h"
+          ],
+          "options": [],
+          "points": 1.0,
+          "accepted_range_hours": {
+            "min": 140,
+            "max": 144,
+            "note": "142 hours ±2 hours; any hour value 140–144 inclusive accepted"
+          }
+        },
+        {
+          "key": "(h)",
+          "question": "Total exfiltrated volume.",
+          "answer_type": "string",
+          "canonical_answer": "~698 MB",
+          "accepted_answers": [
+            "698 MB",
+            "~698 MB",
+            "~700 MB",
+            "18 MB + 680 MB"
+          ],
+          "options": [],
+          "points": 1.0
+        },
+        {
+          "key": "(i)",
+          "question": "Root cause (weaknesses).",
+          "answer_type": "multi_select",
+          "canonical_answer": [
+            "W-01",
+            "W-03"
+          ],
+          "accepted_answers": [
+            [
+              "W-01",
+              "W-03"
+            ],
+            [
+              "W-01",
+              "W-03",
+              "W-02b"
+            ]
+          ],
+          "options": [
+            "W-01",
+            "W-02b",
+            "W-03",
+            "W-04",
+            "W-05",
+            "W-08"
+          ],
+          "points": 1.0
+        },
+        {
+          "key": "(j)",
+          "question": "Privilege-escalation enabler.",
+          "answer_type": "single_choice",
+          "canonical_answer": "W-04",
+          "accepted_answers": [
+            "W-04"
+          ],
+          "options": [
+            "W-04",
+            "W-01",
+            "W-03",
+            "W-05"
+          ],
+          "points": 1.0
+        },
+        {
+          "key": "(k)",
+          "question": "Executive summary (3-5 sentences for a non-technical executive; rubric-scored per supporting_structures.exec_summary_rubric).",
+          "answer_type": "structured_report",
+          "canonical_answer": "Rubric-scored narrative (5 x 1 pt); see supporting_structures.exec_summary_rubric",
+          "accepted_answers": [
+            "See supporting_structures.exec_summary_rubric"
+          ],
+          "options": [],
+          "points": 5.0
+        }
+      ],
+      "canonical_answer": {
+        "(a)": "Sev-1",
+        "(b)": "EDR-20260909-0417 / INC-2026-0417",
+        "(c)": "RDP brute force of svc_portal over internet-exposed TCP 3389",
+        "(d)": "WEB-PRD-01",
+        "(e)": [
+          "svc_portal",
+          "rajesh.kulkarni",
+          "svc_mon"
+        ],
+        "(f)": [
+          "WEB-PRD-01",
+          "APP-PRD-01",
+          "FILE-PRD-01",
+          "DC-01"
+        ],
+        "(g)": "6 days",
+        "(h)": "~698 MB",
+        "(i)": [
+          "W-01",
+          "W-03"
+        ],
+        "(j)": "W-04",
+        "(k)": "Rubric-scored (5 x 1 pt)"
+      },
+      "accepted_answers": "See sub_answers; deterministic fields auto-compared with Q-00-01, Q-02-01/02/03, Q-03-*, Q-05-01/02, Q-07-02 answers; each contradiction voids that report field's point.",
+      "required_evidence": [],
+      "attack_events": [
+        "EVT-031",
+        "EVT-032",
+        "EVT-033",
+        "EVT-034",
+        "EVT-035",
+        "EVT-036",
+        "EVT-037",
+        "EVT-038"
+      ],
+      "evidence_correlation": "Synthesis of all phases; fields 1-10 cross-checked against prior phase answers for consistency.",
+      "points": 15,
+      "difficulty": "Medium",
+      "evidence_linked": false,
+      "hints": [
+        {
+          "text": "Your phase answers are the report's source of truth - do not introduce anything you did not prove.",
+          "penalty": 3
+        }
+      ],
+      "hint_penalty": 3,
+      "unlock": "Q-07-03 complete",
+      "common_wrong_answer": {
+        "answer": "Report fields contradicting earlier phase answers",
+        "why_wrong": "Fields 1-10 are auto-compared with prior answers; each contradiction voids that field's point."
+      },
+      "learning_outcomes": [
+        20,
+        1
+      ],
+      "evidence_selection": {
+        "is_candidate_action": false,
+        "earns_points": false,
+        "points": 0,
+        "required_set": null,
+        "rule": "no evidence-selection scoring on this task"
+      }
+    }
+  ],
+  "supporting_structures": {
+    "timeline_items": [
+      {
+        "key": "TL-01",
+        "description": "External recon: port scan + staging directory enumeration",
+        "evt": [
+          "EVT-001",
+          "EVT-003"
+        ],
+        "canonical_position": 1
+      },
+      {
+        "key": "TL-02",
+        "description": "Initial access: svc_portal RDP brute force succeeds",
+        "evt": [
+          "EVT-005"
+        ],
+        "canonical_position": 2
+      },
+      {
+        "key": "TL-03",
+        "description": "Web shell deployed via staging upload page",
+        "evt": [
+          "EVT-008"
+        ],
+        "canonical_position": 3
+      },
+      {
+        "key": "TL-04",
+        "description": "Pivot credential recovered from passwords.txt",
+        "evt": [
+          "EVT-014"
+        ],
+        "canonical_position": 4
+      },
+      {
+        "key": "TL-05",
+        "description": "First lateral movement: WEB-PRD-01 -> APP-PRD-01",
+        "evt": [
+          "EVT-015"
+        ],
+        "canonical_position": 5
+      },
+      {
+        "key": "TL-06",
+        "description": "Rogue DA account svc_mon created",
+        "evt": [
+          "EVT-017"
+        ],
+        "canonical_position": 6
+      },
+      {
+        "key": "TL-07",
+        "description": "Scheduled-task C2 beacon planted on APP-PRD-01",
+        "evt": [
+          "EVT-018"
+        ],
+        "canonical_position": 7
+      },
+      {
+        "key": "TL-08",
+        "description": "DCSync against DC-01 dumps all domain credentials",
+        "evt": [
+          "EVT-019"
+        ],
+        "canonical_position": 8
+      },
+      {
+        "key": "TL-09",
+        "description": "svc_mon RDP to FILE-PRD-01; collection begins",
+        "evt": [
+          "EVT-021",
+          "EVT-022"
+        ],
+        "canonical_position": 9
+      },
+      {
+        "key": "TL-10",
+        "description": "Bulk exfiltration ~680 MB to 185.220.101.47:8443",
+        "evt": [
+          "EVT-024"
+        ],
+        "canonical_position": 10
+      },
+      {
+        "key": "TL-11",
+        "description": "Detection: EDR alert fires, INC-2026-0417 opened",
+        "evt": [
+          "EVT-031"
+        ],
+        "canonical_position": 11
+      }
+    ],
+    "attack_controlled_list": [
+      {
+        "id": "T1003",
+        "name": "OS Credential Dumping"
+      },
+      {
+        "id": "T1003.006",
+        "name": "OS Credential Dumping: DCSync"
+      },
+      {
+        "id": "T1005",
+        "name": "Data from Local System"
+      },
+      {
+        "id": "T1018",
+        "name": "Remote System Discovery"
+      },
+      {
+        "id": "T1021.001",
+        "name": "Remote Services: Remote Desktop Protocol"
+      },
+      {
+        "id": "T1039",
+        "name": "Data from Network Shared Drive"
+      },
+      {
+        "id": "T1041",
+        "name": "Exfiltration Over C2 Channel"
+      },
+      {
+        "id": "T1053.005",
+        "name": "Scheduled Task/Job: Scheduled Task"
+      },
+      {
+        "id": "T1069",
+        "name": "Permission Groups Discovery"
+      },
+      {
+        "id": "T1070",
+        "name": "Indicator Removal"
+      },
+      {
+        "id": "T1071.001",
+        "name": "Application Layer Protocol: Web Protocols"
+      },
+      {
+        "id": "T1078",
+        "name": "Valid Accounts"
+      },
+      {
+        "id": "T1087",
+        "name": "Account Discovery"
+      },
+      {
+        "id": "T1098",
+        "name": "Account Manipulation"
+      },
+      {
+        "id": "T1136.001",
+        "name": "Create Account"
+      },
+      {
+        "id": "T1552",
+        "name": "Unsecured Credentials"
+      },
+      {
+        "id": "T1560.001",
+        "name": "Archive Collected Data: Archive via Utility"
+      },
+      {
+        "id": "T1567",
+        "name": "Exfiltration Over Web Service"
+      }
+    ],
+    "attack_mappings": [
+      {
+        "behavior": "Procdump-style memory dump of w3wp.exe on WEB-PRD-01",
+        "canonical_technique": "T1003"
+      },
+      {
+        "behavior": "Credentials recovered from C:\\Users\\svc_portal\\Documents\\passwords.txt",
+        "canonical_technique": "T1552"
+      },
+      {
+        "behavior": "Interactive RDP session WEB-PRD-01 -> APP-PRD-01 using a legitimate account",
+        "canonical_technique": "T1021.001"
+      },
+      {
+        "behavior": "Intrusion conducted through legitimate accounts (svc_portal, rajesh.kulkarni, svc_mon)",
+        "canonical_technique": "T1078"
+      },
+      {
+        "behavior": "net group \"Domain Admins\" /domain, net group \"Enterprise Admins\" /domain",
+        "canonical_technique": "T1069"
+      },
+      {
+        "behavior": "nltest /dclist:vistara.local, net view from APP-PRD-01",
+        "canonical_technique": "T1018"
+      },
+      {
+        "behavior": "Creation of domain account svc_mon",
+        "canonical_technique": "T1136.001"
+      },
+      {
+        "behavior": "Adding svc_mon to Domain Admins / Remote Desktop Users",
+        "canonical_technique": "T1098"
+      },
+      {
+        "behavior": "schtasks /create of MicrosoftEdgeUpdateTaskMachineCore",
+        "canonical_technique": "T1053.005"
+      },
+      {
+        "behavior": "Encoded-PowerShell beacon every 30 minutes over HTTPS to 185.220.101.47:8443",
+        "canonical_technique": "T1071.001"
+      },
+      {
+        "behavior": "lsadump::dcsync /domain:vistara.local /all replication request from APP-PRD-01 to DC-01",
+        "canonical_technique": "T1003.006"
+      },
+      {
+        "behavior": "Bulk reads from S:\\ and R:\\ shares into C:\\Windows\\Temp\\collect\\",
+        "canonical_technique": "T1039"
+      },
+      {
+        "behavior": "Compress-Archive of the staging tree and the collect directory into zip archives",
+        "canonical_technique": "T1560.001"
+      },
+      {
+        "behavior": "HTTPS POST of archives to the attacker's 185.220.101.47:8443 /upload endpoint",
+        "canonical_technique": "T1041"
+      },
+      {
+        "behavior": "Clear-History, ConsoleHost_history.txt deletion, recycle-bin emptying on APP-PRD-01",
+        "canonical_technique": "T1070"
+      }
+    ],
+    "host_classification": [
+      {
+        "host": "WEB-PRD-01",
+        "canonical_class": "Compromised",
+        "basis": "initial foothold + web shell + credential theft + exfil #1"
+      },
+      {
+        "host": "APP-PRD-01",
+        "canonical_class": "Compromised",
+        "basis": "persistence + C2 + DCSync origin"
+      },
+      {
+        "host": "FILE-PRD-01",
+        "canonical_class": "Compromised",
+        "basis": "collection + exfil #2"
+      },
+      {
+        "host": "DC-01",
+        "canonical_class": "Compromised",
+        "basis": "DCSync target - full domain credential disclosure; attacker session present"
+      },
+      {
+        "host": "DB-PRD-01",
+        "canonical_class": "Accessed but not compromised",
+        "basis": "read-only enumeration"
+      },
+      {
+        "host": "ERP-APP-01",
+        "canonical_class": "Probed only",
+        "basis": "single failed SMB 4625; no success"
+      },
+      {
+        "host": "MAIL-PRD-01",
+        "canonical_class": "Benign-unrelated",
+        "basis": "no attacker telemetry"
+      },
+      {
+        "host": "VPN-GW-01",
+        "canonical_class": "Benign-unrelated",
+        "basis": "no attacker telemetry"
+      },
+      {
+        "host": "HR-APP-01",
+        "canonical_class": "Benign-unrelated",
+        "basis": "no attacker telemetry"
+      },
+      {
+        "host": "MES-PLC-01",
+        "canonical_class": "Benign-unrelated",
+        "basis": "no attacker telemetry"
+      }
+    ],
+    "ioc_set": {
+      "canonical": [
+        "45.155.90.23",
+        "185.220.101.47 (:8443)",
+        "https://185.220.101.47:8443/beacon",
+        "C:\\inetpub\\wwwroot\\staging\\assets\\upload_2024\\img.aspx",
+        "order_export_2026.zip",
+        "C:\\ProgramData\\Microsoft\\Crypto\\RSA\\staging.zip",
+        "svc_mon",
+        "MicrosoftEdgeUpdateTaskMachineCore"
+      ],
+      "distractors": [
+        "10.10.40.13",
+        "122.176.45.9",
+        "C:\\inetpub\\wwwroot\\assets\\old\\upload_bak.aspx",
+        "pranav.joshi",
+        "admin_legacy",
+        "VS-MAN-2026-0904"
+      ]
+    },
+    "containment_state": {
+      "isolate_hosts": [
+        "WEB-PRD-01",
+        "APP-PRD-01",
+        "FILE-PRD-01"
+      ],
+      "disable_accounts": [
+        "svc_mon",
+        "rajesh.kulkarni",
+        "svc_portal"
+      ],
+      "block_ips": [
+        "185.220.101.47"
+      ],
+      "suspend_paths": [
+        "/staging/"
+      ]
+    },
+    "eradication_steps": [
+      "Remove scheduled task MicrosoftEdgeUpdateTaskMachineCore on APP-PRD-01",
+      "Delete web shell img.aspx on WEB-PRD-01",
+      "Delete staged artifacts (staging.zip + passwords.txt on WEB-PRD-01; C:\\Windows\\Temp\\collect dir + order_export_2026.zip on FILE-PRD-01)",
+      "Delete rogue account svc_mon + audit groups it touched",
+      "Credential resets: rajesh.kulkarni, svc_portal, ALL Domain Admin accounts, krbtgt TWICE, plus org-wide user password reset",
+      "Remove the FW-01 any->3389 rule (W-01 fix)",
+      "Disable/remove /staging/test/upload.aspx and restrict /staging/ (W-02b fix)"
+    ],
+    "recovery_sequence": [
+      "Validate DC-01 (no rebuild; verify no persistence, forced krbtgt reset x2 complete)",
+      "Rebuild WEB-PRD-01 from clean template + redeploy portal",
+      "Rebuild APP-PRD-01 + domain rejoin (config from version control)",
+      "Restore FILE-PRD-01 data from the 2026-09-02 pre-incident backup after malware scan + ACL verification"
+    ],
+    "recovery_approach": {
+      "DC-01": "validate-only (no OS rebuild; credential remediation)",
+      "WEB-PRD-01": "clean-template rebuild + portal redeploy + content restore from 09-02 backup after AV scan",
+      "APP-PRD-01": "rebuild + rejoin + config from version control",
+      "FILE-PRD-01": "in-place OS with data restore from 09-02 backup after malware scan"
+    },
+    "safe_state_checks": [
+      "EDR full-scan clean on all touched hosts",
+      "Persistence re-check (scheduled tasks, services, run keys, web directories) on ALL touched hosts INCLUDING rebuilt ones",
+      "Credential resets verified - rajesh.kulkarni, svc_portal, all Domain Admins, krbtgt x2, org-wide user reset",
+      "AD audit confirms svc_mon absent",
+      "No egress to 185.220.101.47 in 72h enhanced monitoring",
+      "FW-01 3389 rule removed AND external rescan shows 3389 closed on 203.0.113.10",
+      "/staging/test/upload.aspx returns 404",
+      "No anomalous 4624 Type 10 logons or encoded-PowerShell beacons in logs",
+      "Business validation - dealer portal order flow, S:/R: shares, payroll app verified"
+    ],
+    "residual_risks": [
+      "Stolen data (~698 MB incl. payroll PII and client designs) is unrecoverable - exposure must be managed",
+      "W-05 - password-reuse/plaintext-credential hygiene",
+      "W-06 - Plant VLAN -> FILE-PRD-01 SMB exception still open",
+      "W-08 - no MFA on remote access",
+      "W-09 - NetFlow 7-day retention limits investigations"
+    ],
+    "recommendations": [
+      "Enforce CH-Policy-03 change control for firewall rules + audit for stale rules",
+      "Service-account credential vaulting + rotation (close W-03/W-03c; register per AC-Policy-02)",
+      "MFA on VPN/remote access (W-08)",
+      "Privileged-access tiering; remove standing Domain Admin membership (W-04); deploy LAPS (W-05b)",
+      "Extend NetFlow/log retention (W-09)",
+      "Review/remove the W-06 segmentation exception",
+      "Permanently remove internet exposure of staging resources (W-02b) and audit for upload pages"
+    ],
+    "report_fields": [
+      {
+        "field": "incident_classification",
+        "canonical": "Sev-1",
+        "note": "per IR-Policy-01"
+      },
+      {
+        "field": "detection_source_ticket",
+        "canonical": "EDR-20260909-0417 / INC-2026-0417",
+        "note": "either or both accepted"
+      },
+      {
+        "field": "initial_access_vector",
+        "canonical": "RDP brute force of svc_portal over internet-exposed TCP 3389",
+        "note": "single choice from vector list"
+      },
+      {
+        "field": "first_compromised_asset",
+        "canonical": "WEB-PRD-01",
+        "note": ""
+      },
+      {
+        "field": "compromised_accounts",
+        "canonical": [
+          "svc_portal",
+          "rajesh.kulkarni",
+          "svc_mon"
+        ],
+        "note": "multi-select"
+      },
+      {
+        "field": "compromised_hosts",
+        "canonical": [
+          "WEB-PRD-01",
+          "APP-PRD-01",
+          "FILE-PRD-01",
+          "DC-01"
+        ],
+        "note": "multi-select; DC-01 = credential disclosure"
+      },
+      {
+        "field": "dwell_time",
+        "canonical": "6 days",
+        "note": "accept 6 days, ~6 days, 5.9 days, or any hour value 140-144 inclusive (142h +/-2h)",
+        "accepted_range_hours": {
+          "min": 140,
+          "max": 144,
+          "note": "142 hours ±2 hours; any hour value 140–144 inclusive accepted"
+        }
+      },
+      {
+        "field": "total_exfiltrated_volume",
+        "canonical": "~698 MB",
+        "note": "accept 698 MB, ~700 MB, 18 MB + 680 MB"
+      },
+      {
+        "field": "root_cause_weaknesses",
+        "canonical": [
+          "W-01",
+          "W-03"
+        ],
+        "note": "multi-select; W-02b accepted as third; W-04 asked separately"
+      },
+      {
+        "field": "privilege_escalation_enabler",
+        "canonical": "W-04",
+        "note": "rajesh.kulkarni's stale Domain Admin membership"
+      }
+    ],
+    "exec_summary_rubric": [
+      "States what happened (web-facing server breached via exposed remote access + weak service password)",
+      "States business impact (~698 MB stolen incl. client designs + payroll data; ~6-day presence)",
+      "States actions taken (contained, eradicated, rebuilt/restored, validated safe)",
+      "States current status (services restored, safe state verified 09-09 17:30 IST)",
+      "States residual risk/next steps (data exposure management, credential-hygiene/MFA/retention program)"
+    ]
+  },
+  "scoring": {
+    "raw_points_by_phase": {
+      "P0": 5,
+      "P1": 11,
+      "P2": 30,
+      "P3": 50,
+      "P4": 28,
+      "P5": 51,
+      "P6": 39,
+      "P7": 41,
+      "total": 255
+    },
+    "dimensions": [
+      {
+        "id": "D1",
+        "name": "Investigation accuracy & evidence correlation",
+        "tasks": [
+          "Q-00-01",
+          "Q-01-01",
+          "Q-01-02",
+          "Q-02-01",
+          "Q-02-02",
+          "Q-02-03",
+          "Q-02-04",
+          "Q-03-01",
+          "Q-03-02",
+          "Q-03-03",
+          "Q-03-04",
+          "Q-03-05",
+          "Q-03-06",
+          "Q-04-01",
+          "Q-04-02",
+          "Q-04-03",
+          "Q-04-04"
+        ],
+        "raw_points": 124,
+        "weight_pct": 40
+      },
+      {
+        "id": "D2",
+        "name": "Scoping & attack reconstruction",
+        "tasks": [
+          "Q-05-01",
+          "Q-05-02",
+          "Q-05-03",
+          "Q-05-04",
+          "Q-05-05"
+        ],
+        "raw_points": 51,
+        "weight_pct": 15
+      },
+      {
+        "id": "D3",
+        "name": "Containment",
+        "tasks": [
+          "Q-06-01",
+          "Q-06-02"
+        ],
+        "raw_points": 17,
+        "weight_pct": 10
+      },
+      {
+        "id": "D4",
+        "name": "Eradication",
+        "tasks": [
+          "Q-06-03"
+        ],
+        "raw_points": 12,
+        "weight_pct": 10
+      },
+      {
+        "id": "D5",
+        "name": "Recovery",
+        "tasks": [
+          "Q-06-04"
+        ],
+        "raw_points": 10,
+        "weight_pct": 8
+      },
+      {
+        "id": "D6",
+        "name": "Safe-state validation",
+        "tasks": [
+          "Q-07-01",
+          "Q-07-02"
+        ],
+        "raw_points": 18,
+        "weight_pct": 12
+      },
+      {
+        "id": "D7",
+        "name": "Reporting & risk communication",
+        "tasks": [
+          "Q-07-03",
+          "Q-07-04"
+        ],
+        "raw_points": 23,
+        "weight_pct": 5
+      }
+    ],
+    "dimension_note": "Investigative 55% = D1+D2; response decisions 28% = D3+D4+D5; validation+reporting 17% = D6+D7. Final score = sum over dimensions of (earned/max x weight).",
+    "grading_formulas": {
+      "single": "All-or-nothing per sub-answer (single answer / single choice / yes-no / timestamp; accepted aliases per item).",
+      "multi_select": "earned = points_component x max(0, TP - FP) / |correct set|, rounded to nearest 0.5.",
+      "classification_table": "Per-cell all-or-nothing using the item's cell_count and cell_points fields: earned = correct_cells x cell_points (cell_count x cell_points = task points). Q-05-01: cell_count=40 (10 hosts x 4 classes), cell_points=0.25 -> 10 pts.",
+      "ordered_sequence": "Kendall-tau concordance: earned = points x concordant_pairs / total_pairs, rounded to nearest 0.5.",
+      "equal_pooling": "All scored answer components within a task are equally weighted: points per component = component pool / N. No custom per-component weights anywhere. Documented exception by design: Q-07-04 = 10 deterministic fields x 1.0 + 1 rubric-scored executive summary 5.0.",
+      "evidence_linked": "The 80/20 evidence rule applies to every evidence_linked task EXCEPT Q-05-01 (26 tasks flagged evidence_linked; 25 carry scored evidence selection). Evidence selection = 20% of task points (full 20% iff selected set superset of required set with zero incorrect IDs; half (10%) iff superset with <=2 incorrect; else 0); answer components share the remaining 80% equally (pool/N). Q-02-02 explicit split: (a)-(d) = 2.0 each (the 80% answer pool) and (e) = 2.0 under the tier rule ((e) IS the 20% evidence component; no additional rescale). Q-05-01 is exempt: 40 cells x 0.25 = 10 pts; its evidence requirement is validation/authoring metadata (feedback + CF-3 evaluation), earning no separate points.",
+      "negative_marking": "None on investigative items; decision items lose their own points only."
+    },
+    "hint_policy": "Max 2 hints per task. Hint penalty = hint_penalty points deducted from that task's earned score (floor 0). Hints never name the answer.",
+    "pass_threshold_pct": 70,
+    "pass_rule": ">=70% overall AND zero critical failures.",
+    "critical_failures": [
+      {
+        "id": "CF-1",
+        "trigger": "Q-07-02 stage-1 declared SAFE (unsafe safe-state declaration).",
+        "effect": "Total score capped at 49%."
+      },
+      {
+        "id": "CF-2",
+        "trigger": "Q-06-01 omits blocking 185.220.101.47 OR omits isolating any of {WEB-PRD-01, APP-PRD-01, FILE-PRD-01} (failure to contain known active attacker infrastructure/compromised host).",
+        "effect": "Total score capped at 49%."
+      },
+      {
+        "id": "CF-3",
+        "trigger": "Q-05-01 classifies any of {WEB-PRD-01, APP-PRD-01, FILE-PRD-01, DC-01} as anything other than Compromised (missed major compromise).",
+        "effect": "Total score capped at 49%."
+      }
+    ],
+    "bands": [
+      {
+        "band": "Distinction",
+        "range": ">=90"
+      },
+      {
+        "band": "Pass",
+        "range": "70-89.5"
+      },
+      {
+        "band": "Near miss",
+        "range": "50-69.5"
+      },
+      {
+        "band": "Fail",
+        "range": "<50 or any critical failure"
+      }
+    ]
+  },
+  "progression": {
+    "phase_gates": {
+      "P0->P1": "Q-00-01 complete (verdict + severity + anchors)",
+      "P1->P2": "Q-01-01, Q-01-02 complete",
+      "P2->P3": "Q-02-01..04 complete",
+      "P3->P4": "Q-03-01..06 complete",
+      "P4->P5": "Q-04-01..04 complete",
+      "P5->P6": "Q-05-01..05 complete",
+      "P6->P7": "Q-06-01..04 complete",
+      "P7->submit": "Q-07-01..04 complete"
+    },
+    "navigation": "Phase-gated; free navigation + evidence revisit within unlocked phases; completed-phase evidence stays open.",
+    "evidence_reveal_schedule": {
+      "phase_0": [
+        "E-ALERT-001",
+        "E-TICKET-001"
+      ],
+      "phase_1": [
+        "E-ALERT-002",
+        "E-WEB-001",
+        "E-WEB-002",
+        "E-WEB-003",
+        "E-WEB-004",
+        "E-AUTH-001",
+        "E-AUTH-002",
+        "E-AUTH-003",
+        "E-AUTH-004",
+        "E-AUTH-005",
+        "E-AUTH-006",
+        "E-AUTH-007",
+        "E-AUTH-008",
+        "E-AUTH-009",
+        "E-AUTH-010",
+        "E-AUTH-011",
+        "E-AUTH-012",
+        "E-EDR-001",
+        "E-EDR-002",
+        "E-EDR-003",
+        "E-EDR-004",
+        "E-EDR-005",
+        "E-EDR-006",
+        "E-EDR-007",
+        "E-EDR-008",
+        "E-EDR-008B",
+        "E-EDR-009",
+        "E-EDR-010",
+        "E-EDR-011",
+        "E-EDR-012",
+        "E-EDR-013",
+        "E-EDR-014",
+        "E-EDR-015",
+        "E-FS-001",
+        "E-FS-002",
+        "E-FS-003",
+        "E-FS-004",
+        "E-FS-005",
+        "E-FS-006",
+        "E-FS-007",
+        "E-NET-001",
+        "E-NET-002",
+        "E-NET-003",
+        "E-NET-004",
+        "E-NET-005",
+        "E-NET-006",
+        "E-PROXY-001",
+        "E-AD-001",
+        "E-AD-002",
+        "E-AD-003",
+        "E-DB-001",
+        "E-VULN-001",
+        "E-VULN-002",
+        "E-SHARE-001",
+        "E-WIKI-001",
+        "E-DOC-001",
+        "E-DOC-002",
+        "E-DOC-003"
+      ],
+      "phase_6": [
+        "E-RESP-001",
+        "E-RESP-002",
+        "E-RESP-003",
+        "E-RESP-004",
+        "E-VALID-001",
+        "E-AD-004"
+      ],
+      "phase_7": [
+        "E-VALID-002",
+        "E-REPORT-001"
+      ],
+      "notes": "E-ALERT-002 surfaces when P1 opens. Phase-6 response records (E-RESP-001..004, E-AD-004, E-VALID-001) appear as the candidate's executed decisions are applied; E-VALID-002 (interim, with the SKIPPED line) at Q-07-02 stage 1; final E-VALID-002 re-run (16:55) after the candidate refuses the incomplete packet (or after remediation if they declared SAFE prematurely - consequence path, no dead end)."
+    },
+    "consequence_paths": {
+      "over_containment": "Isolating DC-01/VLAN -> business-impact alert (domain auth degraded; CFO/plant escalation), points lost, option to roll back and re-submit.",
+      "under_containment": "Missing C2 block -> beacon persists, new SIEM escalation 30 min later, points lost, remedial containment offered.",
+      "incomplete_eradication": "Eradication missing a mechanism -> persistence rediscovered at validation; candidate must revise before Q-07-02 opens.",
+      "no_soft_lock": true
+    },
+    "pacing_nudge": "Soft nudge when a phase exceeds guidance by >20% (no penalty). Visible clock; no hard fail for slow investigation.",
+    "autosave": "Single 300-min sitting; autosave per answer."
+  }
+}

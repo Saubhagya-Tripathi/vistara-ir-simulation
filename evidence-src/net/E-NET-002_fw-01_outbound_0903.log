@@ -1,0 +1,14 @@
+# SYNTHETIC — FW-01 perimeter syslog excerpt (iptables). Timezone: IST.
+# Collection window: 2026-09-03 13:15–13:40 IST; outbound (egress) connections.
+Sep  3 13:16:02 FW-01 kernel: OUTBOUND ALLOW proto=UDP src=10.10.20.31:53341 dst=203.0.119.2:53     bytes=96   (DNS forwarder query)
+Sep  3 13:18:44 FW-01 kernel: OUTBOUND ALLOW proto=UDP src=10.10.20.11:51200 dst=162.159.200.123:123 bytes=76   (NTP sync)
+Sep  3 13:21:19 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.12:49931 dst=203.0.124.18:25     bytes=22410  rule=EGRESS-SMTP (MAIL-PRD-01 outbound mail)
+Sep  3 13:23:57 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.11:49790 dst=23.203.52.114:443   bytes=4112  (CRL/OCSP check, portal cert)
+Sep  3 13:25:08 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.11:49812 dst=185.220.101.47:8443  session established (TLS)
+Sep  3 13:25:10 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.11:49812 dst=185.220.101.47:8443 bytes=18874368 (~18 MB, staging.zip exfil — NetFlow EXPIRED, FW log only)
+Sep  3 13:27:33 FW-01 kernel: OUTBOUND ALLOW proto=UDP src=10.10.20.32:53402 dst=203.0.119.2:53     bytes=112  (DNS forwarder query)
+Sep  3 13:31:02 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.11:49812 dst=185.220.101.47:8443  session closed  duration=5m54s  bytes_total=18874368
+Sep  3 13:33:48 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.21:50311 dst=40.90.22.190:443    bytes=1893  (CRL/OCSP check)
+Sep  3 13:36:05 FW-01 kernel: OUTBOUND ALLOW proto=UDP src=10.10.20.23:51477 dst=162.159.200.123:123 bytes=76   (NTP sync)
+Sep  3 13:38:52 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.12:50018 dst=203.0.124.44:25     bytes=9877  rule=EGRESS-SMTP (MAIL-PRD-01 outbound mail)
+# NOTE: the NetFlow record for the 13:25 flow from 10.10.20.11 has expired (7-day retention) — this FW-01 log is the surviving network record (see E-NET-006).

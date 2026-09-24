@@ -1,0 +1,15 @@
+{
+  "evidence_id": "E-EDR-002",
+  "type": "edr_process",
+  "source": "SentinelNode EDR",
+  "host": "WEB-PRD-01",
+  "synthetic": true,
+  "collection_window_ist": "2026-09-03T13:00:00+05:30/2026-09-03T13:20:00+05:30",
+  "events": [
+    {"time_ist": "2026-09-03T13:07:48+05:30", "pid": 2140, "process": "svchost.exe", "cmdline": "C:\\Windows\\system32\\svchost.exe -k netsvcs -p -s Schedule", "parent": "services.exe", "parent_pid": 548, "user": "NT AUTHORITY\\SYSTEM", "sha256": "SYNTHETIC-c80fe0d90d3441a6ff14d7d9fa4e181808d4ced458639a238cefe4128c6c9b79", "synthetic": true},
+    {"time_ist": "2026-09-03T13:10:02+05:30", "pid": 5128, "process": "cmd.exe", "cmdline": "cmd /c powershell Compress-Archive -Path C:\\inetpub\\wwwroot\\staging -DestinationPath C:\\ProgramData\\Microsoft\\Crypto\\RSA\\staging.zip", "parent": "w3wp.exe", "parent_pid": 2844, "user": "VISTARA\\svc_portal", "sha256": "SYNTHETIC-421b259958319a9c2cf02250bb3fa40471d3817d6cf496e65df95e460be9fa18", "synthetic": true},
+    {"time_ist": "2026-09-03T13:10:03+05:30", "pid": 5180, "process": "powershell.exe", "cmdline": "powershell Compress-Archive -Path C:\\inetpub\\wwwroot\\staging -DestinationPath C:\\ProgramData\\Microsoft\\Crypto\\RSA\\staging.zip", "parent": "cmd.exe", "parent_pid": 5128, "user": "VISTARA\\svc_portal", "sha256": "SYNTHETIC-c80d0c59ce1bca43ba7e6c1c9825451763c92753b8fdca0e343d12c20369eba0", "synthetic": true},
+    {"time_ist": "2026-09-03T13:10:51+05:30", "event_kind": "file_create", "pid": 5180, "process": "powershell.exe", "cmdline": "powershell Compress-Archive -Path C:\\inetpub\\wwwroot\\staging -DestinationPath C:\\ProgramData\\Microsoft\\Crypto\\RSA\\staging.zip", "parent": "cmd.exe", "parent_pid": 5128, "user": "VISTARA\\svc_portal", "path": "C:\\ProgramData\\Microsoft\\Crypto\\RSA\\staging.zip", "file_size_bytes": 18874368, "sha256": "SYNTHETIC-e2673f8eb99ae501c3b62bd34e80d2627adf06dae3a3df13cef6fae5859e0613", "synthetic": true},
+    {"time_ist": "2026-09-03T13:12:20+05:30", "pid": 3552, "process": "MpCmdRun.exe", "cmdline": "\"C:\\Program Files\\Windows Defender\\MpCmdRun.exe\" -Scan -ScanType 1", "parent": "svchost.exe", "parent_pid": 812, "user": "NT AUTHORITY\\SYSTEM", "sha256": "SYNTHETIC-226b553fddae0ce097b3af400f2c6db99ee346be9836e994b61500ba909a3624", "synthetic": true}
+  ]
+}

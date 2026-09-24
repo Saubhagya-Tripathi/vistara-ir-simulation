@@ -1,0 +1,17 @@
+{
+  "evidence_id": "E-FS-006",
+  "type": "fs_event",
+  "source": "FILE-PRD USN-journal export (IR-2026-0417 collection)",
+  "host": "FILE-PRD-01",
+  "host_ip": "10.10.20.23",
+  "timezone": "IST (UTC+05:30)",
+  "path": "C:\\Windows\\Temp\\order_export_2026.zip",
+  "action": "created",
+  "process": "powershell.exe",
+  "user": "VISTARA\\svc_mon",
+  "ts_ist": "2026-09-05T12:05:48+05:30",
+  "size_bytes": 712415232,
+  "sha256": "SYNTHETIC-5d0a9c31e7b84f62a13d70c5e9284b06f1c73d85a2e940b61c7f3d2098e54a17",
+  "content_excerpt": "zip directory listing (first entries): collect/Clients/FMCG-07/design_rev3.dwg ; collect/Specs/foodgrade_film_spec.pdf ; collect/HR/payroll_aug2026.xlsx ; collect/Finance/finance_summary_q2.xlsx",
+  "synthetic": true
+}

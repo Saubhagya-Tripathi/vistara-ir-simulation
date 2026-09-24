@@ -1,0 +1,181 @@
+{
+  "caseSummary": "You are the Senior IR Analyst assigned to incident INC-2026-0417 at Vistara Polymers Pvt. Ltd. On 2026-09-09 at 09:47 IST, EDR alert EDR-20260909-0417 (\"Suspicious PowerShell encode + external connection\") fired on application server APP-PRD-01 and was surfaced by the SIEM; incident ticket INC-2026-0417 was opened and you were engaged. This dossier is your reference pack for the investigation: organization and business context, network architecture, the host and identity registries, the web/application environment, security controls, and relevant policies. All timestamps in this dossier and in Windows security-event evidence are IST (UTC+05:30); IIS artifacts are the sole exception and carry their own conversion header.",
+  "organization": {
+    "name": "Vistara Polymers Pvt. Ltd.",
+    "industry": "Specialty polymer and packaging materials manufacturing",
+    "headquarters": "Pune, Maharashtra, India",
+    "founded": 2009,
+    "employees": "~480 (this incident concerns the Pune HQ campus and its IT estate)",
+    "business": "Manufactures food-grade polymer films and industrial packaging for FMCG and pharma clients. Operates one HQ campus (Pune) with a corporate office, a plant floor, and a warehouse. A second small sales office exists in Ahmedabad (no systems there are part of the HQ IT estate).",
+    "profile": "Mid-sized manufacturer with a small IT team, a flat network with partial segmentation, legacy systems kept alive for plant operations, and a public-facing web presence for customer orders and dealer engagement. Security maturity is moderate: an EDR rollout is in progress, a SIEM is fed by some sources, and a vulnerability scanner is in use — but gaps exist.",
+    "businessProcesses": [
+      { "process": "Customer order intake & dealer portal", "systems": "WEB-PRD-01 (IIS + custom ASP.NET app), DB-PRD-01", "criticality": "High — revenue channel" },
+      { "process": "ERP (finance, procurement, inventory)", "systems": "ERP-APP-01 + DB-PRD-01", "criticality": "Critical — operations halt without it" },
+      { "process": "Plant floor execution & quality", "systems": "MES-PLC-01 (isolated VLAN), FILE-PRD-01 (shared specs)", "criticality": "High — production continuity" },
+      { "process": "Email & collaboration", "systems": "MAIL-PRD-01 (on-prem Exchange)", "criticality": "High" },
+      { "process": "HR & payroll", "systems": "HR-APP-01", "criticality": "Medium — monthly payroll cycle" },
+      { "process": "File sharing & engineering drawings", "systems": "FILE-PRD-01", "criticality": "High — client IP (packaging designs)" }
+    ],
+    "hours": {
+      "office": "09:00–18:00 IST, Monday–Saturday (half-day Saturday optional for corporate teams)",
+      "plant": "06:00–22:00 IST, three shifts on weekdays; maintenance window Sunday 00:00–06:00 IST",
+      "payrollCycle": "Runs on the 25th of each month; HR-APP-01 must be stable between the 20th–28th",
+      "peakSeason": "October–January (festive + pharma client year-end). It is currently September 2026, just before peak season — business stakes for containment/recovery decisions are elevated.",
+      "dealerPortalPeaks": "10:00–13:00 and 15:00–18:00 IST on weekdays"
+    },
+    "keyPersonnel": [
+      { "name": "Meera Krishnan", "role": "CFO", "notes": "Approves any downtime on ERP; very sensitive to payroll-period disruption" },
+      { "name": "Arvind Bhatnagar", "role": "VP Sales", "notes": "Owns dealer portal revenue; pushes for minimal portal downtime" },
+      { "name": "Sunita Deshmukh", "role": "Plant Head", "notes": "Owns MES/PLC continuity; insists plant VLAN is untouchable" },
+      { "name": "Rohit Chavan", "role": "HR Manager", "notes": "Owns HR-APP-01; monthly payroll guardian" }
+    ]
+  },
+  "network": {
+    "zones": [
+      { "zone": "DMZ", "cidr": "203.0.113.0/28", "purpose": "Web, mail gateway, VPN concentrator", "internetFacing": "Yes (NAT'd public IPs)" },
+      { "zone": "Corporate LAN", "cidr": "10.10.10.0/24", "purpose": "User workstations, printers, Wi-Fi", "internetFacing": "No (NAT via FW-01)" },
+      { "zone": "Server VLAN", "cidr": "10.10.20.0/24", "purpose": "App servers, file, HR, ERP app", "internetFacing": "No" },
+      { "zone": "Database VLAN", "cidr": "10.10.30.0/24", "purpose": "DB-PRD-01, backup target", "internetFacing": "No" },
+      { "zone": "Management VLAN", "cidr": "10.10.40.0/24", "purpose": "EDR console, SIEM, vuln scanner, jump host", "internetFacing": "No" },
+      { "zone": "Plant VLAN", "cidr": "10.10.50.0/24", "purpose": "MES terminals, PLC engineering station", "internetFacing": "No; firewall-isolated from Server VLAN except one rule" },
+      { "zone": "Guest Wi-Fi", "cidr": "10.10.60.0/24", "purpose": "Visitors", "internetFacing": "No; internet-only" }
+    ],
+    "publicIpMap": [
+      { "publicIp": "203.0.113.10", "internalHost": "WEB-PRD-01", "services": "HTTP/HTTPS (80/443), RDP (3389 — should not be open, see weaknesses)" },
+      { "publicIp": "203.0.113.11", "internalHost": "MAIL-PRD-01", "services": "SMTP (25), IMAPS (993)" },
+      { "publicIp": "203.0.113.12", "internalHost": "VPN-GW-01", "services": "IKE/IPsec + SSL-VPN (443)" }
+    ],
+    "publicIpNote": "203.0.113.0/24 is a documentation-range convention; treat these as the organization's real public IPs. ISP: SwiftLink Broadband, Pune — static /28.",
+    "firewalls": {
+      "FW-01": "Perimeter firewall (Linux-based iptables + web UI). Default-deny inbound; rules for the three public services above. Known misconfiguration: a rule added during a 2025 vendor troubleshooting session permits TCP 3389 from any source to 203.0.113.10 (WEB-PRD-01); it was never removed (weakness W-01).",
+      "FW-02": "Internal segmentation (managed switch ACLs + host firewall policy). Separates Server VLAN from Corporate LAN and Plant VLAN. Known gap: Plant VLAN can reach FILE-PRD-01 (SMB 445) on one legacy rule for spec-sheet distribution (weakness W-06).",
+      "dns": "Internal DNS on DC-01/DC-02 (AD-integrated); external DNS hosted by ISP. DMZ hosts use ISP DNS.",
+      "idsIps": "No network IDS/IPS in line. NetFlow is collected on FW-01 but only retained 7 days and rarely reviewed (weakness W-09)."
+    },
+    "remoteAccess": {
+      "vpn": "VPN-GW-01: SSL-VPN for ~30 staff (sales team, plant supervisors). Authenticates against AD. No MFA (weakness W-08).",
+      "rdpExposure": "WEB-PRD-01 is reachable on TCP 3389 from the internet because of the FW-01 rule (weakness W-01)."
+    }
+  },
+  "hosts": [
+    { "name": "WEB-PRD-01", "os": "Windows Server 2016", "ips": ["203.0.113.10 (NAT)", "10.10.20.11"], "role": "Customer portal + dealer portal (IIS 10, ASP.NET 4.8)", "zone": "Server VLAN with DMZ-style public NAT", "edr": "Yes (EDR deployed 2026-06)", "notes": "Primary interface is 10.10.20.11; the public IP is a 1:1 NAT on FW-01, so logs show both addresses. This dual-homed arrangement is a legacy 'temporary' setup from 2023 that was never fixed (weakness W-02)." },
+    { "name": "MAIL-PRD-01", "os": "Windows Server 2019", "ips": ["203.0.113.11", "10.10.20.12"], "role": "Exchange 2019", "zone": "Server VLAN with DMZ-style public NAT", "edr": "Yes", "notes": "" },
+    { "name": "VPN-GW-01", "os": "Linux (Ubuntu 20.04)", "ips": ["203.0.113.12", "10.10.20.13"], "role": "SSL-VPN concentrator", "zone": "Server VLAN with DMZ-style public NAT", "edr": "No (network appliance)", "notes": "" },
+    { "name": "APP-PRD-01", "os": "Windows Server 2019", "ips": ["10.10.20.21"], "role": "Internal application server (runs the Vistara Dealer Portal backend API and an internal HR self-service module)", "zone": "Server VLAN", "edr": "Yes", "notes": "" },
+    { "name": "ERP-APP-01", "os": "Windows Server 2016", "ips": ["10.10.20.22"], "role": "ERP application tier (proprietary thick client + app server)", "zone": "Server VLAN", "edr": "Yes", "notes": "Business-critical." },
+    { "name": "FILE-PRD-01", "os": "Windows Server 2019", "ips": ["10.10.20.23"], "role": "File/print server; engineering drawings, spec sheets, shared drives (S:, R:)", "zone": "Server VLAN", "edr": "Yes", "notes": "" },
+    { "name": "HR-APP-01", "os": "Windows Server 2019", "ips": ["10.10.20.24"], "role": "HR & payroll application (third-party, IIS + SQL LocalDB)", "zone": "Server VLAN", "edr": "Yes", "notes": "Payroll-sensitive; must be stable between the 20th–28th of each month." },
+    { "name": "WSUS-01", "os": "Windows Server 2019", "ips": ["10.10.20.25"], "role": "Patch management", "zone": "Server VLAN", "edr": "No", "notes": "" },
+    { "name": "JUMP-01", "os": "Windows Server 2019", "ips": ["10.10.40.21"], "role": "Admin jump host", "zone": "Management VLAN", "edr": "Yes", "notes": "Used by IT admins." },
+    { "name": "DB-PRD-01", "os": "Windows Server 2019 + SQL Server 2019", "ips": ["10.10.30.21"], "role": "SQL for portal, ERP, HR apps", "zone": "Database VLAN", "edr": "Yes", "notes": "" },
+    { "name": "BKP-01", "os": "Windows Server 2019", "ips": ["10.10.30.22"], "role": "Veeam backup target", "zone": "Database VLAN", "edr": "No", "notes": "Recovery resource." },
+    { "name": "DC-01", "os": "Windows Server 2019", "ips": ["10.10.20.31"], "role": "Primary domain controller, FSMO roles, DNS, CA", "zone": "Server VLAN", "edr": "Yes", "notes": "" },
+    { "name": "DC-02", "os": "Windows Server 2019", "ips": ["10.10.20.32"], "role": "Secondary domain controller", "zone": "Server VLAN", "edr": "Yes", "notes": "" },
+    { "name": "WKSTN-ANU-01", "os": "Windows (workstation)", "ips": ["10.10.10.51 (DHCP, typical)"], "role": "Workstation — Ananya Iyer (ananya.iyer), Finance executive", "zone": "Corporate LAN", "edr": "Partial (~70% of workstations covered)", "notes": "" },
+    { "name": "WKSTN-RAJ-02", "os": "Windows (workstation)", "ips": ["10.10.10.52 (DHCP, typical)"], "role": "Workstation — Rajesh Kulkarni (rajesh.kulkarni), IT Systems Administrator", "zone": "Corporate LAN", "edr": "Yes", "notes": "" },
+    { "name": "WKSTN-PRA-03", "os": "Windows (workstation)", "ips": ["10.10.10.53 (DHCP, typical)"], "role": "Workstation — Pranav Joshi (pranav.joshi), Sales coordinator", "zone": "Corporate LAN", "edr": "Partial (~70% of workstations covered)", "notes": "" },
+    { "name": "WKSTN-SNE-04", "os": "Windows (workstation)", "ips": ["10.10.10.54 (DHCP, typical)"], "role": "Workstation — Sneha Patil (sneha.patil), HR executive", "zone": "Corporate LAN", "edr": "Partial (~70% of workstations covered)", "notes": "" },
+    { "name": "WKSTN-VIK-05", "os": "Windows (workstation)", "ips": ["10.10.10.55 (DHCP, typical)"], "role": "Workstation — Vikram Rao (vikram.rao), Plant supervisor", "zone": "Corporate LAN", "edr": "Partial (~70% of workstations covered)", "notes": "" },
+    { "name": "WKSTN-KAV-06", "os": "Windows (workstation)", "ips": ["10.10.10.56 (DHCP, typical)"], "role": "Workstation — Kavita Menon (kavita.menon), Procurement", "zone": "Corporate LAN", "edr": "Partial (~70% of workstations covered)", "notes": "" },
+    { "name": "WKSTN-DEV-07", "os": "Windows (workstation)", "ips": ["10.10.10.57 (DHCP, typical)"], "role": "Workstation — Devang Shah (devang.shah), IT helpdesk", "zone": "Corporate LAN", "edr": "Partial (~70% of workstations covered)", "notes": "" },
+    { "name": "MES-PLC-01", "os": "Windows 10 IoT (embedded)", "ips": ["10.10.50.11"], "role": "PLC engineering station", "zone": "Plant VLAN", "edr": "No", "notes": "Isolated behind FW-02." },
+    { "name": "MES-TERM-01", "os": "Windows 10", "ips": ["10.10.50.12"], "role": "MES terminal", "zone": "Plant VLAN", "edr": "No", "notes": "" },
+    { "name": "SIEM-01", "os": "Linux", "ips": ["10.10.40.11"], "role": "Wazuh-based SIEM; receives sysmon, IIS, auth logs from EDR-covered hosts", "zone": "Management VLAN", "edr": "n/a", "notes": "" },
+    { "name": "EDR-CON-01", "os": "Linux", "ips": ["10.10.40.12"], "role": "EDR management console (\"SentinelNode\")", "zone": "Management VLAN", "edr": "n/a", "notes": "" },
+    { "name": "VULN-01", "os": "Linux", "ips": ["10.10.40.13"], "role": "Tenable-like vulnerability scanner", "zone": "Management VLAN", "edr": "n/a", "notes": "Runs weekly authenticated scans, Tuesdays 02:00 IST; on-demand jobs can also be launched by IT." },
+    { "name": "ADM-PC-01", "os": "Windows", "ips": ["10.10.40.14"], "role": "IT admin workstation (Rajesh Kulkarni's secondary)", "zone": "Management VLAN", "edr": "Yes", "notes": "" }
+  ],
+  "users": {
+    "domain": { "name": "vistara.local", "netbios": "VISTARA", "forestFunctionalLevel": "Windows Server 2016", "upnSuffix": "vistara.local", "directorySize": "~85 user accounts in AD, plus ~12 service accounts" },
+    "privilegedGroups": [
+      { "group": "Domain Admins", "members": ["svc_backup", "admin_legacy", "rajesh.kulkarni"], "notes": "rajesh.kulkarni was added to Domain Admins in March 2026 for a migration project and never removed (weakness W-04)." },
+      { "group": "Enterprise Admins", "members": ["svc_backup"], "notes": "" },
+      { "group": "Administrators (built-in, servers)", "members": ["Domain Admins", "svc_backup", "admin_legacy"], "notes": "" },
+      { "group": "Server Operators", "members": [], "notes": "Empty" },
+      { "group": "Backup Operators", "members": ["svc_backup"], "notes": "" },
+      { "group": "Remote Desktop Users (WEB-PRD-01 local)", "members": ["svc_portal", "rajesh.kulkarni", "admin_legacy"], "notes": "" },
+      { "group": "Remote Desktop Users (APP-PRD-01 local)", "members": ["svc_portal", "rajesh.kulkarni"], "notes": "" }
+    ],
+    "accounts": [
+      { "username": "svc_portal", "displayName": "(service) Portal App Pool", "role": "Service account running the dealer portal app pool on WEB-PRD-01 and APP-PRD-01", "hygiene": "Weak: Portal@2024 — set 2024, never rotated, documented in a wiki page IT keeps (weakness W-03). Same account across both tiers (weakness W-03b)." },
+      { "username": "rajesh.kulkarni", "displayName": "Rajesh Kulkarni", "role": "IT Systems Administrator", "hygiene": "Reuses a password variant across years: RajKulk@2023, changed to RajKulk@2026 during a forced rotation (weakness W-05 — password reuse). Holds Domain Admins membership and logs into user workstations, servers, and the jump host interchangeably (weakness W-04b)." },
+      { "username": "admin_legacy", "displayName": "Legacy Admin", "role": "Old built-in-style admin account from the 2015 domain setup; enabled", "hygiene": "Password Vistara#Admin1 — weak, never rotated (weakness W-07)." },
+      { "username": "svc_backup", "displayName": "(service) Backup Service", "role": "Veeam service account; member of Domain Admins and Backup Operators", "hygiene": "Strong, vaulted." },
+      { "username": "svc_monitor", "displayName": "(service) Scanner Service", "role": "Vulnerability scanner service account; scanner jobs on VULN-01 run authenticated as this account", "hygiene": "Registered service account." },
+      { "username": "ananya.iyer", "displayName": "Ananya Iyer", "role": "Finance Executive", "hygiene": "Normal." },
+      { "username": "pranav.joshi", "displayName": "Pranav Joshi", "role": "Sales Coordinator", "hygiene": "Normal." },
+      { "username": "sneha.patil", "displayName": "Sneha Patil", "role": "HR Executive", "hygiene": "Normal; payroll prep activity on HR-APP-01 around the monthly cycle." },
+      { "username": "vikram.rao", "displayName": "Vikram Rao", "role": "Plant Supervisor", "hygiene": "Normal; plant VLAN activity." },
+      { "username": "kavita.menon", "displayName": "Kavita Menon", "role": "Procurement", "hygiene": "Normal." },
+      { "username": "devang.shah", "displayName": "Devang Shah", "role": "IT Helpdesk", "hygiene": "Normal; operates the vulnerability scanner (on-demand and scheduled jobs)." },
+      { "username": "helpdesk", "displayName": "(shared) Helpdesk", "role": "Shared account for the ticket system", "hygiene": "Weak." }
+    ]
+  },
+  "webApp": {
+    "publicStack": {
+      "host": "WEB-PRD-01 — IIS 10 on Windows Server 2016",
+      "sites": [
+        { "name": "portal.vistara-polymers.in", "description": "Vistara Dealer Portal (custom ASP.NET 4.8 app; order placement, dealer pricing, invoice download). Binds 443; HTTP 80 redirects to 443." },
+        { "name": "www.vistara-polymers.in", "description": "Static marketing site (WordPress 6.2, kept updated with a current plugin set)." },
+        { "name": "staging.vistara-polymers.in", "description": "Staging copy of the dealer portal, bound to the same public IP under directory /staging/ — left accessible with a robots.txt disallow but no authentication (weakness W-02b). Contains a test upload page /staging/test/upload.aspx used by a vendor in 2024 and never removed." }
+      ],
+      "tls": "Let's Encrypt certificates, auto-renewed",
+      "appPoolIdentity": "svc_portal on both WEB-PRD-01 and APP-PRD-01 (one service account across tiers — weakness W-03b)"
+    },
+    "internalApps": [
+      { "host": "APP-PRD-01", "description": "Hosts the portal's backend API (/api/orders, /api/pricing) and an internal HR self-service module. The portal frontend on WEB-PRD-01 proxies API calls to APP-PRD-01 over HTTP on the Server VLAN. App pool identity svc_portal." },
+      { "host": "ERP-APP-01", "description": "Proprietary ERP thick-client server; app pool svc_erp." },
+      { "host": "HR-APP-01", "description": "Third-party HR app (IIS); app pool svc_hr." }
+    ],
+    "database": {
+      "host": "DB-PRD-01 — SQL Server 2019",
+      "instances": "VISTARA_SQL (default)",
+      "databases": ["PortalDB", "ERPDB", "HRDB"],
+      "authentication": "Mixed-mode; app pools use SQL logins sql_portal, sql_erp, sql_hr (passwords vaulted, strong)"
+    }
+  },
+  "activeDirectory": {
+    "structure": "Single forest, single domain: vistara.local",
+    "domainControllers": "DC-01 (primary), DC-02 (secondary) — both Windows Server 2019",
+    "passwordPolicy": "Default domain policy — minimum 8 characters, complexity enabled, no fine-grained password policies; passwords never expire for service accounts (weakness W-03c)",
+    "privilegedAccess": "No tiering model. Rajesh Kulkarni (helpdesk-origin sysadmin) holds Domain Admin and logs into user workstations, servers, and the jump host interchangeably (weakness W-04b)",
+    "laps": "Not deployed — local admin passwords are consistent across servers (weakness W-05b)",
+    "serviceAccounts": "svc_portal (weak, documented in the internal wiki), svc_backup (strong, vaulted), svc_erp, svc_hr, svc_monitor (vulnerability scanner service)",
+    "legacy": "admin_legacy remains enabled with a weak password (weakness W-07)"
+  },
+  "securityControls": [
+    { "control": "EDR (\"SentinelNode\")", "status": "Deployed on all Windows servers and ~70% of workstations (rollout in progress)", "notes": "WEB-PRD-01, APP-PRD-01, FILE-PRD-01, ERP-APP-01, HR-APP-01, DC-01, DC-02, WKSTN-RAJ-02 covered" },
+    { "control": "SIEM (Wazuh)", "status": "Collects sysmon, security, IIS, EDR alerts", "notes": "Alert that triggered the current incident: EDR \"suspicious process lineage\" on APP-PRD-01 (EDR-20260909-0417)" },
+    { "control": "Vulnerability scanning", "status": "Weekly authenticated scans (VULN-01), Tuesdays 02:00 IST", "notes": "Scanner IP: 10.10.40.13" },
+    { "control": "Email security", "status": "Basic spam filter on MAIL-PRD-01", "notes": "" },
+    { "control": "Backups", "status": "Veeam nightly to BKP-01; 30-day retention; quarterly restore test", "notes": "Recovery resource" },
+    { "control": "Patching", "status": "WSUS; servers patched quarterly, lagging ~60 days", "notes": "Mediocre patch cadence" },
+    { "control": "MFA", "status": "Not implemented for VPN or any remote access (weakness W-08)", "notes": "" },
+    { "control": "Network segmentation", "status": "Partial (FW-02 ACLs)", "notes": "Plant VLAN isolated except the FILE-PRD-01 SMB rule" },
+    { "control": "Logging", "status": "IIS logs retained 90 days on WEB-PRD-01; Windows security logs on servers forwarded to SIEM; FW-01 NetFlow retained 7 days only", "notes": "The 7-day NetFlow retention limits retrospective traffic verification" }
+  ],
+  "policies": [
+    { "id": "IR-Policy-01", "title": "Incident Response Plan", "year": 2024, "text": "Defines severity levels; Sev-1 = confirmed compromise of a production server or of domain credentials. Requires: isolate affected host, disable compromised accounts, preserve evidence, notify CFO & plant head for Sev-1. Gap: policy says \"isolate within 2 hours\" but contains no guidance on scoping before isolation." },
+    { "id": "AC-Policy-02", "title": "Access Control & Password Policy", "year": 2023, "text": "8+ characters, complexity, 90-day rotation for users; service accounts are exempt from rotation (weakness codified in policy — W-03c). Shared/service accounts must be registered in the service-account wiki." },
+    { "id": "CH-Policy-03", "title": "Change Management", "year": 2023, "text": "Firewall changes require a ticket plus 2 approvals. Gap: the FW-01 RDP rule (W-01) predates this policy (2025 vendor session) and was grandfathered without a ticket — the absence of a change record is discoverable in evidence." },
+    { "id": "BK-Policy-04", "title": "Backup & Recovery", "year": 2024, "text": "Nightly backups; RPO 24h; RTO 8h for ERP; restore tests quarterly." },
+    { "id": "VP-Policy-05", "title": "Vendor Remote Access", "year": 2025, "text": "Vendors must use VPN-GW-01 with named accounts; no direct RDP. Violation in practice: the 2025 vendor session that created W-01 used direct RDP for \"faster troubleshooting\", approved verbally by the then-IT-head (departed). Discoverable via an email artifact." },
+    { "id": "NW-Policy-06", "title": "Network Segmentation Standard", "year": 2024, "text": "Plant VLAN must not initiate connections to the Server VLAN. Exception: the FILE-PRD-01 SMB rule documented as \"temporary\" since 2024 (W-06)." }
+  ],
+  "externalContext": {
+    "isp": "SwiftLink Broadband (fictional), Pune — static /28",
+    "dnsHosting": "ISP-managed for vistara-polymers.in",
+    "unaffiliatedInfrastructure": [
+      { "ip": "185.220.101.47", "description": "Rented VPS (\"HostNode EU\", fictional provider); not affiliated with Vistara Polymers, its ISP, or any known vendor or benign service" },
+      { "ip": "45.155.90.23", "description": "VPN exit node (bulletproof-style provider, fictional); not affiliated with Vistara Polymers or any known benign service" }
+    ],
+    "scanningNoise": "Ambient internet scanning noise from various sources is normal background on the perimeter.",
+    "benignExternalServices": [
+      "Googlebot / Bingbot crawlers",
+      "Uptime monitor (UptimeRobot)",
+      "The organization's own VULN-01 scanner (10.10.40.13)",
+      "Payment gateway webhook (Razorpay-like, fictional \"PayBridge\") hitting /api/payments/callback"
+    ]
+  },
+  "timezoneNote": "All narrative timestamps and ALL Windows security-event evidence are rendered in IST (UTC+05:30). The sole exception is IIS artifacts, which are natively UTC; every IIS artifact carries the canonical conversion header: \"Synthetic training data. IIS timestamps are UTC. Convert to IST by adding +05:30.\""
+}

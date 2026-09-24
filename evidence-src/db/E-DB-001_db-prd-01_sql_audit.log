@@ -1,0 +1,6 @@
+# SYNTHETIC — DB-PRD-01 SQL Server audit excerpt (instance VISTARA_SQL). Timezone: IST.
+2026-09-05 15:20:11 IST  LOGIN  user=VISTARA\rajesh.kulkarni  client=10.10.20.23 (FILE-PRD-01)  SUCCESS (Windows auth)
+2026-09-05 15:21:02 IST  SELECT statement="SELECT name FROM sys.databases;"  rows=3 (PortalDB, ERPDB, HRDB)
+2026-09-05 15:34:47 IST  SELECT statement="SELECT TOP 5 * FROM PortalDB.dbo.Customers"  rows=5
+2026-09-05 15:41:19 IST  SELECT statement="SELECT TOP 5 * FROM ERPDB.dbo.Vendors"  rows=5
+# NOTE: no BULK/EXPORT/bcp statements; session closed 15:41. READ-ONLY enumeration only.

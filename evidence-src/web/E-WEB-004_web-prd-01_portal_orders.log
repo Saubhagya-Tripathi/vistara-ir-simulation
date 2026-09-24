@@ -1,0 +1,28 @@
+# Synthetic training data. IIS timestamps are UTC. Convert to IST by adding +05:30.
+# Source: WEB-PRD-01 (10.10.20.11) IIS W3SVC1 W3C log excerpt.
+# Extraction window: 2026-09-06 11:14:00 - 12:06:30 UTC (authenticated portal session traffic; ambient traffic sampled).
+#Fields: date time s-ip cs-method cs-uri-stem cs-uri-query cs-username c-ip cs(User-Agent) sc-status sc-bytes time-taken
+2026-09-06 11:14:22 10.10.20.11 GET /health - - 167.99.14.22 UptimeRobot/2.0 200 15 3
+2026-09-06 11:15:02 10.10.20.11 POST /api/auth/login - pranav.joshi 122.176.45.9 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 200 812 138
+2026-09-06 11:15:44 10.10.20.11 GET /dealer/dashboard - pranav.joshi 122.176.45.9 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 200 12044 62
+2026-09-06 11:17:21 10.10.20.11 GET /api/pricing sku=HDPE-220 pranav.joshi 122.176.45.9 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 200 1402 55
+2026-09-06 11:19:05 10.10.20.11 GET /api/pricing sku=PP-410 pranav.joshi 122.176.45.9 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 200 1404 52
+2026-09-06 11:19:58 10.10.20.11 GET /products/geomembrane - - 66.249.72.14 Mozilla/5.0+(compatible;+Googlebot/2.1;++http://www.google.com/bot.html) 200 21022 59
+2026-09-06 11:24:12 10.10.20.11 POST /api/orders - pranav.joshi 122.176.45.9 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 201 654 412
+2026-09-06 11:24:55 10.10.20.11 GET /api/orders/52114/status - pranav.joshi 122.176.45.9 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 200 976 44
+2026-09-06 11:26:37 10.10.20.11 GET /api/pricing sku=LLDPE-118 pranav.joshi 122.176.45.9 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 200 1398 51
+2026-09-06 11:28:02 10.10.20.11 GET /health - - 167.99.14.22 UptimeRobot/2.0 200 15 2
+2026-09-06 11:31:47 10.10.20.11 POST /api/orders - pranav.joshi 122.176.45.9 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 201 658 388
+2026-09-06 11:32:20 10.10.20.11 GET /api/orders/52115/status - pranav.joshi 122.176.45.9 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 200 976 46
+2026-09-06 11:38:26 10.10.20.11 GET /dealers - - 157.44.201.9 Mozilla/5.0+(iPhone;+CPU+iPhone+OS+17_6+like+Mac+OS+X)+AppleWebKit/605.1.15+(KHTML,+like+Gecko)+Version/17.6+Mobile/15E148+Safari/604.1 200 19480 72
+2026-09-06 11:41:09 10.10.20.11 GET /api/pricing sku=HDPE-240 pranav.joshi 122.176.45.9 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 200 1406 53
+2026-09-06 11:45:26 10.10.20.11 POST /api/orders - pranav.joshi 122.176.45.9 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 201 661 445
+2026-09-06 11:46:03 10.10.20.11 GET /api/orders/52116/status - pranav.joshi 122.176.45.9 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 200 976 43
+2026-09-06 11:48:44 10.10.20.11 GET /health - - 167.99.14.22 UptimeRobot/2.0 200 15 3
+2026-09-06 11:52:18 10.10.20.11 GET /api/pricing sku=PP-320 pranav.joshi 122.176.45.9 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 200 1401 50
+2026-09-06 11:58:33 10.10.20.11 POST /api/orders - pranav.joshi 122.176.45.9 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 201 657 402
+2026-09-06 11:59:10 10.10.20.11 GET /api/orders/52117/status - pranav.joshi 122.176.45.9 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 200 976 45
+2026-09-06 12:01:47 10.10.20.11 GET /wp-login.php - - 94.23.170.55 Mozilla/5.0+(X11;+Linux+x86_64)+AppleWebKit/537.36 404 1245 10
+2026-09-06 12:02:36 10.10.20.11 GET /api/invoices/INV-2026-1183/download - pranav.joshi 122.176.45.9 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 200 48210 96
+2026-09-06 12:04:18 10.10.20.11 GET /health - - 167.99.14.22 UptimeRobot/2.0 200 15 2
+2026-09-06 12:05:11 10.10.20.11 POST /api/auth/logout - pranav.joshi 122.176.45.9 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 200 208 41

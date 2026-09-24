@@ -1,0 +1,7 @@
+# SYNTHETIC TRAINING DATA — APP-PRD-01 Security log excerpt (SIEM export via SIEM-01). Timezone: IST.
+# Query window: 2026-09-04 09:45–10:10 IST. Event 4624 excerpt, host APP-PRD-01 (10.10.20.21).
+Event 4624  2026-09-04 09:47:33 IST  Logon Type 3   Account: svc_portal  Domain: VISTARA  Source: 10.10.20.11 (WEB-PRD-01)  Host: APP-PRD-01  Status: 0x0 SUCCESS (dealer portal backend API connection)
+Event 4624  2026-09-04 09:52:08 IST  Logon Type 3   Account: kavita.menon  Domain: VISTARA  Source: 10.10.10.56 (WKSTN-KAV-06)  Host: APP-PRD-01  Status: 0x0 SUCCESS (HR self-service module)
+Event 4624  2026-09-04 09:58:11 IST  Logon Type 10  Account: rajesh.kulkarni  Domain: VISTARA  Source: 10.10.20.11 (WEB-PRD-01)  Host: APP-PRD-01  SUCCESS
+Event 4624  2026-09-04 10:03:44 IST  Logon Type 3   Account: svc_portal  Domain: VISTARA  Source: 10.10.20.11 (WEB-PRD-01)  Host: APP-PRD-01  Status: 0x0 SUCCESS (dealer portal backend API connection)
+Event 4624  2026-09-04 10:07:29 IST  Logon Type 3   Account: devang.shah  Domain: VISTARA  Source: 10.10.10.57 (WKSTN-DEV-07)  Host: APP-PRD-01  Status: 0x0 SUCCESS (helpdesk ticket console)

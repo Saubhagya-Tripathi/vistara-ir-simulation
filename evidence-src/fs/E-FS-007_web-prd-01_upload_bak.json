@@ -1,0 +1,21 @@
+{
+  "evidence_id": "E-FS-007",
+  "type": "fs_event",
+  "source": "WEB-PRD-01 file-metadata export (IR-2026-0417 collection)",
+  "host": "WEB-PRD-01",
+  "host_ip": "10.10.20.11",
+  "timezone": "IST (UTC+05:30)",
+  "path": "C:\\inetpub\\wwwroot\\assets\\old\\upload_bak.aspx",
+  "action": "metadata_export",
+  "exported_ist": "2026-09-09T15:41:22+05:30",
+  "created_ist": "2025-11-08T10:14:55+05:30",
+  "last_written_ist": "2025-11-08T10:14:55+05:30",
+  "last_accessed_ist": "2025-11-08T11:02:37+05:30",
+  "size_bytes": 2410,
+  "sha256": "SYNTHETIC-a24e6b10c58d3f0791b6c42e80d5a3197f04c8b2e63d1a7059cb48e1720f35d6",
+  "quarantine_flag": true,
+  "quarantine_ref": "quarantined per IR-2025-011 note; file retained for reference",
+  "access_records_2026": 0,
+  "execution_records_2026": 0,
+  "synthetic": true
+}

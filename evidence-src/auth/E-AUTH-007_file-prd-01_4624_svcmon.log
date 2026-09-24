@@ -1,0 +1,7 @@
+# SYNTHETIC TRAINING DATA — FILE-PRD-01 Security log excerpt (SIEM export via SIEM-01). Timezone: IST.
+# Query window: 2026-09-05 10:00–10:30 IST. Event 4624 excerpt, host FILE-PRD-01 (10.10.20.23).
+Event 4624  2026-09-05 10:04:12 IST  Logon Type 3   Account: vikram.rao  Domain: VISTARA  Source: 10.10.10.55 (WKSTN-VIK-05)  Host: FILE-PRD-01  Status: 0x0 SUCCESS (share access S:\Engineering)
+Event 4624  2026-09-05 10:09:48 IST  Logon Type 3   Account: kavita.menon  Domain: VISTARA  Source: 10.10.10.56 (WKSTN-KAV-06)  Host: FILE-PRD-01  Status: 0x0 SUCCESS (share access R:\Shared)
+Event 4624  2026-09-05 10:15:39 IST  Logon Type 10  Account: svc_mon  Domain: VISTARA  Source: 10.10.20.21 (APP-PRD-01)  Host: FILE-PRD-01  SUCCESS
+Event 4624  2026-09-05 10:21:06 IST  Logon Type 3   Account: sneha.patil  Domain: VISTARA  Source: 10.10.10.54 (WKSTN-SNE-04)  Host: FILE-PRD-01  Status: 0x0 SUCCESS (share access R:\HR)
+Event 4624  2026-09-05 10:27:51 IST  Logon Type 3   Account: vikram.rao  Domain: VISTARA  Source: 10.10.10.55 (WKSTN-VIK-05)  Host: FILE-PRD-01  Status: 0x0 SUCCESS (share access S:\Engineering)

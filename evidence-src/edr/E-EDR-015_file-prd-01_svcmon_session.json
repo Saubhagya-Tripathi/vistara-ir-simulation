@@ -1,0 +1,15 @@
+{
+  "evidence_id": "E-EDR-015",
+  "type": "edr_session",
+  "source": "SentinelNode EDR",
+  "host": "FILE-PRD-01",
+  "session": {
+    "user": "VISTARA\\svc_mon",
+    "logon_type": 10,
+    "src_ip": "10.10.20.21 (APP-PRD-01)",
+    "start_ist": "2026-09-05T10:15:39+05:30",
+    "end_ist": "2026-09-05T13:05:12+05:30",
+    "note": "single continuous RDP session spanning share collection, archive staging, and exfil"
+  },
+  "synthetic": true
+}

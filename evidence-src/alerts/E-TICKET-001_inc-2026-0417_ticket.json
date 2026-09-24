@@ -1,0 +1,32 @@
+{
+  "evidence_id": "E-TICKET-001",
+  "type": "ticket",
+  "source": "ServiceNow ITSM",
+  "id": "INC-2026-0417",
+  "opened_ist": "2026-09-09T09:52:00+05:30",
+  "opened_by": "Priya Nair (SOC L2)",
+  "caller": "SOC - Priya Nair",
+  "alert_ref": "EDR-20260909-0417",
+  "asset": "APP-PRD-01 (10.10.20.21)",
+  "category": "Security Incident",
+  "priority": "P1",
+  "severity": "Sev-1 per IR-Policy-01",
+  "short_description": "Encoded PowerShell beacon to external IP from APP-PRD-01",
+  "description": "SIEM alert EDR-20260909-0417 fired 2026-09-09 09:47 IST on APP-PRD-01 (10.10.20.21): encoded PowerShell process, child of scheduled task 'MicrosoftEdgeUpdateTaskMachineCore', established an outbound TCP 8443 connection to external IP 185.220.101.47. SOC retrospective correlation shows related activity on FILE-PRD-01, DC-01 and WEB-PRD-01 going back to 2026-09-03.",
+  "assignment": "Senior IR Analyst (candidate)",
+  "assignment_group": "Incident Response",
+  "status": "Investigating",
+  "work_notes": [
+    {
+      "time_ist": "2026-09-09T09:52:00+05:30",
+      "author": "Priya Nair (SOC L2)",
+      "note": "Escalating EDR-20260909-0417 as INC-2026-0417, P1. Triggering pattern repeats every ~30 min since 2026-09-04 per EDR telemetry; correlation cluster attached (E-ALERT-002)."
+    },
+    {
+      "time_ist": "2026-09-09T09:55:00+05:30",
+      "author": "Priya Nair (SOC L2)",
+      "note": "EDR telemetry export for the triggering process attached (E-EDR-008); perimeter egress records for 185.220.101.47:8443 attached (E-NET-003). Assigned to Senior IR Analyst for triage."
+    }
+  ],
+  "synthetic": true
+}

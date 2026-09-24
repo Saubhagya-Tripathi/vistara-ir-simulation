@@ -1,0 +1,46 @@
+{
+  "evidence_id": "E-RESP-004",
+  "type": "response_record",
+  "incident": "INC-2026-0417",
+  "phase": "recovery",
+  "time_ist": "2026-09-09T15:00:00+05:30",
+  "actor": "IR team",
+  "actions": [
+    {
+      "order": 1,
+      "action": "Validate DC-01 (no rebuild; verify no persistence, forced krbtgt reset x2 complete)",
+      "target": "DC-01",
+      "result": "SUCCESS",
+      "detail": "15:00-15:25 IST. Scheduled tasks, services, run keys clean; replication partners DC-02 only; krbtgt resets #1 and #2 from eradication step 5 confirmed complete"
+    },
+    {
+      "order": 2,
+      "action": "Rebuild WEB-PRD-01 from clean template + redeploy portal",
+      "target": "WEB-PRD-01",
+      "result": "SUCCESS",
+      "detail": "15:25-16:10 IST. Clean Server 2016 template deployed; dealer portal redeployed; content restored from the 2026-09-02 backup after AV scan; staging upload page not restored (remains removed per eradication step 7)"
+    },
+    {
+      "order": 3,
+      "action": "Rebuild APP-PRD-01 + domain rejoin (config from version control)",
+      "target": "APP-PRD-01",
+      "result": "SUCCESS",
+      "detail": "15:30-16:20 IST. Clean template deployed; host rejoined to vistara.local; application configuration deployed from version control; no local artifacts carried over"
+    },
+    {
+      "order": 4,
+      "action": "Restore FILE-PRD-01 data from the 2026-09-02 pre-incident backup after malware scan + ACL verification",
+      "target": "FILE-PRD-01",
+      "result": "SUCCESS",
+      "detail": "16:00-17:20 IST. Veeam restore from BKP-01 of the 2026-09-02 restore point (predates the 09-03 compromise); backup set malware-scanned before restore, 0 detections; share ACLs on S: and R: verified; RPO 24h — one day of file versions lost"
+    },
+    {
+      "order": 5,
+      "action": "Initiate 72h enhanced monitoring",
+      "target": "SIEM-01 / EDR-CON-01",
+      "result": "SUCCESS",
+      "detail": "17:30 IST. Watch items: any egress to 185.220.101.47, anomalous 4624 Type 10 logons, encoded-PowerShell beacons, new scheduled tasks or services on touched hosts"
+    }
+  ],
+  "synthetic": true
+}

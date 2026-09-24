@@ -1,0 +1,39 @@
+# SYNTHETIC — FILE-PRD-01 (10.10.20.23) SMB object-access audit excerpt. Timezone: IST (UTC+05:30).
+# Collection window: 2026-09-05 10:00–12:30 IST. Source: SMB Server share/file-open auditing export.
+# SUMMARY: 1,214 file opens 2026-09-05 10:20–11:45 IST by VISTARA\svc_mon from 10.10.20.21; 35 representative lines follow (incl. ambient share activity).
+# DRILL-DOWN: E-SHARE-001_drilldown.csv
+2026-09-05 10:18:47 IST  SESSION_SETUP  user=VISTARA\svc_mon  src=10.10.20.21  share=S:\
+2026-09-05 10:19:12 IST  SESSION_SETUP  user=VISTARA\svc_mon  src=10.10.20.21  share=R:\
+2026-09-05 10:08:33 IST  READ  user=VISTARA\sneha.patil  src=10.10.10.54  share=R:\  path=R:\HR\onboarding\offer_template_2026.docx
+2026-09-05 10:21:08 IST  READ  user=VISTARA\svc_mon  src=10.10.20.21  share=S:\  path=S:\Clients\FMCG-07\design_rev3.dwg
+2026-09-05 10:21:44 IST  READ  user=VISTARA\svc_mon  src=10.10.20.21  share=S:\  path=S:\Clients\FMCG-07\design_rev2.dwg
+2026-09-05 10:22:31 IST  READ  user=VISTARA\svc_mon  src=10.10.20.21  share=S:\  path=S:\Clients\FMCG-07\packaging_bom.xlsx
+2026-09-05 10:24:05 IST  READ  user=VISTARA\svc_mon  src=10.10.20.21  share=S:\  path=S:\Clients\PHARMA-12\blister_pack_v4.dwg
+2026-09-05 10:25:52 IST  READ  user=VISTARA\svc_mon  src=10.10.20.21  share=S:\  path=S:\Clients\PHARMA-12\coa_template.pdf
+2026-09-05 10:26:18 IST  READ  user=VISTARA\ananya.iyer  src=10.10.10.51  share=R:\  path=R:\Finance\tds_challan_aug2026.pdf
+2026-09-05 10:27:09 IST  READ  user=VISTARA\svc_mon  src=10.10.20.21  share=S:\  path=S:\Clients\DAIRY-03\pouch_film_rev6.dwg
+2026-09-05 10:28:37 IST  READ  user=VISTARA\svc_mon  src=10.10.20.21  share=S:\  path=S:\Clients\DAIRY-03\seal_test_report.pdf
+2026-09-05 10:31:22 IST  READ  user=VISTARA\svc_mon  src=10.10.20.21  share=S:\  path=S:\Clients\AUTO-21\dash_film_rev1.dwg
+2026-09-05 10:33:48 IST  READ  user=VISTARA\svc_mon  src=10.10.20.21  share=S:\  path=S:\Clients\AUTO-21\tooling_cost.xlsx
+2026-09-05 10:35:14 IST  READ  user=VISTARA\vikram.rao  src=10.10.10.55  share=S:\  path=S:\Specs\line2_changeover_checklist.pdf
+2026-09-05 10:36:41 IST  READ  user=VISTARA\svc_mon  src=10.10.20.21  share=S:\  path=S:\Clients\AGRO-09\fertilizer_bag_v2.dwg
+2026-09-05 10:39:27 IST  READ  user=VISTARA\svc_mon  src=10.10.20.21  share=S:\  path=S:\Clients\FMCG-07\shelf_life_study.pdf
+2026-09-05 10:44:13 IST  READ  user=VISTARA\svc_mon  src=10.10.20.21  share=S:\  path=S:\Clients\PHARMA-12\child_resistant_cap.dwg
+2026-09-05 10:46:05 IST  READ  user=VISTARA\vikram.rao  src=10.10.10.55  share=S:\  path=S:\Specs\extruder_pm_schedule_2026.xlsx
+2026-09-05 10:47:52 IST  READ  user=VISTARA\svc_mon  src=10.10.20.21  share=S:\  path=S:\Specs\foodgrade_film_spec.pdf
+2026-09-05 10:49:30 IST  READ  user=VISTARA\svc_mon  src=10.10.20.21  share=S:\  path=S:\Specs\barrier_layer_spec.pdf
+2026-09-05 10:51:06 IST  READ  user=VISTARA\svc_mon  src=10.10.20.21  share=S:\  path=S:\Specs\retort_pouch_spec.pdf
+2026-09-05 10:53:42 IST  READ  user=VISTARA\svc_mon  src=10.10.20.21  share=S:\  path=S:\Specs\ink_adhesion_test_spec.pdf
+2026-09-05 10:57:55 IST  READ  user=VISTARA\svc_mon  src=10.10.20.21  share=S:\  path=S:\Specs\lamination_spec_v7.pdf
+2026-09-05 10:59:41 IST  READ  user=VISTARA\sneha.patil  src=10.10.10.54  share=R:\  path=R:\HR\onboarding\bgv_checklist.xlsx
+2026-09-05 11:02:19 IST  READ  user=VISTARA\svc_mon  src=10.10.20.21  share=R:\  path=R:\HR\payroll_aug2026.xlsx
+2026-09-05 11:04:02 IST  READ  user=VISTARA\svc_mon  src=10.10.20.21  share=R:\  path=R:\HR\salary_bands_2026.xlsx
+2026-09-05 11:06:38 IST  READ  user=VISTARA\svc_mon  src=10.10.20.21  share=R:\  path=R:\HR\pf_nomination_register.xlsx
+2026-09-05 11:09:27 IST  READ  user=VISTARA\svc_mon  src=10.10.20.21  share=R:\  path=R:\HR\leave_balance_aug2026.xlsx
+2026-09-05 11:11:50 IST  READ  user=VISTARA\ananya.iyer  src=10.10.10.51  share=R:\  path=R:\Finance\vendor_master_2026.xlsx
+2026-09-05 11:12:14 IST  READ  user=VISTARA\sneha.patil  src=10.10.10.54  share=R:\  path=R:\HR\policies\leave_policy_2026.pdf
+2026-09-05 11:15:44 IST  READ  user=VISTARA\svc_mon  src=10.10.20.21  share=R:\  path=R:\Finance\finance_summary_q2.xlsx
+2026-09-05 11:18:21 IST  READ  user=VISTARA\svc_mon  src=10.10.20.21  share=R:\  path=R:\Finance\gst_workings_aug2026.xlsx
+2026-09-05 11:21:47 IST  READ  user=VISTARA\svc_mon  src=10.10.20.21  share=R:\  path=R:\Finance\ap_aging_2026-08.xlsx
+2026-09-05 11:25:33 IST  READ  user=VISTARA\svc_mon  src=10.10.20.21  share=R:\  path=R:\Finance\ar_aging_2026-08.xlsx
+2026-09-05 11:45:58 IST  SESSION_LOGOFF  user=VISTARA\svc_mon  src=10.10.20.21  share=S:\

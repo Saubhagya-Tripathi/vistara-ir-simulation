@@ -1,0 +1,39 @@
+# Synthetic training data. IIS timestamps are UTC. Convert to IST by adding +05:30.
+# Source: WEB-PRD-01 (10.10.20.11) IIS W3SVC1 W3C log excerpt.
+# Extraction window: 2026-09-02 08:58:00 - 09:06:30 UTC.
+#Fields: date time s-ip cs-method cs-uri-stem cs-uri-query c-ip cs(User-Agent) sc-status sc-bytes time-taken
+2026-09-02 08:58:03 10.10.20.11 GET / - 103.21.44.18 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 200 18422 45
+2026-09-02 08:58:11 10.10.20.11 GET /health - 167.99.14.22 UptimeRobot/2.0 200 15 3
+2026-09-02 08:58:26 10.10.20.11 GET /products/industrial-polymers - 66.249.72.14 Mozilla/5.0+(compatible;+Googlebot/2.1;++http://www.google.com/bot.html) 200 24110 62
+2026-09-02 08:58:44 10.10.20.11 GET /css/portal.css - 103.21.44.18 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 200 9204 8
+2026-09-02 08:59:02 10.10.20.11 GET /wp-login.php - 94.23.170.55 Mozilla/5.0+(X11;+Linux+x86_64)+AppleWebKit/537.36 404 1245 11
+2026-09-02 08:59:17 10.10.20.11 GET /dealers/locate - 157.44.201.9 Mozilla/5.0+(iPhone;+CPU+iPhone+OS+17_6+like+Mac+OS+X)+AppleWebKit/605.1.15+(KHTML,+like+Gecko)+Version/17.6+Mobile/15E148+Safari/604.1 200 15330 71
+2026-09-02 08:59:31 10.10.20.11 GET /robots.txt - 40.77.167.211 Mozilla/5.0+(compatible;+bingbot/2.0;++http://www.bing.com/bingbot.htm) 200 214 6
+2026-09-02 08:59:48 10.10.20.11 GET /.env - 185.191.34.102 python-requests/2.31.0 404 1245 9
+2026-09-02 09:00:05 10.10.20.11 POST /api/auth/login - 49.37.118.204 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 200 812 133
+2026-09-02 09:00:19 10.10.20.11 GET /api/pricing sku=HDPE-220 49.37.118.204 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 200 1402 58
+2026-09-02 09:00:33 10.10.20.11 GET /xmlrpc.php - 45.148.10.87 Mozilla/5.0+(Windows+NT+6.1;+WOW64)+AppleWebKit/537.36 404 1245 10
+2026-09-02 09:00:51 10.10.20.11 GET /orders/track id=VP-44710 157.44.201.9 Mozilla/5.0+(iPhone;+CPU+iPhone+OS+17_6+like+Mac+OS+X)+AppleWebKit/605.1.15+(KHTML,+like+Gecko)+Version/17.6+Mobile/15E148+Safari/604.1 200 3211 64
+2026-09-02 09:01:04 10.10.20.11 GET /health - 167.99.14.22 UptimeRobot/2.0 200 15 2
+2026-09-02 09:01:12 10.10.20.11 GET /favicon.ico - 103.21.44.18 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 200 4286 4
+2026-09-02 09:01:26 10.10.20.11 GET /.git/config - 103.153.190.44 curl/8.5.0 404 1245 8
+2026-09-02 09:01:40 10.10.20.11 GET /products/packaging-films - 66.249.72.14 Mozilla/5.0+(compatible;+Googlebot/2.1;++http://www.google.com/bot.html) 200 22874 59
+2026-09-02 09:01:55 10.10.20.11 GET /admin/config.php - 94.23.170.55 Mozilla/5.0+(X11;+Linux+x86_64)+AppleWebKit/537.36 404 1245 12
+2026-09-02 09:02:08 10.10.20.11 GET /api/pricing sku=LLDPE-118 49.37.118.204 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 200 1398 55
+2026-09-02 09:02:22 10.10.20.11 GET /phpmyadmin/ - 185.191.34.102 python-requests/2.31.0 404 1245 9
+2026-09-02 09:02:37 10.10.20.11 GET /dealers - 40.77.167.211 Mozilla/5.0+(compatible;+bingbot/2.0;++http://www.bing.com/bingbot.htm) 200 19480 66
+2026-09-02 09:02:51 10.10.20.11 POST /api/auth/login - 117.215.66.30 Mozilla/5.0+(Macintosh;+Intel+Mac+OS+X+14_6)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/127.0.0.0+Safari/537.36 401 402 118
+2026-09-02 09:03:02 10.10.20.11 POST /api/auth/login - 117.215.66.30 Mozilla/5.0+(Macintosh;+Intel+Mac+OS+X+14_6)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/127.0.0.0+Safari/537.36 200 812 121
+2026-09-02 09:03:16 10.10.20.11 GET /health - 167.99.14.22 UptimeRobot/2.0 200 15 3
+2026-09-02 09:03:29 10.10.20.11 GET /wp-admin/install.php - 45.148.10.87 Mozilla/5.0+(Windows+NT+6.1;+WOW64)+AppleWebKit/537.36 404 1245 10
+2026-09-02 09:03:44 10.10.20.11 GET /api/orders/44802/status - 117.215.66.30 Mozilla/5.0+(Macintosh;+Intel+Mac+OS+X+14_6)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/127.0.0.0+Safari/537.36 200 976 47
+2026-09-02 09:04:01 10.10.20.11 GET /images/hero-banner.jpg - 103.21.44.18 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 200 88410 12
+2026-09-02 09:04:15 10.10.20.11 GET /.well-known/security.txt - 193.142.146.77 Mozilla/5.0+(compatible;+security-research) 404 1245 7
+2026-09-02 09:04:28 10.10.20.11 GET /products/geomembrane - 66.249.72.14 Mozilla/5.0+(compatible;+Googlebot/2.1;++http://www.google.com/bot.html) 200 21022 61
+2026-09-02 09:04:47 10.10.20.11 GET /api/pricing sku=PP-410 49.37.118.204 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/128.0.0.0+Safari/537.36 200 1404 52
+2026-09-02 09:05:03 10.10.20.11 GET /health - 167.99.14.22 UptimeRobot/2.0 200 15 2
+2026-09-02 09:05:19 10.10.20.11 GET /manager/html - 103.153.190.44 curl/8.5.0 404 1245 8
+2026-09-02 09:05:34 10.10.20.11 GET /dealers/become-a-dealer - 157.44.201.9 Mozilla/5.0+(iPhone;+CPU+iPhone+OS+17_6+like+Mac+OS+X)+AppleWebKit/605.1.15+(KHTML,+like+Gecko)+Version/17.6+Mobile/15E148+Safari/604.1 200 16805 69
+2026-09-02 09:05:52 10.10.20.11 GET /server-status - 193.142.146.77 Mozilla/5.0+(compatible;+security-research) 404 1245 9
+2026-09-02 09:06:08 10.10.20.11 GET /js/portal.js - 117.215.66.30 Mozilla/5.0+(Macintosh;+Intel+Mac+OS+X+14_6)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/127.0.0.0+Safari/537.36 200 31220 9
+2026-09-02 09:06:21 10.10.20.11 GET /health - 167.99.14.22 UptimeRobot/2.0 200 15 3

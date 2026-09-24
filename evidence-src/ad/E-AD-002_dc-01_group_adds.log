@@ -1,0 +1,7 @@
+# SYNTHETIC — DC-01 / member-server Security log excerpt (SIEM export). Timezone: IST.
+# Collection window: 2026-09-04 11:14–11:20 IST; group-membership change events.
+Event 4776  2026-09-04 11:14:32 IST  Host: DC-01  Account: ananya.iyer  Source: WKSTN-ANU-01 (10.10.10.51)  NTLM credential validation SUCCESS (package: NTLMv2)
+Event 4728  2026-09-04 11:16:05 IST  Host: DC-01  Member added: svc_mon  Group: Domain Admins  By: rajesh.kulkarni
+Event 4732  2026-09-04 11:16:31 IST  Host: APP-PRD-01  Member added: svc_mon  Group: Remote Desktop Users (local)  By: rajesh.kulkarni
+Event 4732  2026-09-04 11:16:52 IST  Host: WEB-PRD-01  Member added: svc_mon  Group: Remote Desktop Users (local)  By: rajesh.kulkarni
+Event 4776  2026-09-04 11:18:44 IST  Host: DC-01  Account: pranav.joshi  Source: WKSTN-PRA-03 (10.10.10.53)  NTLM credential validation SUCCESS (package: NTLMv2)

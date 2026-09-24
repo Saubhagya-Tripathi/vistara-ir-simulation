@@ -1,0 +1,46 @@
+# SYNTHETIC — FILE-PRD-01 (10.10.20.23) local file-system event export (USN journal / object-access). Timezone: IST (UTC+05:30).
+# Collection window: 2026-09-05 10:00–12:30 IST. Exported 2026-09-09 during IR-2026-0417 evidence collection.
+# Scope: writes/reads under C:\Windows\Temp\ and C:\Users\*\AppData\Local\Temp\ on FILE-PRD-01.
+2026-09-05 10:03:12 IST  CREATE  C:\Windows\Temp\mpam-fe7019a8.exe  bytes=148213760  user=NT AUTHORITY\SYSTEM  proc=MpSigStub.exe
+2026-09-05 10:03:47 IST  DELETE  C:\Windows\Temp\mpam-fe7019a8.exe  user=NT AUTHORITY\SYSTEM  proc=MsMpEng.exe
+2026-09-05 10:14:29 IST  CREATE  C:\Windows\Temp\mat-debug-20408.log  bytes=8192  user=NT AUTHORITY\SYSTEM  proc=svchost.exe
+2026-09-05 10:20:04 IST  CREATE_DIR  C:\Windows\Temp\collect\  user=VISTARA\svc_mon  proc=cmd.exe
+2026-09-05 10:21:08 IST  CREATE_DIR  C:\Windows\Temp\collect\Clients\  user=VISTARA\svc_mon  proc=robocopy.exe
+2026-09-05 10:21:41 IST  CREATE  C:\Windows\Temp\collect\Clients\FMCG-07\design_rev3.dwg  bytes=18432000  user=VISTARA\svc_mon  proc=robocopy.exe
+2026-09-05 10:22:03 IST  CREATE  C:\Windows\Temp\collect\Clients\FMCG-07\design_rev2.dwg  bytes=17219620  user=VISTARA\svc_mon  proc=robocopy.exe
+2026-09-05 10:23:19 IST  CREATE  C:\Windows\Temp\collect\Clients\FMCG-07\packaging_bom.xlsx  bytes=244184  user=VISTARA\svc_mon  proc=robocopy.exe
+2026-09-05 10:25:44 IST  CREATE  C:\Windows\Temp\mpam-b12c07d3.exe  bytes=147915264  user=NT AUTHORITY\SYSTEM  proc=MpSigStub.exe
+2026-09-05 10:26:02 IST  DELETE  C:\Windows\Temp\mpam-b12c07d3.exe  user=NT AUTHORITY\SYSTEM  proc=MsMpEng.exe
+2026-09-05 10:27:36 IST  CREATE  C:\Windows\Temp\collect\Clients\PHARMA-12\blister_pack_v4.dwg  bytes=21049344  user=VISTARA\svc_mon  proc=robocopy.exe
+2026-09-05 10:28:10 IST  CREATE  C:\Windows\Temp\collect\Clients\PHARMA-12\coa_template.pdf  bytes=311296  user=VISTARA\svc_mon  proc=robocopy.exe
+2026-09-05 10:29:52 IST  CREATE  C:\Windows\Temp\collect\Clients\DAIRY-03\pouch_film_rev6.dwg  bytes=16875520  user=VISTARA\svc_mon  proc=robocopy.exe
+2026-09-05 10:31:17 IST  CREATE  C:\Windows\Temp\collect\Clients\DAIRY-03\seal_test_report.pdf  bytes=402688  user=VISTARA\svc_mon  proc=robocopy.exe
+2026-09-05 10:32:48 IST  CREATE_DIR  C:\Windows\Temp\collect\Specs\  user=VISTARA\svc_mon  proc=robocopy.exe
+2026-09-05 10:33:05 IST  CREATE  C:\Windows\Temp\collect\Specs\foodgrade_film_spec.pdf  bytes=1249280  user=VISTARA\svc_mon  proc=robocopy.exe
+2026-09-05 10:33:40 IST  CREATE  C:\Windows\Temp\collect\Specs\barrier_layer_spec.pdf  bytes=987136  user=VISTARA\svc_mon  proc=robocopy.exe
+2026-09-05 10:35:11 IST  CREATE  C:\Windows\Temp\collect\Specs\retort_pouch_spec.pdf  bytes=1134592  user=VISTARA\svc_mon  proc=robocopy.exe
+2026-09-05 10:36:29 IST  CREATE  C:\Windows\Temp\collect\Specs\ink_adhesion_test_spec.pdf  bytes=743424  user=VISTARA\svc_mon  proc=robocopy.exe
+2026-09-05 10:41:07 IST  CREATE  C:\Users\VISTARA~1\AppData\Local\Temp\spool_5f2a.tmp  bytes=65536  user=VISTARA\svc_print  proc=spoolsv.exe
+2026-09-05 10:41:09 IST  DELETE  C:\Users\VISTARA~1\AppData\Local\Temp\spool_5f2a.tmp  user=VISTARA\svc_print  proc=spoolsv.exe
+2026-09-05 10:44:58 IST  CREATE_DIR  C:\Windows\Temp\collect\HR\  user=VISTARA\svc_mon  proc=cmd.exe
+2026-09-05 10:45:22 IST  CREATE  C:\Windows\Temp\collect\HR\payroll_aug2026.xlsx  bytes=2097152  user=VISTARA\svc_mon  proc=cmd.exe
+2026-09-05 10:46:03 IST  CREATE  C:\Windows\Temp\collect\HR\salary_bands_2026.xlsx  bytes=512000  user=VISTARA\svc_mon  proc=cmd.exe
+2026-09-05 10:46:51 IST  CREATE  C:\Windows\Temp\collect\HR\pf_nomination_register.xlsx  bytes=389120  user=VISTARA\svc_mon  proc=cmd.exe
+2026-09-05 10:52:26 IST  CREATE_DIR  C:\Windows\Temp\collect\Finance\  user=VISTARA\svc_mon  proc=cmd.exe
+2026-09-05 10:53:14 IST  CREATE  C:\Windows\Temp\collect\Finance\finance_summary_q2.xlsx  bytes=1183744  user=VISTARA\svc_mon  proc=cmd.exe
+2026-09-05 10:54:40 IST  CREATE  C:\Windows\Temp\collect\Finance\gst_workings_aug2026.xlsx  bytes=892928  user=VISTARA\svc_mon  proc=cmd.exe
+2026-09-05 10:55:31 IST  CREATE  C:\Windows\Temp\collect\Finance\ap_aging_2026-08.xlsx  bytes=640000  user=VISTARA\svc_mon  proc=cmd.exe
+2026-09-05 11:01:19 IST  CREATE  C:\Windows\Temp\collect\Clients\AUTO-21\dash_film_rev1.dwg  bytes=19300352  user=VISTARA\svc_mon  proc=robocopy.exe
+2026-09-05 11:04:37 IST  CREATE  C:\Windows\Temp\collect\Clients\AUTO-21\tooling_cost.xlsx  bytes=278528  user=VISTARA\svc_mon  proc=robocopy.exe
+2026-09-05 11:07:55 IST  CREATE  C:\Windows\Temp\SW_DVD5_office_patch_09.cab  bytes=31457280  user=NT AUTHORITY\SYSTEM  proc=TiWorker.exe
+2026-09-05 11:09:12 IST  DELETE  C:\Windows\Temp\SW_DVD5_office_patch_09.cab  user=NT AUTHORITY\SYSTEM  proc=TiWorker.exe
+2026-09-05 11:12:48 IST  CREATE  C:\Windows\Temp\collect\Clients\AGRO-09\fertilizer_bag_v2.dwg  bytes=17825792  user=VISTARA\svc_mon  proc=robocopy.exe
+2026-09-05 11:15:03 IST  CREATE  C:\Windows\Temp\collect\Specs\lamination_spec_v7.pdf  bytes=1056768  user=VISTARA\svc_mon  proc=robocopy.exe
+2026-09-05 11:18:34 IST  CREATE  C:\Windows\Temp\collect\HR\leave_balance_aug2026.xlsx  bytes=433152  user=VISTARA\svc_mon  proc=cmd.exe
+2026-09-05 11:23:17 IST  CREATE  C:\Windows\Temp\collect\Finance\ar_aging_2026-08.xlsx  bytes=598016  user=VISTARA\svc_mon  proc=cmd.exe
+2026-09-05 11:27:42 IST  CREATE  C:\Windows\Temp\collect\Clients\FMCG-07\shelf_life_study.pdf  bytes=1241088  user=VISTARA\svc_mon  proc=robocopy.exe
+2026-09-05 11:33:26 IST  CREATE  C:\Windows\Temp\mat-debug-22091.log  bytes=4096  user=NT AUTHORITY\SYSTEM  proc=svchost.exe
+2026-09-05 11:38:51 IST  CREATE  C:\Windows\Temp\collect\Specs\export_compliance_spec.pdf  bytes=917504  user=VISTARA\svc_mon  proc=robocopy.exe
+2026-09-05 11:45:09 IST  CREATE  C:\Windows\Temp\collect\Clients\PHARMA-12\child_resistant_cap.dwg  bytes=15990784  user=VISTARA\svc_mon  proc=robocopy.exe
+2026-09-05 11:45:52 IST  CREATE  C:\Windows\Temp\collect\_index.txt  bytes=19456  user=VISTARA\svc_mon  proc=cmd.exe
+# END OF EXCERPT — window total: ~2.1 GB written to C:\Windows\Temp\collect\ (1,087 files) by VISTARA\svc_mon between 10:20–11:45 IST.

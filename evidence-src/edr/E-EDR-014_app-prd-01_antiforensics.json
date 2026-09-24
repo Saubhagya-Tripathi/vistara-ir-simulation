@@ -1,0 +1,17 @@
+{
+  "evidence_id": "E-EDR-014",
+  "type": "edr_process",
+  "source": "SentinelNode EDR",
+  "host": "APP-PRD-01",
+  "synthetic": true,
+  "collection_window_ist": "2026-09-08T10:00:00+05:30/2026-09-08T10:15:00+05:30",
+  "events": [
+    {"time_ist": "2026-09-08T10:03:44+05:30", "pid": 2140, "process": "svchost.exe", "cmdline": "C:\\Windows\\system32\\svchost.exe -k netsvcs -p -s Schedule", "parent": "services.exe", "parent_pid": 548, "user": "NT AUTHORITY\\SYSTEM", "sha256": "SYNTHETIC-387c4f8b9d484abe5c383c9455467f5f192a1aa53c05b9cbc5c1da64c6e244af", "synthetic": true},
+    {"time_ist": "2026-09-08T10:05:02+05:30", "pid": 5912, "process": "cmd.exe", "cmdline": "cmd.exe", "parent": "explorer.exe", "parent_pid": 5392, "user": "VISTARA\\svc_mon", "sha256": "SYNTHETIC-f098ef444c845a14a025a3d2ba17f7db6ee7373cb16b46e50814bff8173ef2c1", "synthetic": true},
+    {"time_ist": "2026-09-08T10:05:11+05:30", "pid": 5960, "process": "powershell.exe", "cmdline": "powershell -command Clear-History", "parent": "cmd.exe", "parent_pid": 5912, "user": "VISTARA\\svc_mon", "sha256": "SYNTHETIC-590f77e9349d1e4f25933c801ec9bbc3d1c8b04cd56a17fdee8d8ebae64adec7", "synthetic": true},
+    {"time_ist": "2026-09-08T10:05:47+05:30", "pid": 6004, "process": "cmd.exe", "cmdline": "cmd /c del /f /q \"C:\\Users\\svc_mon\\AppData\\Roaming\\Microsoft\\Windows\\PowerShell\\PSReadLine\\ConsoleHost_history.txt\"", "parent": "cmd.exe", "parent_pid": 5912, "user": "VISTARA\\svc_mon", "sha256": "SYNTHETIC-5e20ca0d3dd3084523c9c9a7a354640c9f5a38ed769794ba6c6f96ad1af3034c", "synthetic": true},
+    {"time_ist": "2026-09-08T10:06:22+05:30", "pid": 6048, "process": "powershell.exe", "cmdline": "powershell -command \"Clear-RecycleBin -Force -ErrorAction SilentlyContinue\"", "parent": "cmd.exe", "parent_pid": 5912, "user": "VISTARA\\svc_mon", "sha256": "SYNTHETIC-8123c587f93de36513e4f412262abf121b83588249119576f43176c98acab004", "synthetic": true},
+    {"time_ist": "2026-09-08T10:07:05+05:30", "pid": 3964, "process": "w3wp.exe", "cmdline": "c:\\windows\\system32\\inetsrv\\w3wp.exe", "parent": "svchost.exe", "parent_pid": 664, "user": "VISTARA\\svc_portal", "sha256": "SYNTHETIC-ef7a227a0240a841ddac0992a6be037b683ae4a8f2fbd8fd75d54c6b5d97ed3a", "synthetic": true},
+    {"time_ist": "2026-09-08T10:08:30+05:30", "pid": 6136, "process": "logoff.exe", "cmdline": "logoff", "parent": "cmd.exe", "parent_pid": 5912, "user": "VISTARA\\svc_mon", "sha256": "SYNTHETIC-9971e47efdf0ce0895fe1fef590b6c9d1740d4be81c7533396791a547c89e80c", "synthetic": true}
+  ]
+}

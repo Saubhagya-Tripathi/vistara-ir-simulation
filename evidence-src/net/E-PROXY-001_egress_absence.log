@@ -1,0 +1,4 @@
+# SYNTHETIC — Egress proxy log query result. Timezone: IST. Query window 2026-09-03 13:25–13:31.
+Query: src=10.10.20.11 dst=185.220.101.47:8443  →  0 matching entries (no matching entries in proxy logs)
+Query: src=10.10.20.0/24 (server VLAN) any egress  →  0 matching entries for window
+# NOTE: server-VLAN egress is direct (no proxy enforcement); absence here is expected and consistent with FW-01 log E-NET-002.

@@ -1,0 +1,29 @@
+{
+  "name": "vistara-ir-simulation",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Vistara Polymers Cyber-Incident Investigation & Response Assessment (VISTARA-IR-ASSESSMENT-v1.0) — browser-based DFIR training simulation",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run build:data && tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "npm run build:data && vitest run",
+    "test:watch": "vitest",
+    "verify": "npm run build:data && node tools/verify-content.mjs",
+    "build:data": "node tools/build-evidence.mjs && node tools/build-bundles.mjs"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "zustand": "^4.4.7"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.1",
+    "typescript": "^5.2.2",
+    "vite": "^4.5.2",
+    "vitest": "^0.34.6"
+  }
+}

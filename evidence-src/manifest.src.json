@@ -1,0 +1,2230 @@
+{
+  "_notes": [
+    "INTERNAL authoring file — internal_metadata is grading-only and must never be rendered to candidates (EVIDENCE_DIRECTORY_SPEC v1.1 §4–5).",
+    "Where EVIDENCE_CATALOG_v1.1 and EVIDENCE_MATRIX_v1.1 disagree on relevance labels, the MATRIX wins (per build brief). Resolved conflicts: E-ALERT-002 catalog:decisive -> matrix:corroborating; E-WEB-001 catalog:benign-noise -> matrix:corroborating; E-EDR-001 catalog:corroborating -> matrix:decisive; E-FS-002 catalog:corroborating -> matrix:decisive; E-FS-006 catalog:corroborating -> matrix:decisive; E-AD-003 catalog:decisive -> matrix:corroborating; E-SHARE-001 catalog:corroborating -> matrix:decisive; E-WIKI-001 catalog:decisive -> matrix:corroborating (qualifier \"root cause\" kept); E-VALID-001 catalog:corroborating -> matrix:decisive (matrix classes E-VALID-001/002 jointly as the Phase-7 gate); E-REPORT-001 catalog:decisive -> matrix:corroborating.",
+    "E-AD-003 carries rh_refs [\"RH-04\"] with red_herring=false: the admin_legacy surface lives inside this snapshot (last_logon_ist ≈2025-07) per catalog CHG-11 / matrix RH-04 row; rule_out records the dismissal.",
+    "E-AUTH-001 and E-NET-001 carry rh_refs [\"RH-07\"] with red_herring=false because the ambient-scanner noise is interleaved inside them (catalog: \"Contains RH-07 noise\"); rule_out records the dismissal pattern.",
+    "E-AUTH-012 evt_refs set to [\"EVT-027\",\"EVT-029\"] (the noise events it closes out) — the catalog \"Maps to\" line lists RH-02/RH-03 only; rh_refs carry those.",
+    "E-REPORT-001 corroborates left empty: catalog says \"all of the above\" which is not an enumerable reference set.",
+    "E-VALID-002 candidate_view.path is the interim packet; candidate_view.rerun_path points to the re-run packet the app swaps in when the re-run is revealed.",
+    "The retired WSUS-churn herring ID and the retired v1.0 TGT event ID appear nowhere in this manifest or in any artifact body."
+  ],
+  "manifest_version": "1.1",
+  "generated_for": "INC-2026-0417 (SYNTHETIC)",
+  "timezone_convention": "All timestamps IST (UTC+05:30) except IIS access logs, which are UTC. Every IIS artifact header carries verbatim: Synthetic training data. IIS timestamps are UTC. Convert to IST by adding +05:30.",
+  "artifacts": [
+    {
+      "candidate_view": {
+        "evidence_id": "E-ALERT-001",
+        "path": "alerts/E-ALERT-001_siem-01_edr_alert.json",
+        "type": "siem_alert",
+        "source": "Wazuh SIEM (SIEM-01)",
+        "host": "APP-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-09T09:47:00+05:30",
+          "end": "2026-09-09T09:47:00+05:30"
+        },
+        "reveal_phase": 0,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "SIEM alert EDR-20260909-0417 — suspicious encoded PowerShell + external connection"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-031"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-ALERT-002",
+          "E-EDR-008",
+          "E-NET-003"
+        ],
+        "relevance": "decisive",
+        "expected_significance": "Candidate validates a true incident (Sev-1 per IR-Policy-01), identifies APP-PRD-01 as the alerting host and 185.220.101.47 as C2."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-ALERT-002",
+        "path": "alerts/E-ALERT-002_siem-01_correlation_cluster.json",
+        "type": "siem_alert",
+        "source": "Wazuh SIEM (SIEM-01)",
+        "host": null,
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-03T13:25:00+05:30",
+          "end": "2026-09-09T09:52:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "SIEM retrospective correlation cluster (FILE-PRD-01 / DC-01 / WEB-PRD-01 / APP-PRD-01)"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-032"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-ALERT-001",
+          "E-AUTH-006",
+          "E-AUTH-007",
+          "E-NET-002",
+          "E-NET-004"
+        ],
+        "relevance": "corroborating",
+        "expected_significance": "Incident is wider than one host; candidate opens investigation on WEB-PRD-01, FILE-PRD-01, DC-01."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-TICKET-001",
+        "path": "alerts/E-TICKET-001_inc-2026-0417_ticket.json",
+        "type": "ticket",
+        "source": "ServiceNow ITSM",
+        "host": "APP-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-09T09:52:00+05:30",
+          "end": "2026-09-09T09:52:00+05:30"
+        },
+        "reveal_phase": 0,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "ServiceNow ticket INC-2026-0417 (P1, assigned to IR analyst)"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-031"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-ALERT-001",
+          "E-ALERT-002"
+        ],
+        "relevance": "corroborating",
+        "expected_significance": "Declare true incident; begin triage on APP-PRD-01."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-WEB-001",
+        "path": "web/E-WEB-001_web-prd-01_ambient_0902.log",
+        "type": "iis_access_log",
+        "source": "IIS W3SVC1, W3C extended logging",
+        "host": "WEB-PRD-01",
+        "timezone": "UTC — header carries: Synthetic training data. IIS timestamps are UTC. Convert to IST by adding +05:30.",
+        "window_ist": {
+          "start": "2026-09-02T14:00:00+05:30",
+          "end": "2026-09-02T15:00:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "IIS ambient traffic during the 2026-09-02 RDP recon window"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-002"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-NET-001"
+        ],
+        "relevance": "corroborating",
+        "expected_significance": "Candidate learns web logs are quiet during the RDP recon — the perimeter log is the source for EVT-001/002."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-WEB-002",
+        "path": "web/E-WEB-002_web-prd-01_gobuster_staging.log",
+        "type": "iis_access_log",
+        "source": "IIS W3SVC1, W3C extended logging",
+        "host": "WEB-PRD-01",
+        "timezone": "UTC — header carries: Synthetic training data. IIS timestamps are UTC. Convert to IST by adding +05:30.",
+        "window_ist": {
+          "start": "2026-09-02T15:05:00+05:30",
+          "end": "2026-09-02T15:22:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "IIS gobuster-style directory enumeration of /staging/ from 45.155.90.23"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-003"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-NET-001",
+          "E-WEB-003"
+        ],
+        "relevance": "decisive (recon phase)",
+        "expected_significance": "Attacker discovered the staging upload page on 09-02; 45.155.90.23 is an attacker IOC."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-WEB-003",
+        "path": "web/E-WEB-003_web-prd-01_upload_imgshell.log",
+        "type": "iis_access_log",
+        "source": "IIS W3SVC1, W3C extended logging",
+        "host": "WEB-PRD-01",
+        "timezone": "UTC — header carries: Synthetic training data. IIS timestamps are UTC. Convert to IST by adding +05:30.",
+        "window_ist": {
+          "start": "2026-09-03T13:02:00+05:30",
+          "end": "2026-09-08T23:59:59+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "IIS POST to /staging/test/upload.aspx and img.aspx shell callbacks"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-008"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-FS-001",
+          "E-WEB-002"
+        ],
+        "relevance": "decisive",
+        "expected_significance": "Persistence mechanism #3 = web shell img.aspx at C:\\inetpub\\wwwroot\\staging\\assets\\upload_2024\\; weakness W-02b exploited."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-WEB-004",
+        "path": "web/E-WEB-004_web-prd-01_portal_orders.log",
+        "type": "iis_access_log",
+        "source": "IIS W3SVC1, W3C extended logging",
+        "host": "WEB-PRD-01",
+        "timezone": "UTC — header carries: Synthetic training data. IIS timestamps are UTC. Convert to IST by adding +05:30.",
+        "window_ist": {
+          "start": "2026-09-06T16:45:00+05:30",
+          "end": "2026-09-06T17:35:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Portal order API calls in pranav.joshi session (odd-hour orders)"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-027"
+        ],
+        "rh_refs": [
+          "RH-02"
+        ],
+        "red_herring": true,
+        "rule_out": "VPN log (E-AUTH-010) ties the session to Ahmedabad office IP 122.176.45.9; orders match legitimate dealer POs; no host compromise telemetry.",
+        "corroborates": [
+          "E-AUTH-010"
+        ],
+        "relevance": "red-herring",
+        "expected_significance": "Odd-hour ≠ malicious; rule out with VPN log + order content."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-AUTH-001",
+        "path": "auth/E-AUTH-001_web-prd-01_rdp_bruteforce.log",
+        "type": "windows_security",
+        "source": "WEB-PRD-01 Security log (forwarded to SIEM-01); DC-01 4776 records",
+        "host": "WEB-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-03T10:22:00+05:30",
+          "end": "2026-09-03T11:47:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": "auth/E-AUTH-001_drilldown.csv",
+        "title": "RDP brute force (4625 bursts) and svc_portal 4624 Type 10 success at 11:47"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-004",
+          "EVT-005"
+        ],
+        "rh_refs": [
+          "RH-07"
+        ],
+        "red_herring": false,
+        "rule_out": "RH-07 background scanner noise rules out: distributed random source IPs, zero successes, no follow-on — contrast the focused 45.155.90.23 campaign culminating in the 11:47 success.",
+        "corroborates": [
+          "E-NET-001",
+          "E-NET-005",
+          "E-EDR-001"
+        ],
+        "relevance": "decisive",
+        "expected_significance": "Initial access = RDP brute force of svc_portal (Portal@2024) over exposed 3389 at 2026-09-03 11:47 IST; WEB-PRD-01 is patient zero."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-AUTH-002",
+        "path": "auth/E-AUTH-002_app-prd-01_ntlm_failure.log",
+        "type": "windows_security",
+        "source": "APP-PRD-01 / SIEM-01",
+        "host": "APP-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-03T15:12:00+05:30",
+          "end": "2026-09-03T15:12:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Failed NTLM logon rajesh.kulkarni from WEB-PRD-01 (old password)"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-013"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-AUTH-003",
+          "E-EDR-004"
+        ],
+        "relevance": "corroborating",
+        "expected_significance": "rajesh.kulkarni's old password is dead; the attacker needs (and later obtains) the current one."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-AUTH-003",
+        "path": "auth/E-AUTH-003_app-prd-01_4625_from_web.log",
+        "type": "windows_security",
+        "source": "APP-PRD-01",
+        "host": "APP-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-03T15:12:00+05:30",
+          "end": "2026-09-03T15:12:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Security 4625 LogonType 3 for rajesh.kulkarni sourced from WEB-PRD-01"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-013"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-AUTH-002",
+          "E-EDR-004"
+        ],
+        "relevance": "corroborating",
+        "expected_significance": "Confirms failed lateral movement attempt from WEB-PRD-01 — links WEB-PRD-01 compromise to interest in APP-PRD-01 one day before the successful pivot."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-AUTH-004",
+        "path": "auth/E-AUTH-004_app-prd-01_4624_type10.log",
+        "type": "windows_security",
+        "source": "APP-PRD-01",
+        "host": "APP-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-04T09:58:00+05:30",
+          "end": "2026-09-04T09:58:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Security 4624 LogonType 10 rajesh.kulkarni WEB-PRD-01 → APP-PRD-01"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-015"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-EDR-006",
+          "E-FS-003"
+        ],
+        "relevance": "decisive",
+        "expected_significance": "Attacker moved WEB-PRD-01 → APP-PRD-01 using the password recovered from passwords.txt; valid-account lateral movement (T1021.001 + T1078)."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-AUTH-005",
+        "path": "auth/E-AUTH-005_dc-01_ldap_binds.log",
+        "type": "windows_security",
+        "source": "DC-01 (directory service log / SIEM)",
+        "host": "DC-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-04T10:05:00+05:30",
+          "end": "2026-09-04T10:40:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "LDAP binds and group-enumeration queries from APP-PRD-01 as rajesh.kulkarni"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-016"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-EDR-007"
+        ],
+        "relevance": "corroborating",
+        "expected_significance": "Attacker enumerated domain privilege structure from APP-PRD-01 and learned rajesh.kulkarni is a Domain Admin."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-AUTH-006",
+        "path": "auth/E-AUTH-006_dc-01_4662_dcsync.log",
+        "type": "windows_security",
+        "source": "DC-01",
+        "host": "DC-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-04T13:10:00+05:30",
+          "end": "2026-09-04T13:14:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Security 4662 replication access (DCSync) by rajesh.kulkarni from APP-PRD-01"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-019",
+          "EVT-020"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-EDR-009",
+          "E-ALERT-002"
+        ],
+        "relevance": "decisive",
+        "expected_significance": "All domain NTLM hashes + krbtgt captured; drives eradication (org-wide resets, double krbtgt reset) and scope (DC-01 credential disclosure)."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-AUTH-007",
+        "path": "auth/E-AUTH-007_file-prd-01_4624_svcmon.log",
+        "type": "windows_security",
+        "source": "FILE-PRD-01",
+        "host": "FILE-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-05T10:15:00+05:30",
+          "end": "2026-09-05T10:15:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Security 4624 LogonType 10 svc_mon from APP-PRD-01 on FILE-PRD-01"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-021"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-AD-001",
+          "E-AD-002",
+          "E-AD-003",
+          "E-EDR-015",
+          "E-SHARE-001"
+        ],
+        "relevance": "decisive",
+        "expected_significance": "svc_mon is attacker-controlled persistence and is active; FILE-PRD-01 is in scope."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-AUTH-008",
+        "path": "auth/E-AUTH-008_db-prd-01_4624_type3.log",
+        "type": "windows_security",
+        "source": "DB-PRD-01 (10.10.30.21)",
+        "host": "DB-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-05T15:20:00+05:30",
+          "end": "2026-09-05T15:20:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Security 4624 LogonType 3 rajesh.kulkarni from FILE-PRD-01 on DB-PRD-01"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-025"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-DB-001"
+        ],
+        "relevance": "corroborating",
+        "expected_significance": "DB-PRD-01 was accessed read-only — scoping judgment: accessed ≠ compromised."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-AUTH-009",
+        "path": "auth/E-AUTH-009_erp-app-01_4625_smb.log",
+        "type": "windows_security",
+        "source": "ERP-APP-01 (10.10.20.22)",
+        "host": "ERP-APP-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-06T09:33:00+05:30",
+          "end": "2026-09-06T09:33:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Single failed SMB connect (4625) on ERP-APP-01 from APP-PRD-01"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-026"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-EDR-013"
+        ],
+        "relevance": "corroborating",
+        "expected_significance": "ERP-APP-01 is out of compromise scope; probe only."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-AUTH-010",
+        "path": "auth/E-AUTH-010_vpn-gw-01_pranav_joshi.log",
+        "type": "vpn_log",
+        "source": "VPN-GW-01 (203.0.113.12 / 10.10.20.13)",
+        "host": "VPN-GW-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-06T16:45:00+05:30",
+          "end": "2026-09-06T17:35:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "SSL-VPN login pranav.joshi from 122.176.45.9 (odd-hour sales work)"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-027"
+        ],
+        "rh_refs": [
+          "RH-02"
+        ],
+        "red_herring": true,
+        "rule_out": "Known Ahmedabad office egress IP 122.176.45.9; orders match dealer POs (E-WEB-004); no endpoint alerts; full-window summary E-AUTH-012 shows no other anomalies.",
+        "corroborates": [
+          "E-WEB-004",
+          "E-AUTH-012"
+        ],
+        "relevance": "red-herring",
+        "expected_significance": "Benign traveling-user activity; exclude from attack path."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-AUTH-011",
+        "path": "auth/E-AUTH-011_vpn-gw-01_ananya_iyer.log",
+        "type": "vpn_log",
+        "source": "VPN-GW-01 / ERP-APP-01",
+        "host": "VPN-GW-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-07T11:20:00+05:30",
+          "end": "2026-09-07T11:26:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "VPN login ananya.iyer from Ahmedabad + role-consistent ERP 4624"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-029"
+        ],
+        "rh_refs": [
+          "RH-03"
+        ],
+        "red_herring": true,
+        "rule_out": "HR-approved travel record TRV-2026-0312 (E-DOC-003); ERP activity role-consistent; no lateral movement; full-window summary E-AUTH-012 shows no other anomalies.",
+        "corroborates": [
+          "E-AUTH-012",
+          "E-DOC-003"
+        ],
+        "relevance": "red-herring",
+        "expected_significance": "Benign; exclude ananya.iyer from compromised accounts."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-AUTH-012",
+        "path": "auth/E-AUTH-012_vpn-gw-01_full_window.log",
+        "type": "vpn_log",
+        "source": "VPN-GW-01",
+        "host": "VPN-GW-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-02T00:00:00+05:30",
+          "end": "2026-09-09T23:59:59+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Full-window VPN session summary 2026-09-02 → 2026-09-09 (negative evidence)"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-027",
+          "EVT-029"
+        ],
+        "rh_refs": [
+          "RH-02",
+          "RH-03"
+        ],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-AUTH-010",
+          "E-AUTH-011",
+          "E-DOC-003"
+        ],
+        "relevance": "corroborating",
+        "expected_significance": "Initial access was RDP, not VPN; both odd VPN logins are the documented benign users."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-EDR-001",
+        "path": "edr/E-EDR-001_web-prd-01_post_logon.json",
+        "type": "edr_process",
+        "source": "SentinelNode EDR (EDR-CON-01)",
+        "host": "WEB-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-03T11:47:00+05:30",
+          "end": "2026-09-03T12:20:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Post-logon orientation: whoami / ipconfig / net user / quser as svc_portal"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-006"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-AUTH-001",
+          "E-NET-005"
+        ],
+        "relevance": "decisive",
+        "expected_significance": "Interactive human-driven session (not malware dropper); svc_portal session is attacker hands-on-keyboard."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-EDR-002",
+        "path": "edr/E-EDR-002_web-prd-01_compress_archive.json",
+        "type": "edr_process",
+        "source": "SentinelNode EDR (EDR-CON-01)",
+        "host": "WEB-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-03T13:10:00+05:30",
+          "end": "2026-09-03T13:10:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Compress-Archive of /staging → staging.zip (collection #1)"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-009"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-FS-002"
+        ],
+        "relevance": "decisive (collection #1)",
+        "expected_significance": "Portal source/config (connection strings, API keys) staged as staging.zip (~18 MB)."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-EDR-003",
+        "path": "edr/E-EDR-003_web-prd-01_host_recon.json",
+        "type": "edr_process",
+        "source": "SentinelNode EDR (EDR-CON-01)",
+        "host": "WEB-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-03T14:40:00+05:30",
+          "end": "2026-09-03T14:40:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Host recon: netstat -ano, tasklist, wmic, appcmd list apppool /config"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-011"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-EDR-004",
+          "E-EDR-001"
+        ],
+        "relevance": "corroborating",
+        "expected_significance": "Attacker hunting credentials in config/memory."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-EDR-004",
+        "path": "edr/E-EDR-004_web-prd-01_procdump.json",
+        "type": "edr_process",
+        "source": "SentinelNode EDR (EDR-CON-01)",
+        "host": "WEB-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-03T15:05:00+05:30",
+          "end": "2026-09-03T15:05:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Procdump-style w3wp.exe dump + Credential Manager / LSA access"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-012"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-AUTH-002",
+          "E-AUTH-003"
+        ],
+        "relevance": "decisive",
+        "expected_significance": "Credential theft on WEB-PRD-01; old password fails → attacker searches further."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-EDR-005",
+        "path": "edr/E-EDR-005_web-prd-01_cred_search.json",
+        "type": "edr_process",
+        "source": "SentinelNode EDR (EDR-CON-01)",
+        "host": "WEB-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-03T16:20:00+05:30",
+          "end": "2026-09-03T16:20:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Unsecured-credential search: type deploy.ps1, findstr password, passwords.txt read"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-014"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-FS-003",
+          "E-WIKI-001"
+        ],
+        "relevance": "decisive",
+        "expected_significance": "Current password for rajesh.kulkarni obtained from passwords.txt (W-05); explains EVT-015 success."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-EDR-006",
+        "path": "edr/E-EDR-006_app-prd-01_rdp_session.json",
+        "type": "edr_process",
+        "source": "SentinelNode EDR (EDR-CON-01)",
+        "host": "APP-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-04T09:58:00+05:30",
+          "end": "2026-09-04T09:58:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "RDP session artifacts (mstsc/rdpclip) on APP-PRD-01 from WEB-PRD-01"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-015"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-AUTH-004"
+        ],
+        "relevance": "corroborating",
+        "expected_significance": "Confirms interactive RDP pivot WEB-PRD-01 → APP-PRD-01."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-EDR-007",
+        "path": "edr/E-EDR-007_app-prd-01_ad_discovery.json",
+        "type": "edr_process",
+        "source": "SentinelNode EDR (EDR-CON-01)",
+        "host": "APP-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-04T10:05:00+05:30",
+          "end": "2026-09-04T10:40:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "AD discovery: net group \"Domain Admins\" /domain, nltest /dclist, net view, LDAP"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-016"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-AUTH-005"
+        ],
+        "relevance": "decisive (discovery)",
+        "expected_significance": "Attacker maps domain privileges; knows he holds Domain Admin (W-04)."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-EDR-008",
+        "path": "edr/E-EDR-008_app-prd-01_schtasks_beacon.json",
+        "type": "edr_process",
+        "source": "SentinelNode EDR (EDR-CON-01)",
+        "host": "APP-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-04T11:30:00+05:30",
+          "end": "2026-09-04T11:32:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "schtasks /create \"MicrosoftEdgeUpdateTaskMachineCore\" + encoded-PS beacon"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-018"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-FS-004",
+          "E-NET-003",
+          "E-ALERT-001",
+          "E-EDR-008B"
+        ],
+        "relevance": "decisive",
+        "expected_significance": "Host persistence + active C2 channel on APP-PRD-01; this is what the EDR alert fired on."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-EDR-008B",
+        "path": "edr/E-EDR-008B_app-prd-01_ps4104.log",
+        "type": "powershell_log",
+        "source": "APP-PRD-01 PowerShell Operational log",
+        "host": "APP-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-04T11:32:00+05:30",
+          "end": "2026-09-04T11:32:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "PowerShell 4104 script-block record of the encoded beacon (SYSTEM)"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-018"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-EDR-008",
+          "E-FS-004",
+          "E-NET-003"
+        ],
+        "relevance": "corroborating",
+        "expected_significance": "Candidate can decode the beacon payload from an independent log source; C2 URL confirmed without relying solely on EDR decoding."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-EDR-009",
+        "path": "edr/E-EDR-009_dc-01_dcsync_process.json",
+        "type": "edr_process",
+        "source": "SentinelNode EDR (EDR-CON-01)",
+        "host": "DC-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-04T13:10:00+05:30",
+          "end": "2026-09-04T13:14:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "mimikatz-style lsadump::dcsync /domain:vistara.local /all in rajesh.kulkarni session"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-019",
+          "EVT-020"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-AUTH-006"
+        ],
+        "relevance": "decisive",
+        "expected_significance": "Domain credential dump incl. krbtgt; mandates double krbtgt reset in eradication."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-EDR-010",
+        "path": "edr/E-EDR-010_file-prd-01_collection.json",
+        "type": "edr_process",
+        "source": "SentinelNode EDR (EDR-CON-01)",
+        "host": "FILE-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-05T10:20:00+05:30",
+          "end": "2026-09-05T11:45:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Collection: dir sweeps + robocopy into C:\\Windows\\Temp\\collect\\ as svc_mon"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-022"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-FS-005",
+          "E-SHARE-001"
+        ],
+        "relevance": "decisive",
+        "expected_significance": "~2.1 GB staged: client designs (S:\\Clients), spec sheets, payroll_aug2026.xlsx (R:\\HR), finance summaries (R:\\Finance)."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-EDR-011",
+        "path": "edr/E-EDR-011_file-prd-01_compress_archive.json",
+        "type": "edr_process",
+        "source": "SentinelNode EDR (EDR-CON-01)",
+        "host": "FILE-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-05T12:05:00+05:30",
+          "end": "2026-09-05T12:05:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Compress-Archive → C:\\Windows\\Temp\\order_export_2026.zip (~680 MB)"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-023"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-FS-006"
+        ],
+        "relevance": "decisive",
+        "expected_significance": "Exfil package prepared; archive name is an IOC."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-EDR-012",
+        "path": "edr/E-EDR-012_file-prd-01_exfil_post.json",
+        "type": "edr_process",
+        "source": "SentinelNode EDR (EDR-CON-01)",
+        "host": "FILE-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-05T12:30:00+05:30",
+          "end": "2026-09-05T13:05:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Invoke-WebRequest chunked POST to https://185.220.101.47:8443/upload"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-024"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-NET-004"
+        ],
+        "relevance": "decisive",
+        "expected_significance": "~680 MB exfiltrated to attacker VPS; FILE-PRD-01 is exfil origin."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-EDR-013",
+        "path": "edr/E-EDR-013_app-prd-01_erp_probe.json",
+        "type": "edr_process",
+        "source": "SentinelNode EDR (EDR-CON-01)",
+        "host": "APP-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-06T09:30:00+05:30",
+          "end": "2026-09-06T09:33:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "ERP probe: wmic /node + net use \\\\ERP-APP-01 attempts (abandoned)"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-026"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-AUTH-009"
+        ],
+        "relevance": "corroborating",
+        "expected_significance": "ERP-APP-01 probed only; exclude from compromise scope."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-EDR-014",
+        "path": "edr/E-EDR-014_app-prd-01_antiforensics.json",
+        "type": "edr_process",
+        "source": "SentinelNode EDR (EDR-CON-01)",
+        "host": "APP-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-08T10:05:00+05:30",
+          "end": "2026-09-08T10:05:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Anti-forensics: Clear-History, ConsoleHost_history.txt deletion, recycle-bin emptying"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-030"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-ALERT-002",
+          "E-EDR-008"
+        ],
+        "relevance": "corroborating",
+        "expected_significance": "Cleanup partial; SIEM/EDR retention defeats it — a logging-strength lesson."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-EDR-015",
+        "path": "edr/E-EDR-015_file-prd-01_svcmon_session.json",
+        "type": "edr_session",
+        "source": "SentinelNode EDR (EDR-CON-01)",
+        "host": "FILE-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-05T10:15:00+05:30",
+          "end": "2026-09-05T13:05:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "svc_mon RDP session telemetry spanning collection → archive → exfil"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-021",
+          "EVT-022",
+          "EVT-023",
+          "EVT-024"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-AUTH-007",
+          "E-EDR-010",
+          "E-EDR-011",
+          "E-EDR-012"
+        ],
+        "relevance": "corroborating",
+        "expected_significance": "svc_mon session on FILE-PRD-01 spans the entire collection→exfil window."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-FS-001",
+        "path": "fs/E-FS-001_web-prd-01_img_aspx.json",
+        "type": "fs_event",
+        "source": "WEB-PRD-01 file-system telemetry",
+        "host": "WEB-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-03T13:02:00+05:30",
+          "end": "2026-09-03T13:02:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "File creation: staging\\assets\\upload_2024\\img.aspx (web shell)"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-008"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-WEB-003"
+        ],
+        "relevance": "decisive",
+        "expected_significance": "Identify shell path for eradication (EVT-035 step 2)."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-FS-002",
+        "path": "fs/E-FS-002_web-prd-01_staging_zip.json",
+        "type": "fs_event",
+        "source": "WEB-PRD-01 file-system telemetry",
+        "host": "WEB-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-03T13:10:00+05:30",
+          "end": "2026-09-03T13:10:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "File creation: C:\\ProgramData\\Microsoft\\Crypto\\RSA\\staging.zip (~18 MB)"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-009"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-EDR-002",
+          "E-NET-002"
+        ],
+        "relevance": "decisive",
+        "expected_significance": "Staging + exfil of portal source/config on 09-03; artifact to delete in eradication step 3."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-FS-003",
+        "path": "fs/E-FS-003_web-prd-01_passwords_txt.json",
+        "type": "fs_event",
+        "source": "WEB-PRD-01 file-system telemetry",
+        "host": "WEB-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-03T16:20:00+05:30",
+          "end": "2026-09-03T16:20:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "passwords.txt metadata + content excerpt (pivot credential source)"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-014"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-EDR-005",
+          "E-WIKI-001"
+        ],
+        "relevance": "decisive",
+        "expected_significance": "Root of the pivot: plaintext credential file; also confirms svc_portal password documented in wiki."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-FS-004",
+        "path": "fs/E-FS-004_app-prd-01_task_xml.log",
+        "type": "fs_event",
+        "source": "APP-PRD-01 scheduled task XML export",
+        "host": "APP-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-04T11:30:00+05:30",
+          "end": "2026-09-04T11:30:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Scheduled task XML: MicrosoftEdgeUpdateTaskMachineCore (SYSTEM, 30 min, powershell -enc)"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-018"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-EDR-008",
+          "E-NET-003"
+        ],
+        "relevance": "decisive",
+        "expected_significance": "Task must be deleted (eradication step 1); validates the detection alert."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-FS-005",
+        "path": "fs/E-FS-005_file-prd-01_temp_collect.log",
+        "type": "fs_event",
+        "source": "FILE-PRD-01 file-system telemetry",
+        "host": "FILE-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-05T10:20:00+05:30",
+          "end": "2026-09-05T11:45:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "File events: C:\\Windows\\Temp\\collect\\ creation + bulk copies (~2.1 GB)"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-022"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-EDR-010",
+          "E-SHARE-001"
+        ],
+        "relevance": "decisive",
+        "expected_significance": "Data categories staged: client designs/specs, payroll (PII), finance summaries."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-FS-006",
+        "path": "fs/E-FS-006_file-prd-01_order_export.json",
+        "type": "fs_event",
+        "source": "FILE-PRD-01 file-system telemetry",
+        "host": "FILE-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-05T12:05:00+05:30",
+          "end": "2026-09-05T12:05:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "File creation: C:\\Windows\\Temp\\order_export_2026.zip (~680 MB)"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-023"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-EDR-011",
+          "E-NET-004"
+        ],
+        "relevance": "decisive",
+        "expected_significance": "Archive name/size = IOC; matches the 680 MB FW flow at 12:30–13:05."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-FS-007",
+        "path": "fs/E-FS-007_web-prd-01_upload_bak.json",
+        "type": "fs_event",
+        "source": "WEB-PRD-01 file-system telemetry (metadata export)",
+        "host": "WEB-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2025-11-08T00:00:00+05:30",
+          "end": "2026-09-09T23:59:59+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Metadata: assets\\old\\upload_bak.aspx (2025 quarantined shell variant)"
+      },
+      "internal_metadata": {
+        "evt_refs": [],
+        "rh_refs": [
+          "RH-05"
+        ],
+        "red_herring": true,
+        "rule_out": "File timestamp 2025-11-08 + quarantine note in E-DOC-002 + no 2026 IIS requests to that path in E-WEB-003; the live shell is img.aspx (E-FS-001).",
+        "corroborates": [
+          "E-DOC-002",
+          "E-FS-001",
+          "E-WEB-003"
+        ],
+        "relevance": "red-herring",
+        "expected_significance": "Not every web shell is this incident's shell; the live one is img.aspx."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-SHARE-001",
+        "path": "fs/E-SHARE-001_file-prd-01_smb_audit.log",
+        "type": "smb_file_audit",
+        "source": "FILE-PRD-01 SMB object-access audit",
+        "host": "FILE-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-05T10:20:00+05:30",
+          "end": "2026-09-05T11:45:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": "fs/E-SHARE-001_drilldown.csv",
+        "title": "SMB session + file-open audit: svc_mon reads across S:\\ and R:\\ shares"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-022"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-FS-005",
+          "E-EDR-010"
+        ],
+        "relevance": "decisive",
+        "expected_significance": "Confirms which shares/files were read — feeds data-scope determination."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-NET-001",
+        "path": "net/E-NET-001_fw-01_scan_rdp.log",
+        "type": "firewall_log",
+        "source": "FW-01 (perimeter syslog)",
+        "host": null,
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-02T14:12:00+05:30",
+          "end": "2026-09-02T14:31:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "FW-01: SYN scan ports 1–10000 + RDP allow on 3389 from 45.155.90.23"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-001",
+          "EVT-002"
+        ],
+        "rh_refs": [
+          "RH-07"
+        ],
+        "red_herring": false,
+        "rule_out": "RH-07 ambient scanner noise rules out: distributed random source IPs, zero successes, no follow-on — contrast the focused 45.155.90.23 campaign.",
+        "corroborates": [
+          "E-WEB-002",
+          "E-AUTH-001"
+        ],
+        "relevance": "decisive (recon/exposure)",
+        "expected_significance": "The stale any→3389 rule (W-01) exists and was found by scanning on 09-02; 45.155.90.23 = attacker VPN exit."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-NET-002",
+        "path": "net/E-NET-002_fw-01_outbound_0903.log",
+        "type": "firewall_log",
+        "source": "FW-01 (perimeter syslog)",
+        "host": null,
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-03T13:25:00+05:30",
+          "end": "2026-09-03T13:31:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "FW-01 outbound: 10.10.20.11 → 185.220.101.47:8443, ~18 MB (exfil #1)"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-010"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-EDR-002",
+          "E-FS-002",
+          "E-PROXY-001",
+          "E-NET-006"
+        ],
+        "relevance": "decisive",
+        "expected_significance": "First exfil 09-03; NetFlow copy expired (7-day retention, W-09) — this flow is visible only here + EDR (see E-NET-006)."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-NET-003",
+        "path": "net/E-NET-003_fw-01_beacon_8443.log",
+        "type": "firewall_log",
+        "source": "FW-01 (perimeter syslog)",
+        "host": null,
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-04T11:32:00+05:30",
+          "end": "2026-09-09T10:30:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": "net/E-NET-003_drilldown_beacon_flows.csv",
+        "title": "FW-01 outbound: 30-min beacon cadence 10.10.20.21 → 185.220.101.47:8443"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-018"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-EDR-008",
+          "E-FS-004",
+          "E-ALERT-001"
+        ],
+        "relevance": "decisive (C2)",
+        "expected_significance": "Active C2 from APP-PRD-01 — justifies immediate isolation and IOC block at FW-01."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-NET-004",
+        "path": "net/E-NET-004_fw-01_outbound_0905.log",
+        "type": "firewall_log",
+        "source": "FW-01 (perimeter syslog)",
+        "host": null,
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-05T12:30:00+05:30",
+          "end": "2026-09-05T13:05:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "FW-01 outbound: 10.10.20.23 → 185.220.101.47:8443, ~680 MB (exfil #2)"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-024"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-EDR-012",
+          "E-FS-006"
+        ],
+        "relevance": "decisive",
+        "expected_significance": "~680 MB exfil confirmed; total exfil ~698 MB across both events."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-NET-005",
+        "path": "net/E-NET-005_fw-01_rdp_session.log",
+        "type": "firewall_log",
+        "source": "FW-01 (perimeter syslog)",
+        "host": null,
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-03T11:47:00+05:30",
+          "end": "2026-09-03T12:20:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "FW-01 session log: TCP 3389 45.155.90.23 → 203.0.113.10, 11:47–12:20"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-005",
+          "EVT-006"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-AUTH-001",
+          "E-EDR-001"
+        ],
+        "relevance": "corroborating",
+        "expected_significance": "Confirms successful RDP session (not just a logon event) from the attacker IP."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-NET-006",
+        "path": "net/E-NET-006_netflow_summary.log",
+        "type": "netflow_summary",
+        "source": "NetFlow collector (report viewed during investigation)",
+        "host": null,
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-02T00:00:00+05:30",
+          "end": "2026-09-09T23:59:59+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "NetFlow 7-day retention summary (09-03 exfil flow absent — W-09)"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-010",
+          "EVT-024"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-NET-002",
+          "E-NET-004",
+          "E-EDR-012"
+        ],
+        "relevance": "corroborating",
+        "expected_significance": "Candidate understands evidence-survivability differences across log tiers; feeds recommendations (W-09 retention extension)."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-PROXY-001",
+        "path": "net/E-PROXY-001_egress_absence.log",
+        "type": "proxy_log",
+        "source": "Egress proxy (FW-01 egress path)",
+        "host": null,
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-03T13:25:00+05:30",
+          "end": "2026-09-03T13:31:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Explicit negative proxy record: no matching entries for the 09-03 exfil window"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-010"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-NET-002",
+          "E-FS-002"
+        ],
+        "relevance": "corroborating",
+        "expected_significance": "Egress-control gap → recommendations; exfil corroboration rests on FW + EDR."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-AD-001",
+        "path": "ad/E-AD-001_dc-01_4720_svcmon.log",
+        "type": "windows_security",
+        "source": "DC-01",
+        "host": "DC-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-04T11:15:00+05:30",
+          "end": "2026-09-04T11:15:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Security 4720: user svc_mon created by rajesh.kulkarni from APP-PRD-01"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-017"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-AD-002",
+          "E-AD-003",
+          "E-AUTH-007"
+        ],
+        "relevance": "decisive",
+        "expected_significance": "svc_mon is attacker-created identity persistence; created by compromised rajesh.kulkarni from APP-PRD-01."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-AD-002",
+        "path": "ad/E-AD-002_dc-01_group_adds.log",
+        "type": "windows_security",
+        "source": "DC-01 (+ local group events)",
+        "host": "DC-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-04T11:16:00+05:30",
+          "end": "2026-09-04T11:16:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Security 4728/4732: svc_mon added to Domain Admins + Remote Desktop Users"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-017"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-AD-001",
+          "E-AD-003"
+        ],
+        "relevance": "decisive",
+        "expected_significance": "Full privilege scope of svc_mon; drives eradication (delete account + audit groups it touched)."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-AD-003",
+        "path": "ad/E-AD-003_dc-01_snapshot.json",
+        "type": "ad_snapshot",
+        "source": "DC-01 directory export (Get-ADGroupMember / Get-ADUser)",
+        "host": "DC-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-09T10:05:00+05:30",
+          "end": "2026-09-09T10:05:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "AD snapshot: Domain Admins membership incl. svc_mon; per-object last_logon_ist"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-017"
+        ],
+        "rh_refs": [
+          "RH-04"
+        ],
+        "red_herring": false,
+        "rule_out": "RH-04 (admin_legacy) surface lives here. Rule-out: last_logon_ist ≈2025-07 — no logons for 14 months; absent from every attack-path artifact; report as hygiene finding, not compromise.",
+        "corroborates": [
+          "E-AD-001",
+          "E-AD-002"
+        ],
+        "relevance": "corroborating",
+        "expected_significance": "svc_mon still present at detection → containment must disable it; admin_legacy is weak-but-unexploited (report as hygiene finding, not compromise)."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-AD-004",
+        "path": "ad/E-AD-004_dc-01_disable_delete.log",
+        "type": "windows_security",
+        "source": "DC-01",
+        "host": "DC-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-09T10:30:00+05:30",
+          "end": "2026-09-09T15:00:00+05:30"
+        },
+        "reveal_phase": 6,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Security 4725/4726: account disables (svc_mon, rajesh.kulkarni, svc_portal) + svc_mon deletion"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-033",
+          "EVT-035"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-RESP-001",
+          "E-RESP-003"
+        ],
+        "relevance": "corroborating",
+        "expected_significance": "Confirms correct account-containment set executed."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-DB-001",
+        "path": "db/E-DB-001_db-prd-01_sql_audit.log",
+        "type": "sql_audit",
+        "source": "DB-PRD-01 SQL Server audit (instance VISTARA_SQL)",
+        "host": "DB-PRD-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-05T15:20:00+05:30",
+          "end": "2026-09-05T15:41:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "SQL audit: read-only enumeration by rajesh.kulkarni from FILE-PRD-01"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-025"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-AUTH-008"
+        ],
+        "relevance": "decisive (scoping judgment)",
+        "expected_significance": "DB-PRD-01 accessed read-only; not compromised; no bulk DB exfil — correct scoping excludes it from 'compromised hosts' but notes data exposure risk of sampled rows."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-VULN-001",
+        "path": "vuln/E-VULN-001_vuln-01_on_demand.log",
+        "type": "vuln_scan_job",
+        "source": "VULN-01 (10.10.40.13)",
+        "host": "VULN-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-04T09:15:00+05:30",
+          "end": "2026-09-04T11:02:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Vulnerability scan job VS-MAN-2026-0904 (on-demand, operator devang.shah)"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-007"
+        ],
+        "rh_refs": [
+          "RH-01"
+        ],
+        "red_herring": true,
+        "rule_out": "Internal scanner source 10.10.40.13 (VULN-01, registered in asset inventory); authenticated scan using svc_monitor with a scanner job log; operator devang.shah; plugin-based host enumeration with no follow-on exploitation; no attacker behavior is ever sourced from 10.10.40.13. On-demand manual run — rule-out does NOT rest on the recurring schedule.",
+        "corroborates": [
+          "E-VULN-002"
+        ],
+        "relevance": "red-herring",
+        "expected_significance": "Distinguish sanctioned scanning from attacker recon. The 09-04 instance is an on-demand manual run — rule-out does NOT rest on the recurring schedule."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-VULN-002",
+        "path": "vuln/E-VULN-002_vuln-01_weekly.log",
+        "type": "vuln_scan_job",
+        "source": "VULN-01 (10.10.40.13)",
+        "host": "VULN-01",
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-08T02:00:00+05:30",
+          "end": "2026-09-08T03:47:00+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Vulnerability scan job VS-WK37-2026 (weekly scheduled, Tuesdays 02:00 IST)"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-028"
+        ],
+        "rh_refs": [
+          "RH-01"
+        ],
+        "red_herring": true,
+        "rule_out": "Scheduled recurring weekly job (Tuesdays 02:00 IST, job VS-WK37-2026) plus canonical wording: internal scanner source 10.10.40.13 (VULN-01, registered in asset inventory); authenticated scan using svc_monitor with a scanner job log; operator devang.shah; plugin-based host enumeration with no follow-on exploitation; no attacker behavior is ever sourced from 10.10.40.13.",
+        "corroborates": [
+          "E-VULN-001"
+        ],
+        "relevance": "red-herring",
+        "expected_significance": "Recurring benign pattern; not attacker activity."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-WIKI-001",
+        "path": "docs/E-WIKI-001_service_account_register.md",
+        "type": "document",
+        "source": "IT wiki",
+        "host": null,
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2024-03-14T00:00:00+05:30",
+          "end": "2026-09-09T23:59:59+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Service-account register wiki page (svc_portal: Portal@2024, rotation-exempt)"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-014"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-FS-003",
+          "E-AUTH-001"
+        ],
+        "relevance": "corroborating (root cause)",
+        "expected_significance": "The brute-forced password was documented internally — W-03/W-03c confirmed as root-cause enablers; feeds recommendations."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-DOC-001",
+        "path": "docs/E-DOC-001_vendor_rdp_email_2025.md",
+        "type": "document",
+        "source": "MAIL-PRD-01 archive / IT mailbox export",
+        "host": null,
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2025-06-17T00:00:00+05:30",
+          "end": "2025-12-31T23:59:59+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "2025 vendor email thread: direct RDP enabled, no change ticket (W-01 origin)"
+      },
+      "internal_metadata": {
+        "evt_refs": [],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-NET-001"
+        ],
+        "relevance": "corroborating (root cause)",
+        "expected_significance": "W-01 is a stale 2025 vendor rule — feeds eradication step 6 and recommendations (change-control enforcement)."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-DOC-002",
+        "path": "docs/E-DOC-002_quarantine_note_2025.md",
+        "type": "document",
+        "source": "IT document store",
+        "host": null,
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2025-11-08T00:00:00+05:30",
+          "end": "2025-11-08T23:59:59+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "2025 IR report: quarantine of assets\\old\\upload_bak.aspx (never deleted)"
+      },
+      "internal_metadata": {
+        "evt_refs": [],
+        "rh_refs": [
+          "RH-05"
+        ],
+        "red_herring": true,
+        "rule_out": "File timestamp 2025-11-08 (E-FS-007 metadata); quarantine note in this report; no 2026 IIS requests to that path in E-WEB-003.",
+        "corroborates": [
+          "E-FS-001",
+          "E-FS-007",
+          "E-WEB-003"
+        ],
+        "relevance": "red-herring",
+        "expected_significance": "Not every web shell is this incident's shell; the live one is img.aspx."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-DOC-003",
+        "path": "docs/E-DOC-003_hr_travel_TRV-2026-0312.md",
+        "type": "document",
+        "source": "HR / ITSM document store",
+        "host": null,
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-04T00:00:00+05:30",
+          "end": "2026-09-09T23:59:59+05:30"
+        },
+        "reveal_phase": 1,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "HR travel-approval record TRV-2026-0312 (ananya.iyer, Ahmedabad)"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-029"
+        ],
+        "rh_refs": [
+          "RH-03"
+        ],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-AUTH-011",
+          "E-AUTH-012"
+        ],
+        "relevance": "corroborating",
+        "expected_significance": "ananya.iyer's 09-07 VPN/ERP activity is HR-approved business travel; exclude her from compromised accounts."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-RESP-001",
+        "path": "response/E-RESP-001_containment_record.json",
+        "type": "response_record",
+        "source": "EDR-CON-01 / FW-01 / FW-02 change log",
+        "host": null,
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-09T10:30:00+05:30",
+          "end": "2026-09-09T10:30:00+05:30"
+        },
+        "reveal_phase": 6,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Containment execution record: isolate 3 hosts, block 185.220.101.47, disable accounts"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-033"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-AD-004",
+          "E-NET-003"
+        ],
+        "relevance": "corroborating",
+        "expected_significance": "Bleeding stopped; correct scope = 3 hosts, 3 accounts, 1 IOC."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-RESP-002",
+        "path": "response/E-RESP-002_preservation_record.json",
+        "type": "response_record",
+        "source": "IR toolchain",
+        "host": null,
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-09T11:00:00+05:30",
+          "end": "2026-09-09T11:00:00+05:30"
+        },
+        "reveal_phase": 6,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Evidence preservation record: memory/disk captures, SIEM export, chain of custody"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-034"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-RESP-003"
+        ],
+        "relevance": "corroborating",
+        "expected_significance": "Correct ordering: preserve → eradicate."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-RESP-003",
+        "path": "response/E-RESP-003_eradication_checklist.json",
+        "type": "response_record",
+        "source": "IR toolchain / DC-01 / FW-01 / WEB-PRD-01",
+        "host": null,
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-09T12:00:00+05:30",
+          "end": "2026-09-09T15:00:00+05:30"
+        },
+        "reveal_phase": 6,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Eradication checklist execution log (ordered 7 steps incl. krbtgt ×2)"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-035"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-AD-004",
+          "E-FS-001",
+          "E-FS-002",
+          "E-FS-003",
+          "E-FS-004",
+          "E-FS-006",
+          "E-VALID-002"
+        ],
+        "relevance": "corroborating",
+        "expected_significance": "All 3 persistence mechanisms + both entry weaknesses + stolen credentials addressed; 'restore from backup alone' is insufficient."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-RESP-004",
+        "path": "response/E-RESP-004_recovery_log.json",
+        "type": "response_record",
+        "source": "BKP-01 (Veeam) / build system",
+        "host": null,
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-09T15:00:00+05:30",
+          "end": "2026-09-09T17:30:00+05:30"
+        },
+        "reveal_phase": 6,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Recovery execution logs: DC validate → WEB rebuild → APP rebuild → FILE restore"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-036"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-VALID-001",
+          "E-VALID-002"
+        ],
+        "relevance": "corroborating",
+        "expected_significance": "Correct order DC → WEB → APP → FILE; backups pre-date 09-03 compromise (RPO 24h, one day file-version loss)."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-VALID-001",
+        "path": "response/E-VALID-001_interim_validation.json",
+        "type": "validation_record",
+        "source": "EDR-CON-01 / IR toolchain",
+        "host": null,
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-09T16:30:00+05:30",
+          "end": "2026-09-09T16:30:00+05:30"
+        },
+        "reveal_phase": 6,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Interim validation: EDR full-scan clean on rebuilt/restored hosts"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-036"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-RESP-004",
+          "E-VALID-002"
+        ],
+        "relevance": "decisive (Phase 7 gate)",
+        "expected_significance": "EDR-clean is necessary but NOT sufficient — leads into the validation trap."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-VALID-002",
+        "path": "response/E-VALID-002_safestate_interim.json",
+        "type": "validation_record",
+        "source": "IR toolchain / EDR-CON-01 / FW-01",
+        "host": null,
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-09T17:30:00+05:30",
+          "end": "2026-09-09T17:30:00+05:30"
+        },
+        "reveal_phase": 7,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Safe-state validation report (7-check gate; persistence re-check initially SKIPPED)",
+        "rerun_path": "response/E-VALID-002_safestate_rerun.json"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-037"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [
+          "E-VALID-001",
+          "E-RESP-003",
+          "E-AD-003"
+        ],
+        "relevance": "decisive (Phase 7 gate)",
+        "expected_significance": "Candidate insists on complete checklist before go; residual-risk statement selected (stolen data unrecoverable; W-05/W-06/W-08/W-09 open)."
+      }
+    },
+    {
+      "candidate_view": {
+        "evidence_id": "E-REPORT-001",
+        "path": "response/E-REPORT-001_final_report_template.md",
+        "type": "report",
+        "source": "Simulation reporting module",
+        "host": null,
+        "timezone": "IST (UTC+05:30)",
+        "window_ist": {
+          "start": "2026-09-10T10:00:00+05:30",
+          "end": "2026-09-10T10:00:00+05:30"
+        },
+        "reveal_phase": 7,
+        "synthetic": true,
+        "drilldown": null,
+        "title": "Final incident report template (candidate deliverable)"
+      },
+      "internal_metadata": {
+        "evt_refs": [
+          "EVT-038"
+        ],
+        "rh_refs": [],
+        "red_herring": false,
+        "rule_out": null,
+        "corroborates": [],
+        "relevance": "corroborating",
+        "expected_significance": "Internally consistent report: Sev-1, dwell 6 days, exfil ~698 MB, root cause W-01+W-03, escalation W-04."
+      }
+    }
+  ]
+}

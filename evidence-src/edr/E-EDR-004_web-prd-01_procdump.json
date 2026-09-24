@@ -1,0 +1,17 @@
+{
+  "evidence_id": "E-EDR-004",
+  "type": "edr_process",
+  "source": "SentinelNode EDR",
+  "host": "WEB-PRD-01",
+  "synthetic": true,
+  "collection_window_ist": "2026-09-03T15:00:00+05:30/2026-09-03T15:15:00+05:30",
+  "events": [
+    {"time_ist": "2026-09-03T15:03:26+05:30", "pid": 2140, "process": "svchost.exe", "cmdline": "C:\\Windows\\system32\\svchost.exe -k netsvcs -p -s Schedule", "parent": "services.exe", "parent_pid": 548, "user": "NT AUTHORITY\\SYSTEM", "sha256": "SYNTHETIC-590f77e9349d1e4f25933c801ec9bbc3d1c8b04cd56a17fdee8d8ebae64adec7", "synthetic": true},
+    {"time_ist": "2026-09-03T15:04:51+05:30", "pid": 6640, "process": "cmd.exe", "cmdline": "cmd.exe", "parent": "w3wp.exe", "parent_pid": 2844, "user": "VISTARA\\svc_portal", "sha256": "SYNTHETIC-5e20ca0d3dd3084523c9c9a7a354640c9f5a38ed769794ba6c6f96ad1af3034c", "synthetic": true},
+    {"time_ist": "2026-09-03T15:05:33+05:30", "pid": 6724, "process": "procdump.exe", "cmdline": "procdump -ma 2844 C:\\ProgramData\\Microsoft\\Crypto\\RSA\\w3wp.dmp", "parent": "cmd.exe", "parent_pid": 6640, "user": "VISTARA\\svc_portal", "sha256": "SYNTHETIC-8123c587f93de36513e4f412262abf121b83588249119576f43176c98acab004", "synthetic": true},
+    {"time_ist": "2026-09-03T15:06:20+05:30", "pid": 6772, "process": "cmd.exe", "cmdline": "cmd /c dir \"C:\\Users\\svc_portal\\AppData\\Roaming\\Microsoft\\Credentials\\\"", "parent": "cmd.exe", "parent_pid": 6640, "user": "VISTARA\\svc_portal", "sha256": "SYNTHETIC-9971e47efdf0ce0895fe1fef590b6c9d1740d4be81c7533396791a547c89e80c", "synthetic": true},
+    {"time_ist": "2026-09-03T15:07:02+05:30", "pid": 6816, "process": "cmd.exe", "cmdline": "cmd /c dir \"C:\\Users\\svc_portal\\AppData\\Local\\Microsoft\\Credentials\\\"", "parent": "cmd.exe", "parent_pid": 6640, "user": "VISTARA\\svc_portal", "sha256": "SYNTHETIC-3f4fff2b0c6a8c5ee0393697c620adc134cf30d85f0f74b1642ff1b5adcba216", "synthetic": true},
+    {"time_ist": "2026-09-03T15:08:44+05:30", "pid": 6860, "process": "reg.exe", "cmdline": "reg query HKLM\\SECURITY\\Policy\\Secrets", "parent": "cmd.exe", "parent_pid": 6640, "user": "VISTARA\\svc_portal", "sha256": "SYNTHETIC-39449b7553b479c94b378eb45c6bfa9327b1af96225b1d12cd22c1b05a82eb04", "synthetic": true},
+    {"time_ist": "2026-09-03T15:09:31+05:30", "pid": 3552, "process": "MpCmdRun.exe", "cmdline": "\"C:\\Program Files\\Windows Defender\\MpCmdRun.exe\" -Scan -ScanType 1", "parent": "svchost.exe", "parent_pid": 812, "user": "NT AUTHORITY\\SYSTEM", "sha256": "SYNTHETIC-9362735cef16ba386d131084d973d8a14977ed741fbc453addd8ce3a5f5d4c55", "synthetic": true}
+  ]
+}

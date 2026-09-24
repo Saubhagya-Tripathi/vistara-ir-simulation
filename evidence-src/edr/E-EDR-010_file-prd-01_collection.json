@@ -1,0 +1,22 @@
+{
+  "evidence_id": "E-EDR-010",
+  "type": "edr_process",
+  "source": "SentinelNode EDR",
+  "host": "FILE-PRD-01",
+  "synthetic": true,
+  "collection_window_ist": "2026-09-05T10:15:00+05:30/2026-09-05T11:50:00+05:30",
+  "events": [
+    {"time_ist": "2026-09-05T10:18:30+05:30", "pid": 1876, "process": "spoolsv.exe", "cmdline": "C:\\Windows\\System32\\spoolsv.exe", "parent": "services.exe", "parent_pid": 548, "user": "NT AUTHORITY\\SYSTEM", "sha256": "SYNTHETIC-732fb46c78465a12f5b15f8df626f6993c76e62c5a6366ba83db3372f8df0647", "synthetic": true},
+    {"time_ist": "2026-09-05T10:20:14+05:30", "pid": 6032, "process": "cmd.exe", "cmdline": "cmd.exe", "parent": "explorer.exe", "parent_pid": 5872, "user": "VISTARA\\svc_mon", "sha256": "SYNTHETIC-f4da859ff8328f788bd4417dabb8cd70776d006522a30ba0d2d46562e80af1cc", "synthetic": true},
+    {"time_ist": "2026-09-05T10:21:02+05:30", "pid": 6080, "process": "cmd.exe", "cmdline": "cmd /c dir /s *.dwg S:\\", "parent": "cmd.exe", "parent_pid": 6032, "user": "VISTARA\\svc_mon", "sha256": "SYNTHETIC-6720947fcda308ea731d99f145431b6787fcc42bd012565d73e99d02d13e1083", "synthetic": true},
+    {"time_ist": "2026-09-05T10:24:36+05:30", "pid": 6124, "process": "cmd.exe", "cmdline": "cmd /c dir /s *.xlsx R:\\", "parent": "cmd.exe", "parent_pid": 6032, "user": "VISTARA\\svc_mon", "sha256": "SYNTHETIC-614a043e9b7eaedc3e1a0a2ba55ddf013550c27d8c11d27d2ff94c3555447389", "synthetic": true},
+    {"time_ist": "2026-09-05T10:26:11+05:30", "pid": 6172, "process": "cmd.exe", "cmdline": "cmd /c dir /s *payroll* R:\\", "parent": "cmd.exe", "parent_pid": 6032, "user": "VISTARA\\svc_mon", "sha256": "SYNTHETIC-5ff24a7072caa53e3fce54992d333ba6f028f67225519d8d08242bd538e87505", "synthetic": true},
+    {"time_ist": "2026-09-05T10:27:45+05:30", "pid": 6216, "process": "cmd.exe", "cmdline": "cmd /c dir /s *salary* R:\\", "parent": "cmd.exe", "parent_pid": 6032, "user": "VISTARA\\svc_mon", "sha256": "SYNTHETIC-79327ede7f32720c17b347e33863f910cbf41d0d78cda089e58176a79b4f561b", "synthetic": true},
+    {"time_ist": "2026-09-05T10:29:12+05:30", "pid": 6260, "process": "cmd.exe", "cmdline": "cmd /c dir /s *.pdf S:\\", "parent": "cmd.exe", "parent_pid": 6032, "user": "VISTARA\\svc_mon", "sha256": "SYNTHETIC-63714549c19ea9d5aec526ad0c64b021ec4e42472a94a6d88016de613dda7e23", "synthetic": true},
+    {"time_ist": "2026-09-05T10:33:19+05:30", "pid": 6344, "process": "robocopy.exe", "cmdline": "robocopy S:\\Clients C:\\Windows\\Temp\\collect /E", "parent": "cmd.exe", "parent_pid": 6032, "user": "VISTARA\\svc_mon", "sha256": "SYNTHETIC-fb0646c740b2afd6ce0f098ec68a507f33bc2227b52f71fa878549c9ebcaf494", "synthetic": true},
+    {"time_ist": "2026-09-05T10:52:44+05:30", "pid": 2140, "process": "svchost.exe", "cmdline": "C:\\Windows\\system32\\svchost.exe -k netsvcs -p -s Schedule", "parent": "services.exe", "parent_pid": 548, "user": "NT AUTHORITY\\SYSTEM", "sha256": "SYNTHETIC-68528abe76f37336676c286292cd52206fcc92dd16124f404bb1a46ab5310677", "synthetic": true},
+    {"time_ist": "2026-09-05T10:58:42+05:30", "pid": 6512, "process": "cmd.exe", "cmdline": "cmd /c copy R:\\HR\\payroll_aug2026.xlsx C:\\Windows\\Temp\\collect\\", "parent": "cmd.exe", "parent_pid": 6032, "user": "VISTARA\\svc_mon", "sha256": "SYNTHETIC-37a82111672707d697b3a693b7b84ef0980bf76a75bac5ea8fd3f6dc8364747d", "synthetic": true},
+    {"time_ist": "2026-09-05T11:12:27+05:30", "pid": 6680, "process": "robocopy.exe", "cmdline": "robocopy R:\\Finance C:\\Windows\\Temp\\collect\\finance /E", "parent": "cmd.exe", "parent_pid": 6032, "user": "VISTARA\\svc_mon", "sha256": "SYNTHETIC-5bb61084176c79eb6e341fda51b6d04f09ee1dbe8f16142362a624c03192f157", "synthetic": true},
+    {"time_ist": "2026-09-05T11:41:55+05:30", "pid": 6844, "process": "cmd.exe", "cmdline": "cmd /c dir C:\\Windows\\Temp\\collect\\", "parent": "cmd.exe", "parent_pid": 6032, "user": "VISTARA\\svc_mon", "sha256": "SYNTHETIC-9b913d5664b4fc6f9fba730720e2f9deeb65b75d1a0b44375f5ce3ea64129a06", "synthetic": true}
+  ]
+}

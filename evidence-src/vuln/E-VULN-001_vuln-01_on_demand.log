@@ -1,0 +1,19 @@
+# SYNTHETIC — VULN-01 (10.10.40.13) scan job log. Timezone: IST.
+JOB VS-MAN-2026-0904  start=2026-09-04 09:15:00 IST  end=11:02:41 IST  mode=AUTHENTICATED (cred svc_monitor)  trigger=ON-DEMAND  operator=devang.shah  targets=14 (Server VLAN sweep)
+  note: pre-peak-season baseline re-scan; initiated manually from the scanner console by the operator
+  10.10.20.11 WEB-PRD-01   23 plugins fired, 0 critical, 0 high, 2 info
+  10.10.20.12 MAIL-PRD-01  21 plugins fired, 0 critical, 1 low
+  10.10.20.13 VPN-GW-01    12 plugins fired, 0 critical, 1 info (appliance — partial credentialed checks)
+  10.10.20.14              no response (no host listening)
+  10.10.20.15              no response (no host listening)
+  10.10.20.18              no response (no host listening)
+  10.10.20.19              no response (no host listening)
+  10.10.20.21 APP-PRD-01   19 plugins fired, 0 critical, 1 medium
+  10.10.20.22 ERP-APP-01   18 plugins fired, 0 critical, 2 low
+  10.10.20.23 FILE-PRD-01  17 plugins fired, 0 critical
+  10.10.20.24 HR-APP-01    16 plugins fired, 0 critical, 1 low
+  10.10.20.25 WSUS-01      15 plugins fired, 0 critical
+  10.10.20.31 DC-01        22 plugins fired, 0 critical
+  10.10.20.32 DC-02        22 plugins fired, 0 critical
+  result: routine baseline; plugin-based host enumeration only
+  next scheduled run 2026-09-08 02:00 IST (job VS-WK37-2026)

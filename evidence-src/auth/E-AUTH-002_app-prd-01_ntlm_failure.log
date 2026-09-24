@@ -1,0 +1,7 @@
+# SYNTHETIC TRAINING DATA — NTLM credential validation records, DC-01 Security log (SIEM export via SIEM-01). Timezone: IST.
+# Query window: 2026-09-03 15:10–15:20 IST. Event 4776 records referencing logons to APP-PRD-01 (10.10.20.21).
+Event 4776  2026-09-03 15:11:26 IST  Host: DC-01  Account: sneha.patil  Source Workstation: WKSTN-SNE-04 (10.10.10.54)  Authentication Package: NTLMv2  Credential validation SUCCESS
+Event 4776  2026-09-03 15:12:41 IST  Host: DC-01  Account: rajesh.kulkarni  Source Workstation: WEB-PRD-01 (10.10.20.11)  Authentication Package: NTLM  Credential validation FAILED  Error Code: 0xC000006A (bad password)
+Event 4776  2026-09-03 15:12:43 IST  Host: DC-01  Account: rajesh.kulkarni  Source Workstation: WEB-PRD-01 (10.10.20.11)  Authentication Package: NTLM  Credential validation FAILED  Error Code: 0xC000006A (bad password)
+Event 4776  2026-09-03 15:14:55 IST  Host: DC-01  Account: kavita.menon  Source Workstation: WKSTN-KAV-06 (10.10.10.56)  Authentication Package: NTLMv2  Credential validation SUCCESS
+Event 4776  2026-09-03 15:17:08 IST  Host: DC-01  Account: svc_backup  Source Workstation: BKP-01 (10.10.30.22)  Authentication Package: NTLMv2  Credential validation SUCCESS

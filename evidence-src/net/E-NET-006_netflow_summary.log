@@ -1,0 +1,18 @@
+# SYNTHETIC — NetFlow collector summary report (FW-01 NetFlow v9 export). Timezone: IST.
+# Report generated 2026-09-09 during INC-2026-0417 investigation.
+Collector     : NetFlow collector, Management VLAN (receives FW-01 NetFlow v9 export)
+Export source : FW-01 (perimeter)
+Retention     : flow records retained 7 days only, then purged by nightly rotation (00:10 IST). No archive tier configured.
+
+QUERY 1   src=10.10.20.11  dst=185.220.101.47  dport=8443  date=2026-09-03
+RESULT    : 0 matching flow records.
+DETAIL    : the 2026-09-03 13:25–13:31 IST transfer (10.10.20.11 → 185.220.101.47:8443, ~18 MB)
+            predates the retained window and has been purged per the 7-day rotation.
+            Surviving records of that flow: FW-01 connection log (see E-NET-002) and EDR telemetry.
+
+QUERY 2   src=10.10.20.21  dst=185.220.101.47  dport=8443  full retained window
+RESULT    : 238 matching flow records, 2026-09-04 11:32 IST → 2026-09-09 10:02 IST,
+            ~30-minute cadence, 3.6–4.5 KB each (see E-NET-003 and its drill-down CSV).
+
+Collector stats: 4,102,377 flow records on disk for the retained window; storage 61% used; rotation healthy.
+Known limitation: no flow older than 7 days can be produced for any query. NetFlow retention extension has been raised before as a logging-capacity gap (W-09); FW-01 connection logs and EDR telemetry remain the longer-lived sources.

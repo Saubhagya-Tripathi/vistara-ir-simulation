@@ -1,0 +1,18 @@
+{
+  "evidence_id": "E-EDR-009",
+  "type": "edr_process",
+  "source": "SentinelNode EDR",
+  "host": "DC-01",
+  "synthetic": true,
+  "collection_window_ist": "2026-09-04T13:05:00+05:30/2026-09-04T13:20:00+05:30",
+  "session": {"user": "VISTARA\\rajesh.kulkarni", "logon_type": 10, "src_ip": "10.10.20.21 (APP-PRD-01)", "start_ist": "2026-09-04T13:09:47+05:30"},
+  "events": [
+    {"time_ist": "2026-09-04T13:09:47+05:30", "pid": 5520, "process": "userinit.exe", "cmdline": "userinit.exe", "parent": "winlogon.exe", "parent_pid": 604, "user": "VISTARA\\rajesh.kulkarni", "logon_type": 10, "session_src_ip": "10.10.20.21", "sha256": "SYNTHETIC-6d8739ec5fb79271509cb83ae9973b169c3f5fd68141aef668d78758271084a5", "synthetic": true},
+    {"time_ist": "2026-09-04T13:10:05+05:30", "pid": 5564, "process": "explorer.exe", "cmdline": "C:\\Windows\\Explorer.EXE", "parent": "userinit.exe", "parent_pid": 5520, "user": "VISTARA\\rajesh.kulkarni", "sha256": "SYNTHETIC-bfe3616b39532e42f3af3e418a602c24f734db2d6d2b259c1f600fec0dea08c3", "synthetic": true},
+    {"time_ist": "2026-09-04T13:10:41+05:30", "pid": 5612, "process": "cmd.exe", "cmdline": "cmd.exe", "parent": "explorer.exe", "parent_pid": 5564, "user": "VISTARA\\rajesh.kulkarni", "sha256": "SYNTHETIC-24428613c4293d3157d1b2585787c9004d587510f4d9a64c4f6f5d1dc87e820e", "synthetic": true},
+    {"time_ist": "2026-09-04T13:10:58+05:30", "pid": 5660, "process": "mimikatz.exe", "cmdline": "mimikatz.exe \"privilege::debug\" \"lsadump::dcsync /domain:vistara.local /all\" \"exit\"", "parent": "cmd.exe", "parent_pid": 5612, "user": "VISTARA\\rajesh.kulkarni", "sha256": "SYNTHETIC-ccbaf8cc906a1e1074dec62f5520f2990f77cba9ade3d85c516eb225a3f11d62", "synthetic": true},
+    {"time_ist": "2026-09-04T13:11:52+05:30", "pid": 3552, "process": "MpCmdRun.exe", "cmdline": "\"C:\\Program Files\\Windows Defender\\MpCmdRun.exe\" -Scan -ScanType 1", "parent": "svchost.exe", "parent_pid": 812, "user": "NT AUTHORITY\\SYSTEM", "sha256": "SYNTHETIC-6958c7d361405d24fb82ef3401f507d98ccf8409b1b2e8e84b24700d0c2d6c97", "synthetic": true},
+    {"time_ist": "2026-09-04T13:12:30+05:30", "pid": 1988, "process": "dfsrs.exe", "cmdline": "C:\\Windows\\system32\\dfsrs.exe", "parent": "services.exe", "parent_pid": 548, "user": "NT AUTHORITY\\SYSTEM", "sha256": "SYNTHETIC-5d6e02336012ec4cedd95438679e2ea1e276ec8674165d9588670812785df384", "synthetic": true},
+    {"time_ist": "2026-09-04T13:14:02+05:30", "pid": 5780, "process": "logoff.exe", "cmdline": "logoff", "parent": "cmd.exe", "parent_pid": 5612, "user": "VISTARA\\rajesh.kulkarni", "sha256": "SYNTHETIC-e52901946d989dc6d8d59635be6b05ce35537ff11f5bf360194a4d411baccaba", "synthetic": true}
+  ]
+}

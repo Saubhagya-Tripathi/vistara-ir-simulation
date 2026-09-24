@@ -1,0 +1,6 @@
+# SYNTHETIC TRAINING DATA — ERP-APP-01 Security log excerpt (SIEM export via SIEM-01). Timezone: IST.
+# Query window: 2026-09-06 09:15–09:45 IST. Event 4625/4624 excerpt, host ERP-APP-01 (10.10.20.22).
+# SUMMARY: 1 failed network logon from 10.10.20.21 (APP-PRD-01) at 09:33; 0 successful logons from that source within the window.
+Event 4624  2026-09-06 09:18:02 IST  Logon Type 3  Account: ERP-APP-01$  Domain: VISTARA  Source: 10.10.20.31 (DC-01)  Host: ERP-APP-01  Status: 0x0 SUCCESS (machine account — domain channel)
+Event 4625  2026-09-06 09:33:17 IST  Logon Type 3  Account: administrator  Domain: VISTARA  Source: 10.10.20.21 (APP-PRD-01)  Host: ERP-APP-01  Status: 0xC000006A  SubStatus: 0xC0000064 (user does not exist)
+Event 4624  2026-09-06 09:41:26 IST  Logon Type 3  Account: ERP-APP-01$  Domain: VISTARA  Source: 10.10.20.31 (DC-01)  Host: ERP-APP-01  Status: 0x0 SUCCESS (machine account — domain channel)

@@ -1,0 +1,11 @@
+# SYNTHETIC — FW-01 perimeter syslog excerpt (iptables). Timezone: IST.
+# Collection window: 2026-09-05 12:20–13:15 IST; outbound (egress) connections.
+Sep  5 12:21:08 FW-01 kernel: OUTBOUND ALLOW proto=UDP src=10.10.20.31:55209 dst=203.0.119.2:53      bytes=88   (DNS forwarder query)
+Sep  5 12:24:41 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.12:51977 dst=203.0.124.18:25     bytes=18653  rule=EGRESS-SMTP (MAIL-PRD-01 outbound mail)
+Sep  5 12:27:15 FW-01 kernel: OUTBOUND ALLOW proto=UDP src=10.10.20.23:52102 dst=162.159.200.123:123 bytes=76   (NTP sync)
+Sep  5 12:30:41 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.23:52240 dst=185.220.101.47:8443  session established (TLS, HTTP POST /upload, chunked transfer)
+Sep  5 12:30:44 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.23:52240 dst=185.220.101.47:8443 bytes=713031680 (~680 MB, order_export_2026.zip exfil, 12:30–13:05, chunked)
+Sep  5 12:52:30 FW-01 kernel: OUTBOUND ALLOW proto=UDP src=10.10.20.32:55316 dst=203.0.119.2:53      bytes=121  (DNS forwarder query)
+Sep  5 13:05:12 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.23:52240 dst=185.220.101.47:8443  session closed  duration=34m31s  bytes_total=713031680
+Sep  5 13:07:49 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.21:52661 dst=40.90.22.190:443    bytes=2074  (CRL/OCSP check)
+Sep  5 13:11:22 FW-01 kernel: OUTBOUND ALLOW proto=TCP src=10.10.20.12:52418 dst=203.0.124.44:25     bytes=8341  rule=EGRESS-SMTP (MAIL-PRD-01 outbound mail)

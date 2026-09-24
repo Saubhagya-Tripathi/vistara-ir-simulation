@@ -1,0 +1,17 @@
+# SYNTHETIC TRAINING DATA — WEB-PRD-01 Security log excerpt (SIEM export via SIEM-01). Timezone: IST.
+# Query window: 2026-09-03 10:15–11:50 IST. Events 4625/4624 (host WEB-PRD-01) and 4776 NTLM validation records (host DC-01).
+# SUMMARY: 147 failed logons (Event 4625, Logon Type 10) 10:22–11:46 from 45.155.90.23; single successful Logon Type 10 at 11:47; representative excerpt below.
+# DRILL-DOWN: E-AUTH-001_drilldown.csv (full 4625 table, incl. low-rate background failures from unrelated internet sources)
+Event 4625  2026-09-03 10:22:14 IST  Logon Type 10  Account: administrator  Domain: VISTARA  Source: 45.155.90.23  Status: 0xC000006A  SubStatus: 0xC0000064 (user does not exist)
+Event 4625  2026-09-03 10:24:07 IST  Logon Type 10  Account: admin          Domain: VISTARA  Source: 45.155.90.23  Status: 0xC000006A  SubStatus: 0xC0000064 (user does not exist)
+Event 4625  2026-09-03 10:31:52 IST  Logon Type 10  Account: backup         Domain: VISTARA  Source: 91.240.118.172  Status: 0xC000006A  SubStatus: 0xC0000064 (user does not exist)
+Event 4625  2026-09-03 10:41:55 IST  Logon Type 10  Account: svc_portal     Domain: VISTARA  Source: 45.155.90.23  Status: 0xC000006A  SubStatus: 0xC000006A (bad password — account exists)
+Event 4625  2026-09-03 10:58:03 IST  Logon Type 10  Account: rajesh.kulkarni  Domain: VISTARA  Source: 45.155.90.23  Status: 0xC000006A  SubStatus: 0xC000006A (bad password — account exists)
+Event 4625  2026-09-03 11:02:47 IST  Logon Type 10  Account: test           Domain: VISTARA  Source: 185.176.27.44  Status: 0xC000006A  SubStatus: 0xC0000064 (user does not exist)
+Event 4625  2026-09-03 11:18:29 IST  Logon Type 10  Account: administrator  Domain: VISTARA  Source: 193.32.162.157  Status: 0xC000006A  SubStatus: 0xC0000064 (user does not exist)
+Event 4625  2026-09-03 11:40:12 IST  Logon Type 10  Account: svc_portal     Domain: VISTARA  Source: 45.155.90.23  Status: 0xC000006A  SubStatus: 0xC000006A (bad password — account exists)
+Event 4625  2026-09-03 11:43:56 IST  Logon Type 10  Account: svc_portal     Domain: VISTARA  Source: 45.155.90.23  Status: 0xC000006A  SubStatus: 0xC000006A (bad password — account exists)
+Event 4625  2026-09-03 11:46:31 IST  Logon Type 10  Account: svc_portal     Domain: VISTARA  Source: 45.155.90.23  Status: 0xC000006A  SubStatus: 0xC000006A
+Event 4776  2026-09-03 11:47:01 IST  Host: DC-01  Account: svc_portal  Source: WEB-PRD-01 (10.10.20.11)  NTLM credential validation SUCCESS (package: NTLMv2)
+Event 4776  2026-09-03 11:47:02 IST  Host: DC-01  Account: svc_portal  Source: WEB-PRD-01 (10.10.20.11)  NTLM credential validation SUCCESS (package: NTLMv2)
+Event 4624  2026-09-03 11:47:03 IST  Logon Type 10  Account: svc_portal  Domain: VISTARA  Source: 45.155.90.23  Workstation: -  Status: 0x0 (SUCCESS — RDP session opened)

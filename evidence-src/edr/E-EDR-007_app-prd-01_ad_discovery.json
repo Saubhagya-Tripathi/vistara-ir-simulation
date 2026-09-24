@@ -1,0 +1,21 @@
+{
+  "evidence_id": "E-EDR-007",
+  "type": "edr_process",
+  "source": "SentinelNode EDR",
+  "host": "APP-PRD-01",
+  "synthetic": true,
+  "collection_window_ist": "2026-09-04T10:00:00+05:30/2026-09-04T10:45:00+05:30",
+  "events": [
+    {"time_ist": "2026-09-04T10:03:44+05:30", "pid": 2140, "process": "svchost.exe", "cmdline": "C:\\Windows\\system32\\svchost.exe -k netsvcs -p -s Schedule", "parent": "services.exe", "parent_pid": 548, "user": "NT AUTHORITY\\SYSTEM", "sha256": "SYNTHETIC-ce75acc00d7906fcdde1f9eb1efd53648d6854e3eafee0d3218434272522930e", "synthetic": true},
+    {"time_ist": "2026-09-04T10:05:19+05:30", "pid": 4912, "process": "cmd.exe", "cmdline": "cmd.exe", "parent": "explorer.exe", "parent_pid": 4568, "user": "VISTARA\\rajesh.kulkarni", "sha256": "SYNTHETIC-9ea1671412211d796a51f02c941007406ff2fe4ea3c5cf6a11bf13f431f385cb", "synthetic": true},
+    {"time_ist": "2026-09-04T10:05:47+05:30", "pid": 4960, "process": "net.exe", "cmdline": "net group \"Domain Admins\" /domain", "parent": "cmd.exe", "parent_pid": 4912, "user": "VISTARA\\rajesh.kulkarni", "sha256": "SYNTHETIC-7e99004e7c6d80532f8cffec03f78e5a39fafd7c64b814e6f64e860a135774fa", "synthetic": true},
+    {"time_ist": "2026-09-04T10:07:12+05:30", "pid": 5004, "process": "net.exe", "cmdline": "net group \"Enterprise Admins\" /domain", "parent": "cmd.exe", "parent_pid": 4912, "user": "VISTARA\\rajesh.kulkarni", "sha256": "SYNTHETIC-40b9885cb739e29f9ed39b1ecdff0596c887bc8d586d7744a4b4c2bec611b9c0", "synthetic": true},
+    {"time_ist": "2026-09-04T10:09:38+05:30", "pid": 5052, "process": "nltest.exe", "cmdline": "nltest /dclist:vistara.local", "parent": "cmd.exe", "parent_pid": 4912, "user": "VISTARA\\rajesh.kulkarni", "sha256": "SYNTHETIC-9a27fe8e4a2c4438be73b1b275c475e3d1ed61652c8c104eb4ad8e263e9815d3", "synthetic": true},
+    {"time_ist": "2026-09-04T10:12:04+05:30", "pid": 5096, "process": "net.exe", "cmdline": "net view", "parent": "cmd.exe", "parent_pid": 4912, "user": "VISTARA\\rajesh.kulkarni", "sha256": "SYNTHETIC-f2db8b7abe62fe791be248e67677b94429ee714d9ee9e2dead517744be717ef6", "synthetic": true},
+    {"time_ist": "2026-09-04T10:15:31+05:30", "pid": 5144, "process": "powershell.exe", "cmdline": "powershell -nop -c \"([adsisearcher]'(&(objectCategory=person)(objectClass=user)(adminCount=1))').FindAll() | ForEach-Object { $_.Properties.samaccountname }\"", "parent": "cmd.exe", "parent_pid": 4912, "user": "VISTARA\\rajesh.kulkarni", "sha256": "SYNTHETIC-fc8c2631455222a23d1342d5bbeca9557244f9afb57ce86c3585c7af244611b4", "synthetic": true},
+    {"time_ist": "2026-09-04T10:21:08+05:30", "pid": 3964, "process": "w3wp.exe", "cmdline": "c:\\windows\\system32\\inetsrv\\w3wp.exe", "parent": "svchost.exe", "parent_pid": 664, "user": "VISTARA\\svc_portal", "sha256": "SYNTHETIC-ef7a227a0240a841ddac0992a6be037b683ae4a8f2fbd8fd75d54c6b5d97ed3a", "synthetic": true},
+    {"time_ist": "2026-09-04T10:24:50+05:30", "pid": 5236, "process": "powershell.exe", "cmdline": "powershell -nop -c \"([adsisearcher]'(&(objectCategory=computer)(operatingSystem=*Server*))').FindAll() | ForEach-Object { $_.Properties.name }\"", "parent": "cmd.exe", "parent_pid": 4912, "user": "VISTARA\\rajesh.kulkarni", "sha256": "SYNTHETIC-638d8a552354d96a076ebb6699667de1fda05bedd5c8236a2d85701d970957fc", "synthetic": true},
+    {"time_ist": "2026-09-04T10:33:17+05:30", "pid": 5312, "process": "nltest.exe", "cmdline": "nltest /domain_trusts", "parent": "cmd.exe", "parent_pid": 4912, "user": "VISTARA\\rajesh.kulkarni", "sha256": "SYNTHETIC-c059f466d790fb63fc9a9c0010801c6262b504ad2ecba09c952e0e755783693c", "synthetic": true},
+    {"time_ist": "2026-09-04T10:38:52+05:30", "pid": 3552, "process": "MpCmdRun.exe", "cmdline": "\"C:\\Program Files\\Windows Defender\\MpCmdRun.exe\" -Scan -ScanType 1", "parent": "svchost.exe", "parent_pid": 812, "user": "NT AUTHORITY\\SYSTEM", "sha256": "SYNTHETIC-880e56fd01a637701f684b4622efc677f9fa2b8faba7acab2f63506503b2f76d", "synthetic": true}
+  ]
+}

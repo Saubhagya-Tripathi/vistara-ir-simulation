@@ -1,0 +1,6 @@
+# SYNTHETIC — VPN-GW-01 SSL-VPN auth log. Timezone: IST.
+# Query window: 2026-09-06 16:30–18:00 IST. Sessions for user pranav.joshi and concurrent gateway activity.
+2026-09-06 16:38:14 IST  CONNECT  user=vikram.rao  src=103.115.196.22  assigned=10.10.10.162  session OK
+2026-09-06 16:45:02 IST  CONNECT  user=pranav.joshi  src=122.176.45.9 (Vistara Ahmedabad office, registered static IP — see asset inventory)  assigned=10.10.10.153  session OK
+2026-09-06 16:52:40 IST  DISCONNECT user=vikram.rao  duration=14m
+2026-09-06 17:35:40 IST  DISCONNECT user=pranav.joshi  duration=50m  note="orders placed match dealer POs #DLR-2291/#DLR-2294 (see E-WEB-004)"

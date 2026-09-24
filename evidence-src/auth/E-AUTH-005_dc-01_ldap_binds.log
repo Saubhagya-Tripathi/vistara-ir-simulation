@@ -1,0 +1,19 @@
+# SYNTHETIC TRAINING DATA — DC-01 directory service LDAP query log (SIEM export via SIEM-01). Timezone: IST.
+# Query window: 2026-09-04 10:00–10:45 IST. LDAP binds/searches against DC-01 (10.10.20.31).
+2026-09-04 10:02:31 IST  BIND    client=10.10.20.12 (MAIL-PRD-01)   user=VISTARA\MAIL-PRD-01$  auth=Kerberos  result=SUCCESS
+2026-09-04 10:05:12 IST  BIND    client=10.10.20.21 (APP-PRD-01)    user=VISTARA\rajesh.kulkarni  auth=NTLM  result=SUCCESS
+2026-09-04 10:05:19 IST  SEARCH  client=10.10.20.21 (APP-PRD-01)    user=VISTARA\rajesh.kulkarni  base="" (RootDSE)  scope=base  filter="(objectClass=*)"  attrs=defaultNamingContext,dnsHostName  result=SUCCESS entries=1
+2026-09-04 10:05:47 IST  SEARCH  client=10.10.20.21 (APP-PRD-01)    user=VISTARA\rajesh.kulkarni  base="DC=vistara,DC=local"  scope=sub  filter="(&(objectClass=group)(cn=Domain Admins))"  attrs=member  result=SUCCESS entries=1 (3 members returned)
+2026-09-04 10:06:02 IST  SEARCH  client=10.10.20.21 (APP-PRD-01)    user=VISTARA\rajesh.kulkarni  base="DC=vistara,DC=local"  scope=sub  filter="(&(objectClass=group)(cn=Enterprise Admins))"  attrs=member  result=SUCCESS entries=1 (1 member returned)
+2026-09-04 10:07:58 IST  CLDAP   client=10.10.20.21 (APP-PRD-01)    DC locator ping (UDP 389) for domain vistara.local  responded: DC-01.vistara.local, DC-02.vistara.local
+2026-09-04 10:09:20 IST  BIND    client=10.10.10.54 (WKSTN-SNE-04)  user=VISTARA\sneha.patil  auth=Kerberos  result=SUCCESS
+2026-09-04 10:11:33 IST  SEARCH  client=10.10.20.21 (APP-PRD-01)    user=VISTARA\rajesh.kulkarni  base="OU=Domain Controllers,DC=vistara,DC=local"  scope=one  filter="(objectClass=computer)"  attrs=cn,operatingSystem  result=SUCCESS entries=2
+2026-09-04 10:14:06 IST  BIND    client=10.10.30.21 (DB-PRD-01)     user=VISTARA\DB-PRD-01$  auth=Kerberos  result=SUCCESS
+2026-09-04 10:16:44 IST  SEARCH  client=10.10.20.21 (APP-PRD-01)    user=VISTARA\rajesh.kulkarni  base="DC=vistara,DC=local"  scope=sub  filter="(&(objectCategory=computer)(operatingSystem=*Server*))"  attrs=cn,dNSHostName  result=SUCCESS entries=11
+2026-09-04 10:18:12 IST  SEARCH  client=10.10.10.55 (WKSTN-VIK-05)  user=VISTARA\WKSTN-VIK-05$  base="DC=vistara,DC=local"  scope=sub  filter="(&(objectClass=groupPolicyContainer))"  result=SUCCESS entries=6
+2026-09-04 10:22:50 IST  BIND    client=10.10.20.32 (DC-02)         user=VISTARA\DC-02$  auth=Kerberos  result=SUCCESS (inter-DC replication bind)
+2026-09-04 10:27:18 IST  SEARCH  client=10.10.20.21 (APP-PRD-01)    user=VISTARA\rajesh.kulkarni  base="DC=vistara,DC=local"  scope=sub  filter="(&(objectClass=user)(adminCount=1))"  attrs=sAMAccountName,memberOf  result=SUCCESS entries=4
+2026-09-04 10:31:37 IST  SEARCH  client=10.10.20.21 (APP-PRD-01)    user=VISTARA\rajesh.kulkarni  base="DC=vistara,DC=local"  scope=sub  filter="(&(objectClass=group)(cn=Remote Desktop Users))"  attrs=member  result=SUCCESS entries=1
+2026-09-04 10:35:09 IST  BIND    client=10.10.10.53 (WKSTN-PRA-03)  user=VISTARA\pranav.joshi  auth=Kerberos  result=SUCCESS
+2026-09-04 10:38:26 IST  SEARCH  client=10.10.20.21 (APP-PRD-01)    user=VISTARA\rajesh.kulkarni  base="CN=Domain Admins,CN=Users,DC=vistara,DC=local"  scope=base  filter="(objectClass=*)"  attrs=member,memberOf  result=SUCCESS (members: svc_backup, admin_legacy, rajesh.kulkarni)
+2026-09-04 10:40:11 IST  UNBIND  client=10.10.20.21 (APP-PRD-01)    user=VISTARA\rajesh.kulkarni  session closed
